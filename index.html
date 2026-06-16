@@ -112,13 +112,87 @@
   /* ribbon */
   .ribbon{position:absolute;top:14px;right:-30px;background:var(--gold);color:#0a1612;font-weight:900;font-size:11px;padding:4px 36px;transform:rotate(45deg);box-shadow:0 4px 12px rgba(0,0,0,.3)}
 
-  /* mobile tweaks */
+  /* ═══════ MOBILE OPTIMIZATIONS ═══════ */
   @media (max-width: 768px){
-    .phone-frame{transform:scale(.85)}
+    /* Typography */
+    h1{font-size:34px !important;line-height:1.2 !important}
+    h2{font-size:26px !important;line-height:1.25 !important}
+    h3{font-size:17px !important}
+
+    /* Spacing */
+    section{padding-top:48px !important;padding-bottom:48px !important}
+    .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl{padding-left:14px !important;padding-right:14px !important}
+
+    /* Floating bot — أصغر افتراضياً */
+    #floatBot{
+      bottom:14px !important;left:14px !important;
+      max-width:calc(100vw - 28px) !important;
+    }
+    #floatBot .glass{padding:10px !important}
+    #botBubble{bottom:14px !important;left:14px !important;width:52px !important;height:52px !important}
+
+    /* Phone frame: أصغر + يكون في الوسط */
+    .phone-frame{transform:scale(.78);transform-origin:top center;margin:-50px auto -120px}
+
+    /* Business buttons: عمود واحد */
+    .biz-btn{width:100%;justify-content:flex-start !important}
+    .biz-btn .text-right{flex:1}
+
+    /* Admin tour: tabs أعلى ثم المحتوى — لا columns */
+    #admin .lg\\:col-span-4{order:1}
+    #admin .lg\\:col-span-8{order:2}
+    /* Tabs على شكل scroll أفقي */
+    #admin aside{
+      display:flex;flex-direction:row;gap:8px;overflow-x:auto;
+      padding-bottom:8px;-webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    #admin aside::-webkit-scrollbar{display:none}
+    #admin .tab-card{flex:0 0 auto;min-width:140px;padding:12px !important}
+    #admin .tab-card .text-xs{display:none}
+
+    /* Counter cards: padding أقل */
+    .counter-card{padding:14px !important}
+    .counter-card .text-3xl{font-size:24px !important}
+
+    /* Before/after: تكدّس + إخفاء VS divider */
+    #before-after .grid{gap:14px !important}
+
+    /* Hero buttons: عمود */
+    .btn-gold, .btn-primary{padding-top:12px;padding-bottom:12px}
+
+    /* Stats grid في hero */
+    section .grid-cols-2{gap:10px}
+
+    /* FAQ: padding أقل */
+    .faq-item button{padding:14px !important}
+    .faq-answer > div{padding-right:14px !important;padding-left:14px !important}
+
+    /* Demo section: phone-frame تحت المنيو */
+    #demo > div.grid{gap:30px !important}
+
+    /* Adaptive mockup: padding أقل */
+    #adaptive .glass{padding:14px !important}
+    #adaptive .biz-tab{font-size:11px !important;padding:6px 10px !important}
+
+    /* Onboarding numbers: أصغر */
+    #start .w-16{width:48px !important;height:48px !important;font-size:18px !important}
+
+    /* Support cards: tightly stacked */
+    #support .grid > div{padding:18px !important}
+
+    /* Header navigation hidden + add hamburger feel via shrinking */
+    header .max-w-7xl{padding-top:10px !important;padding-bottom:10px !important}
+    header h1, header .font-extrabold{font-size:15px !important}
+    header .text-\\[10px\\]{display:none}
   }
+
   @media (max-width: 480px){
-    .phone-frame{transform:scale(.78)}
-    h1{font-size:32px !important}
+    h1{font-size:28px !important}
+    h2{font-size:22px !important}
+    .phone-frame{transform:scale(.7);margin:-70px auto -160px}
+    #adaptive .grid-cols-2{grid-template-columns:1fr !important}
+    #before-after .text-2xl{font-size:20px !important}
   }
 </style>
 </head>
@@ -138,7 +212,8 @@
       <a href="#admin" class="text-slate-300 hover:text-[#c9a24b] transition">الادمن</a>
       <a href="#adaptive" class="text-slate-300 hover:text-[#c9a24b] transition">تكيّف حسب نشاطك</a>
       <a href="#demo" class="text-slate-300 hover:text-[#c9a24b] transition">تجربة حية</a>
-      <a href="#support" class="text-slate-300 hover:text-[#c9a24b] transition">الدعم</a>
+      <a href="#start" class="text-slate-300 hover:text-[#c9a24b] transition">ابدأ في 30د</a>
+      <a href="#faq" class="text-slate-300 hover:text-[#c9a24b] transition">أسئلة شائعة</a>
     </nav>
     <a href="https://wa.me/966508572902" target="_blank" class="btn-gold px-4 py-2 rounded-lg text-sm">
       <i class="fab fa-whatsapp"></i> ابدأ الآن
@@ -147,28 +222,33 @@
 </header>
 
 <!-- ═══════════════════ FLOATING BOT ═══════════════════ -->
-<div id="floatBot" class="fixed bottom-5 left-5 z-50 max-w-[340px] w-[92vw] sm:w-[340px] transition-all duration-300">
+<button id="botBubble" onclick="botExpand()" class="hidden fixed bottom-5 left-5 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] shadow-2xl shadow-emerald-900/50 items-center justify-center text-2xl float-bot border-2 border-[#c9a24b]/40">
+  🤖
+  <span class="absolute top-0 right-0 w-3 h-3 bg-emerald-400 rounded-full border-2 border-[#08120e] pulse-soft"></span>
+</button>
+
+<div id="floatBot" class="fixed bottom-5 left-5 z-50 max-w-[340px] w-[calc(100vw-40px)] sm:w-[340px] transition-all duration-300">
   <div class="glass rounded-2xl p-4 glow-green border border-[#c9a24b]/30 space-y-3">
     <div class="flex items-start gap-3">
       <div class="relative shrink-0">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] flex items-center justify-center text-2xl float-bot shadow-lg">🤖</div>
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] flex items-center justify-center text-xl float-bot shadow-lg">🤖</div>
         <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full border-2 border-[#08120e] pulse-soft"></span>
       </div>
       <div class="flex-1 min-w-0">
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-between gap-2">
           <span class="text-xs font-extrabold text-[#c9a24b]">بوت ثواني</span>
           <span id="botStatus" class="text-[9px] bg-[#1a3a25] text-emerald-300 px-1.5 py-0.5 rounded font-mono">جاهز</span>
         </div>
         <p id="botSpeech" class="text-xs text-slate-200 leading-relaxed mt-1">
-          أهلين! أنا هنا أرشدك. مرّر للأسفل بهدوء، وكلما وقفت عند قسم أكلمك عنه. أو اسألني مباشرة 👇
+          أهلين! أنا هنا أرشدك. مرّر للأسفل بهدوء، وكلما وقفت عند قسم أكلمك عنه 👇
         </p>
       </div>
-      <button onclick="document.getElementById('floatBot').style.display='none'" class="text-slate-500 hover:text-slate-300 text-sm shrink-0">✕</button>
+      <button onclick="botMinimize()" title="تصغير" class="text-slate-400 hover:text-[#c9a24b] text-base shrink-0 leading-none">−</button>
     </div>
 
     <div class="flex flex-wrap gap-1.5 pt-2 border-t border-[#1a3a25]">
       <button onclick="botSay('admin')" class="text-[10px] bg-[#1a3a25] hover:bg-[#234a32] text-emerald-200 px-2 py-1 rounded transition">📊 صفحة الادمن</button>
-      <button onclick="botSay('orders')" class="text-[10px] bg-[#1a3a25] hover:bg-[#234a32] text-emerald-200 px-2 py-1 rounded transition">📦 كيف يدخل الطلب</button>
+      <button onclick="botSay('orders')" class="text-[10px] bg-[#1a3a25] hover:bg-[#234a32] text-emerald-200 px-2 py-1 rounded transition">📦 الطلبات</button>
       <button onclick="botSay('support')" class="text-[10px] bg-[#1a3a25] hover:bg-[#234a32] text-emerald-200 px-2 py-1 rounded transition">🚀 الدعم</button>
     </div>
 
@@ -217,6 +297,28 @@
     <div class="glass rounded-xl p-4">
       <div class="text-3xl font-black text-[#c9a24b]">0<span class="text-base">ر.س</span></div>
       <div class="text-xs text-slate-400 mt-1">رسوم لكل طلب</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ LIVE COUNTERS ═══════════════════ -->
+<section class="max-w-6xl mx-auto px-5 py-12">
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="glass rounded-2xl p-5 text-center counter-card">
+      <div class="text-3xl md:text-4xl font-black text-[#c9a24b] count-up" data-target="100000" data-suffix="+">0</div>
+      <div class="text-xs text-slate-400 mt-2 leading-tight">طلب عالجناه</div>
+    </div>
+    <div class="glass rounded-2xl p-5 text-center counter-card">
+      <div class="text-3xl md:text-4xl font-black text-[#c9a24b] count-up" data-target="12400" data-suffix=" س">0</div>
+      <div class="text-xs text-slate-400 mt-2 leading-tight">ساعة وفّرناها للمتاجر</div>
+    </div>
+    <div class="glass rounded-2xl p-5 text-center counter-card">
+      <div class="text-3xl md:text-4xl font-black text-[#c9a24b] count-up" data-target="2.8" data-suffix=" ث" data-decimals="1">0</div>
+      <div class="text-xs text-slate-400 mt-2 leading-tight">متوسط رد البوت</div>
+    </div>
+    <div class="glass rounded-2xl p-5 text-center counter-card">
+      <div class="text-3xl md:text-4xl font-black text-[#c9a24b] count-up" data-target="98" data-suffix="%">0</div>
+      <div class="text-xs text-slate-400 mt-2 leading-tight">رضا العملاء</div>
     </div>
   </div>
 </section>
@@ -386,6 +488,66 @@
   .biz-tab.active{background:#c9a24b;color:#0a1612;font-weight:800}
 </style>
 
+<!-- ═══════════════════ BEFORE / AFTER ═══════════════════ -->
+<section id="before-after" class="max-w-6xl mx-auto px-5 py-20">
+  <div class="text-center mb-12">
+    <span class="text-xs text-[#c9a24b] font-bold uppercase tracking-wider">قبل · وبعد</span>
+    <h2 class="text-3xl md:text-5xl font-black mt-2">يومك من <span class="text-rose-400">فوضى</span> إلى <span class="gradient-text">انسجام</span></h2>
+    <p class="text-slate-400 mt-3 max-w-2xl mx-auto">نفس العميل، نفس الرسالة، نفس الساعة الفجر — نتيجتان مختلفتان كلياً.</p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-5 md:gap-8 relative">
+    <!-- VS divider -->
+    <div class="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-14 h-14 rounded-full bg-[#c9a24b] text-[#0a1612] font-black text-lg items-center justify-center shadow-2xl">VS</div>
+
+    <!-- BEFORE -->
+    <div class="bg-gradient-to-br from-rose-950/40 to-[#1a1416] border border-rose-900/40 rounded-3xl p-5 md:p-7">
+      <div class="flex items-center gap-2 mb-5">
+        <span class="bg-rose-600 text-white text-[10px] font-black px-3 py-1 rounded-full">قبل ثواني 😩</span>
+      </div>
+      <div class="space-y-3 text-sm">
+        <div class="flex items-start gap-2"><span class="text-base">🌙</span><div><b>2:14 ص</b> · عميل يكتب: "بكم اللاتيه؟"</div></div>
+        <div class="bg-rose-950/30 border border-rose-900/40 rounded-lg p-3 text-rose-200 text-xs">
+          🔕 جوالك على صامت · ما تشوف الرسالة
+        </div>
+        <div class="flex items-start gap-2"><span class="text-base">😤</span><div><b>2:18 ص</b> · العميل: "محد رد..." 🚶‍♂️</div></div>
+        <div class="bg-rose-950/30 border border-rose-900/40 rounded-lg p-3 text-rose-200 text-xs">
+          ❌ راح للكافيه الثاني · طلب 4 مشروبات
+        </div>
+        <div class="flex items-start gap-2"><span class="text-base">😩</span><div><b>8:00 ص</b> · تفتح الجوال، تشوف الرسالة، تكتب اعتذار</div></div>
+        <div class="flex items-start gap-2"><span class="text-base">📉</span><div>متوسط 3 عملاء/يوم تخسرهم بسبب التأخر في الرد</div></div>
+      </div>
+      <div class="mt-5 bg-rose-950/40 border border-rose-700/40 rounded-xl p-4 text-center">
+        <div class="text-2xl font-black text-rose-300">~3,600 ر.س</div>
+        <div class="text-[11px] text-rose-200/70 mt-1">خسارة شهرية تقريبية</div>
+      </div>
+    </div>
+
+    <!-- AFTER -->
+    <div class="bg-gradient-to-br from-emerald-950/40 to-[#0a1f17] border border-[#c9a24b]/30 rounded-3xl p-5 md:p-7 glow-green">
+      <div class="flex items-center gap-2 mb-5">
+        <span class="bg-emerald-600 text-white text-[10px] font-black px-3 py-1 rounded-full">بعد ثواني 🎉</span>
+      </div>
+      <div class="space-y-3 text-sm">
+        <div class="flex items-start gap-2"><span class="text-base">🌙</span><div><b>2:14 ص</b> · نفس العميل، نفس الرسالة</div></div>
+        <div class="bg-emerald-950/30 border border-emerald-900/40 rounded-lg p-3 text-emerald-200 text-xs">
+          🤖 البوت رد في 2.8 ثانية: "أهلاً! اللاتيه بـ 22 ر.س ☕"
+        </div>
+        <div class="flex items-start gap-2"><span class="text-base">😊</span><div><b>2:15 ص</b> · العميل طلب 4 مشروبات، أكد الموقع</div></div>
+        <div class="bg-emerald-950/30 border border-emerald-900/40 rounded-lg p-3 text-emerald-200 text-xs">
+          🧾 فاتورة وُلِّدت + تنبيه وصلك على الجوال
+        </div>
+        <div class="flex items-start gap-2"><span class="text-base">🌅</span><div><b>8:00 ص</b> · تفتح الادمن، الطلب جاهز للتحضير</div></div>
+        <div class="flex items-start gap-2"><span class="text-base">⭐</span><div>العميل قيّمك 5 نجوم وانضم لقائمة الولاء</div></div>
+      </div>
+      <div class="mt-5 bg-emerald-950/40 border border-[#c9a24b]/40 rounded-xl p-4 text-center">
+        <div class="text-2xl font-black text-[#c9a24b]">+3,600 ر.س</div>
+        <div class="text-[11px] text-emerald-200/70 mt-1">إيراد إضافي شهري تقريبياً</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════════ LIVE DEMO ═══════════════════ -->
 <section id="demo" class="max-w-7xl mx-auto px-5 py-20">
   <div class="text-center mb-12">
@@ -502,6 +664,96 @@
   </div>
 </section>
 
+<!-- ═══════════════════ ONBOARDING TIMELINE ═══════════════════ -->
+<section id="start" class="max-w-5xl mx-auto px-5 py-20">
+  <div class="text-center mb-12">
+    <span class="text-xs text-[#c9a24b] font-bold uppercase tracking-wider">سهلة جداً</span>
+    <h2 class="text-3xl md:text-5xl font-black mt-2">ابدأ في <span class="gradient-text">30 دقيقة</span></h2>
+    <p class="text-slate-400 mt-3">بدون مبرمج، بدون تنصيب، بدون تعلم. أنت بس اتبع الخطوات.</p>
+  </div>
+
+  <div class="relative">
+    <!-- خط الزمن العمودي -->
+    <div class="hidden md:block absolute right-[50%] top-8 bottom-8 w-0.5 bg-gradient-to-b from-[#c9a24b] via-[#1b5e20] to-[#c9a24b]"></div>
+
+    <div class="space-y-6 md:space-y-10">
+      <!-- خطوة 1 -->
+      <div class="grid md:grid-cols-2 gap-5 md:gap-12 items-center">
+        <div class="glass rounded-2xl p-5 md:p-6 md:order-1 order-2">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-3xl">📝</span>
+            <div>
+              <div class="text-[10px] text-[#c9a24b] font-bold">الخطوة 1 · 5 دقائق</div>
+              <h3 class="font-black text-lg">اشترك بسرعة</h3>
+            </div>
+          </div>
+          <p class="text-sm text-slate-300 leading-relaxed">رسالة واتساب بسيطة لنا، نعطيك رابط متجرك + كلمة مرور، تدخل ادمن متجرك مباشرة.</p>
+        </div>
+        <div class="md:order-2 order-1 text-center">
+          <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-[#c9a24b] to-[#e0b85f] text-[#0a1612] font-black text-2xl flex items-center justify-center shadow-2xl shadow-[#c9a24b]/40 ring-4 ring-[#0a1612]">1</div>
+        </div>
+      </div>
+
+      <!-- خطوة 2 -->
+      <div class="grid md:grid-cols-2 gap-5 md:gap-12 items-center">
+        <div class="md:order-1 order-1 text-center">
+          <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] text-white font-black text-2xl flex items-center justify-center shadow-2xl shadow-[#1b5e20]/40 ring-4 ring-[#0a1612]">2</div>
+        </div>
+        <div class="glass rounded-2xl p-5 md:p-6 md:order-2 order-2">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-3xl">📋</span>
+            <div>
+              <div class="text-[10px] text-[#c9a24b] font-bold">الخطوة 2 · 10 دقائق</div>
+              <h3 class="font-black text-lg">ضع منيوك</h3>
+            </div>
+          </div>
+          <p class="text-sm text-slate-300 leading-relaxed">صور المنتج + اسم + سعر. أو اكتب لنا في واتساب نعمله لك مجاناً في 10 دقائق.</p>
+        </div>
+      </div>
+
+      <!-- خطوة 3 -->
+      <div class="grid md:grid-cols-2 gap-5 md:gap-12 items-center">
+        <div class="glass rounded-2xl p-5 md:p-6 md:order-1 order-2">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-3xl">📱</span>
+            <div>
+              <div class="text-[10px] text-[#c9a24b] font-bold">الخطوة 3 · 5 دقائق</div>
+              <h3 class="font-black text-lg">اربط واتسابك</h3>
+            </div>
+          </div>
+          <p class="text-sm text-slate-300 leading-relaxed">من اللوحة → "ربط واتساب" → امسح QR من جوالك أو ادخل رقمك واحصل على كود سداسي. تم.</p>
+        </div>
+        <div class="md:order-2 order-1 text-center">
+          <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-[#c9a24b] to-[#e0b85f] text-[#0a1612] font-black text-2xl flex items-center justify-center shadow-2xl shadow-[#c9a24b]/40 ring-4 ring-[#0a1612]">3</div>
+        </div>
+      </div>
+
+      <!-- خطوة 4 -->
+      <div class="grid md:grid-cols-2 gap-5 md:gap-12 items-center">
+        <div class="md:order-1 order-1 text-center">
+          <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-emerald-500 to-emerald-700 text-white font-black text-2xl flex items-center justify-center shadow-2xl shadow-emerald-500/40 ring-4 ring-[#0a1612]">4</div>
+        </div>
+        <div class="glass rounded-2xl p-5 md:p-6 md:order-2 order-2 border-[#c9a24b]/40 glow-gold">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-3xl">🚀</span>
+            <div>
+              <div class="text-[10px] text-emerald-400 font-bold">الخطوة 4 · 10 دقائق</div>
+              <h3 class="font-black text-lg">شارك واربح</h3>
+            </div>
+          </div>
+          <p class="text-sm text-slate-300 leading-relaxed">شارك رقمك أو رابط متجرك في حالة واتساب أو سناب. الطلبات تبدأ بالدخول. مبروك! 🎉</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-12">
+    <a href="https://wa.me/966508572902?text=أبغى%20أبدأ%20في%20ثواني" target="_blank" class="btn-gold inline-block px-8 py-4 rounded-xl text-base">
+      <i class="fab fa-whatsapp"></i> ابدأ الآن — كلمنا في واتساب
+    </a>
+  </div>
+</section>
+
 <!-- ═══════════════════ FUN SUPPORT ═══════════════════ -->
 <section id="support" class="max-w-7xl mx-auto px-5 py-20">
   <div class="text-center mb-10">
@@ -546,6 +798,23 @@
         <p class="text-xs text-slate-300 leading-relaxed">مالك مطعم اتصل الساعة 11 الليل: "البوت رد على عميل سعودي بلهجة مصرية!" — أصلحناها وضحكنا. لسا يطلب البوت يكلم زبائنه بكلمات لهجته 🤣</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ FAQ ═══════════════════ -->
+<section id="faq" class="max-w-4xl mx-auto px-5 py-20">
+  <div class="text-center mb-10">
+    <span class="text-xs text-[#c9a24b] font-bold uppercase tracking-wider">الأسئلة الشائعة</span>
+    <h2 class="text-3xl md:text-5xl font-black mt-2">سؤال في بالك؟ <span class="gradient-text">ها هو الجواب</span></h2>
+  </div>
+
+  <div class="space-y-3" id="faqList"></div>
+
+  <div class="text-center mt-10">
+    <p class="text-sm text-slate-400">ما لقيت سؤالك؟</p>
+    <a href="https://wa.me/966508572902" target="_blank" class="text-[#c9a24b] hover:text-[#e0b85f] font-bold mt-2 inline-block">
+      <i class="fab fa-whatsapp"></i> اسألنا مباشرة على واتساب
+    </a>
   </div>
 </section>
 
@@ -600,7 +869,10 @@
       <ul class="space-y-2 text-slate-400 text-xs">
         <li><a href="#admin" class="hover:text-[#c9a24b]">جولة في الادمن</a></li>
         <li><a href="#adaptive" class="hover:text-[#c9a24b]">تكيّف حسب نشاطك</a></li>
+        <li><a href="#before-after" class="hover:text-[#c9a24b]">قبل وبعد</a></li>
         <li><a href="#demo" class="hover:text-[#c9a24b]">تجربة حية</a></li>
+        <li><a href="#start" class="hover:text-[#c9a24b]">ابدأ في 30 دقيقة</a></li>
+        <li><a href="#faq" class="hover:text-[#c9a24b]">أسئلة شائعة</a></li>
       </ul>
     </div>
     <div>
@@ -1029,10 +1301,93 @@ function setBiz(key){
   botSpeechSet(`${c.emoji} <b>${c.label}</b> — اللوحة الآن بمصطلحات هذا النشاط. شاهد كيف تغيّر "${c.flowName}" + الـ tabs + الحقول`);
 }
 
+/* ── Counter animation ───────────────────────────── */
+function animateCounter(el){
+  const target = parseFloat(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const decimals = parseInt(el.dataset.decimals || '0');
+  const duration = 1800;
+  const start = performance.now();
+  function tick(now){
+    const p = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const v = target * eased;
+    el.textContent = (decimals > 0 ? v.toFixed(decimals) : Math.floor(v).toLocaleString('ar-SA')) + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+    else el.textContent = (decimals > 0 ? target.toFixed(decimals) : target.toLocaleString('ar-SA')) + suffix;
+  }
+  requestAnimationFrame(tick);
+}
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.done){
+      entry.target.dataset.done = '1';
+      animateCounter(entry.target);
+    }
+  });
+}, {threshold:0.5});
+document.querySelectorAll('.count-up').forEach(el => counterObserver.observe(el));
+
+/* ── FAQ Accordion ───────────────────────────────── */
+const faqs = [
+  {q:'هل أحتاج رقم واتساب جديد؟', a:'لا أبداً. نفس رقمك الحالي يصير بوت ذكي. تربطه عبر QR (نفس طريقة WhatsApp Web) أو كود سداسي ترسله واتساب لرقمك.'},
+  {q:'هل البوت يفهم اللهجة السعودية والعربية؟', a:'نعم تماماً. الـ AI مدرّب على اللهجات الخليجية والعربية الفصحى. والمصطلحات في اللوحة كلها بالعربية الواضحة.'},
+  {q:'كم طلب يقدر يستقبل في اليوم؟', a:'بدون حد أعلى. النظام يستقبل آلاف الطلبات في اليوم بدون مشاكل. حد الأمان فقط في "بث الرسائل" — 50 رسالة/جلسة لحماية رقمك من حظر واتساب.'},
+  {q:'هل بياناتي وبيانات عملائي آمنة؟', a:'نعم. كل المتاجر معزولة كلياً (composite keys)، النظام يستخدم تشفير bcrypt للكلمات، 2FA TOTP اختياري للماستر، ونسخ احتياطي مشفّر (GPG AES-256) يومياً على VPS منفصل.'},
+  {q:'إذا انقطع الانترنت أو واتساب، إيش يصير؟', a:'النظام عنده "Session Watchdog" يفحص كل 5 دقائق ويعيد الاتصال تلقائياً. لو استمر الانقطاع أكثر من 10 د، نتصل بك. الطلبات اللي وصلت قبل الانقطاع محفوظة كلها.'},
+  {q:'هل أقدر أعدل المنيو والأسعار في أي وقت؟', a:'نعم، تعديلاتك تظهر فوراً في بوت واتساب. بدون إعادة نشر، بدون انتظار. حتى إخفاء منتج مؤقت "نفد" بضغطة زر.'},
+  {q:'يدعم أي أنواع متاجر؟', a:'مقاهي، مطاعم، مخابز، صالونات تجميل، عيادات، خدمات منزلية (سباكة/كهرباء/تنظيف)، خدمات تقنية (برمجة/تصميم)، بقالات، وأي نشاط يستقبل طلبات أو حجوزات.'},
+  {q:'كيف أتواصل مع الدعم؟', a:'واتساب 0508572902 — متوسط رد 3 ثوان في ساعات العمل. وعندنا بوت دعم ذكي يجاوبك على الأسئلة الشائعة 24/7.'},
+];
+function renderFAQ(){
+  document.getElementById('faqList').innerHTML = faqs.map((f,i) => `
+    <div class="glass rounded-xl border border-[#1a3a25] overflow-hidden faq-item">
+      <button onclick="toggleFAQ(${i})" class="w-full px-5 py-4 flex items-center justify-between text-right gap-3 hover:bg-white/5 transition">
+        <span class="font-bold text-sm flex-1">${f.q}</span>
+        <i class="fas fa-chevron-down text-[#c9a24b] text-xs faq-icon transition-transform"></i>
+      </button>
+      <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+        <div class="px-5 pb-4 text-sm text-slate-300 leading-relaxed border-t border-[#1a3a25] pt-3">${f.a}</div>
+      </div>
+    </div>
+  `).join('');
+}
+function toggleFAQ(i){
+  const item = document.querySelectorAll('.faq-item')[i];
+  const ans = item.querySelector('.faq-answer');
+  const icon = item.querySelector('.faq-icon');
+  const isOpen = ans.style.maxHeight && ans.style.maxHeight !== '0px';
+  // أغلق الباقي
+  document.querySelectorAll('.faq-item').forEach(it => {
+    it.querySelector('.faq-answer').style.maxHeight = '0px';
+    it.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+  });
+  if (!isOpen){
+    ans.style.maxHeight = ans.scrollHeight + 'px';
+    icon.style.transform = 'rotate(180deg)';
+  }
+}
+
+/* ── Floating bot minimize ───────────────────────── */
+function botMinimize(){
+  document.getElementById('floatBot').style.display = 'none';
+  document.getElementById('botBubble').style.display = 'flex';
+}
+function botExpand(){
+  document.getElementById('floatBot').style.display = 'block';
+  document.getElementById('botBubble').style.display = 'none';
+}
+
 /* ── Init ────────────────────────────────────────── */
 renderMenu();
 showAdminTab(document.querySelector('.tab-card.active'), 'dash');
 setBiz('food');
+renderFAQ();
+
+// تقليل البوت تلقائياً على الموبايل بعد 4 ث
+if (window.innerWidth < 768){
+  setTimeout(botMinimize, 4000);
+}
 
 // تحديث الـ floating bot speech عند scroll
 let lastSection = '';
@@ -1040,8 +1395,11 @@ window.addEventListener('scroll', () => {
   const sections = [
     {id:'admin', msg:'هنا أعرّفك على صفحة الادمن. انقر على بطاقة وأنا أشرح لك'},
     {id:'adaptive', msg:'هذي ميزتنا الفريدة! اللوحة تتغيّر حسب نشاطك — جرّب الأزرار فوق ⬆️'},
+    {id:'before-after', msg:'شف الفرق: نفس العميل، نفس الساعة، نتيجتان مختلفتان كلياً 🌅'},
     {id:'demo', msg:'جرّب الآن! اضغط منتج من المنيو وأرسل الطلب — راح تشوف كل شي يتحرك 🎬'},
+    {id:'start', msg:'30 دقيقة فقط وتكون شغّال — اتبع الخطوات الأربع ⚡'},
     {id:'support', msg:'الدعم؟ 3 ثوان رد + بوت يشرح لك حتى لو ما حد رد ⚡'},
+    {id:'faq', msg:'سؤال في بالك؟ على الأغلب جوابه هنا 📖'},
   ];
   const y = window.scrollY + 200;
   for (const s of sections){
