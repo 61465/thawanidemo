@@ -63,6 +63,14 @@
   .order-card .status{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700}
   .order-card .status.pending{background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.3)}
   .order-card .status.confirmed{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(74,222,128,.3)}
+  .order-card .status.rejected{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(248,113,113,.3)}
+  .order-card .oc-actions{display:flex;gap:8px;margin:10px 0;flex-wrap:wrap}
+  .order-card .oc-actions button{flex:1;min-width:120px;padding:10px 14px;border-radius:8px;font-family:inherit;font-weight:800;font-size:13px;cursor:pointer;border:none;transition:.15s}
+  .order-card .oc-actions .btn-accept{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;box-shadow:0 3px 10px rgba(22,163,74,.25)}
+  .order-card .oc-actions .btn-accept:hover{transform:translateY(-1px)}
+  .order-card .oc-actions .btn-reject{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(248,113,113,.3)}
+  .order-card .oc-actions .btn-reject:hover{background:rgba(239,68,68,.25)}
+  .order-card .reject-note{background:rgba(239,68,68,.08);border:1px solid rgba(248,113,113,.2);color:#fca5a5;padding:8px 12px;border-radius:8px;font-size:12px;margin:8px 0}
 
   /* Products grid */
   .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
@@ -121,6 +129,7 @@
 
   <div class="tabs">
     <button class="tab active" data-tab="orders">📦 الطلبات الواردة</button>
+    <button class="tab"        data-tab="accounting">💰 المحاسب</button>
     <button class="tab"        data-tab="products">🛍️ المنتجات</button>
     <button class="tab"        data-tab="info">ℹ️ معلومات</button>
   </div>
@@ -132,6 +141,14 @@
         <span class="big">⏳</span>
         جاري تحميل الطلبات...
       </div>
+    </div>
+  </section>
+
+  <!-- Accounting -->
+  <section id="accountingSection">
+    <div class="card">
+      <div class="card-h">💰 المحاسب — إحصائيات الجلسة</div>
+      <div id="acctBox" style="font-size:13px">جاري التحميل...</div>
     </div>
   </section>
 
@@ -182,6 +199,7 @@
       const tabId = tab.getAttribute("data-tab");
       document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
       document.getElementById(tabId + "Section").classList.add("active");
+      if (tabId === "accounting") loadAccounting();
     });
   });
 
@@ -265,8 +283,17 @@
     box.innerHTML = orders.map(o => {
       const items = (o.items || []).map(i => `<b>${escapeHtml(i.name)}</b> × ${i.qty}`).join("، ") || "—";
       const dt = o.timestamp ? new Date(o.timestamp).toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" }) : "—";
-      const statusClass = o.status === "confirmed" ? "confirmed" : "pending";
-      const statusLabel = o.status === "confirmed" ? "✓ مؤكد" : "⏳ بانتظار التأكيد";
+      let statusClass = "pending", statusLabel = "⏳ بانتظار التأكيد";
+      if (o.status === "confirmed") { statusClass = "confirmed"; statusLabel = "✓ مؤكد"; }
+      else if (o.status === "rejected") { statusClass = "rejected"; statusLabel = "✗ مرفوض"; }
+
+      // أزرار القبول/الرفض — فقط للطلبات بانتظار التأكيد
+      const actions = (o.status === "pending_confirmation" || !o.status) ? `
+        <div class="oc-actions">
+          <button class="btn-accept" onclick="confirmOrder('${escapeHtml(o.orderId)}')">✅ قبول الطلب</button>
+          <button class="btn-reject" onclick="rejectOrder('${escapeHtml(o.orderId)}')">❌ رفض</button>
+        </div>` : (o.rejectReason ? `<div class="reject-note">📋 السبب: ${escapeHtml(o.rejectReason)}</div>` : "");
+
       return `<div class="order-card">
         <div class="top">
           <div>
@@ -276,6 +303,7 @@
           </div>
           <div class="total">${(o.total||0)} ${escapeHtml(o.currency||"ر.س")}</div>
         </div>
+        ${actions}
         <div class="meta">
           ${o.customerLocation ? `<div class="meta-item"><div class="lbl">📍 العنوان</div><div class="val">${escapeHtml(o.customerLocation)}</div></div>` : ""}
           <div class="meta-item"><div class="lbl">🕒 الوقت</div><div class="val">${dt}</div></div>
@@ -284,6 +312,61 @@
         <div class="items">📦 ${items}</div>
       </div>`;
     }).join("");
+  }
+
+  async function confirmOrder(orderId) {
+    if (!confirm(`تأكيد قبول الطلب ${orderId}؟ سيُرسل تأكيد للعميل عبر واتساب.`)) return;
+    try {
+      const r = await fetch(`${API_BASE}/try/orders/${encodeURIComponent(slotId)}/${encodeURIComponent(orderId)}/confirm`, {
+        method: "POST", headers: { "Content-Type": "application/json" }, body: "{}",
+      });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.error || "فشل القبول");
+      showNotif("✅ تم قبول الطلب وإرسال تأكيد للعميل");
+      loadOrders();
+      loadAccounting();
+    } catch (e) { alert("❌ " + e.message); }
+  }
+
+  async function rejectOrder(orderId) {
+    const reason = prompt("سبب الرفض (اختياري):", "");
+    if (reason === null) return;
+    try {
+      const r = await fetch(`${API_BASE}/try/orders/${encodeURIComponent(slotId)}/${encodeURIComponent(orderId)}/reject`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reason }),
+      });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.error || "فشل الرفض");
+      showNotif("❌ تم رفض الطلب وإبلاغ العميل");
+      loadOrders();
+      loadAccounting();
+    } catch (e) { alert("❌ " + e.message); }
+  }
+
+  // ─── Accounting ──────────────────────────────────
+  async function loadAccounting() {
+    try {
+      const r = await fetch(`${API_BASE}/try/accounting/${encodeURIComponent(slotId)}`);
+      const d = await r.json();
+      if (!r.ok) return;
+      const topRows = (d.topProducts || []).map(p =>
+        `<div style="display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.15);border-radius:6px;margin-bottom:6px"><span>${escapeHtml(p.name)}</span><b style="color:#34d399">×${p.qty}</b></div>`
+      ).join("") || `<div style="color:var(--muted);font-style:italic">لا توجد مبيعات بعد</div>`;
+      document.getElementById("acctBox").innerHTML = `
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:18px">
+          <div class="kpi-card" style="background:rgba(46,125,50,.15);border:1px solid rgba(52,211,153,.3);border-radius:10px;padding:14px"><div style="font-size:11px;color:#34d399;font-weight:700;margin-bottom:4px">💰 إجمالي الإيرادات</div><div style="font-size:22px;font-weight:900;color:#fff">${d.totalRevenue} ${escapeHtml(d.currency)}</div></div>
+          <div class="kpi-card" style="background:rgba(201,162,75,.1);border:1px solid rgba(201,162,75,.3);border-radius:10px;padding:14px"><div style="font-size:11px;color:#e0b85f;font-weight:700;margin-bottom:4px">📦 الطلبات المؤكدة</div><div style="font-size:22px;font-weight:900;color:#fff">${d.confirmedCount}</div></div>
+          <div class="kpi-card" style="background:rgba(245,158,11,.1);border:1px solid rgba(251,191,36,.3);border-radius:10px;padding:14px"><div style="font-size:11px;color:#fbbf24;font-weight:700;margin-bottom:4px">⏳ بانتظار التأكيد</div><div style="font-size:22px;font-weight:900;color:#fff">${d.pendingCount}</div></div>
+          <div class="kpi-card" style="background:rgba(239,68,68,.08);border:1px solid rgba(248,113,113,.25);border-radius:10px;padding:14px"><div style="font-size:11px;color:#fca5a5;font-weight:700;margin-bottom:4px">❌ مرفوضة</div><div style="font-size:22px;font-weight:900;color:#fff">${d.rejectedCount}</div></div>
+          <div class="kpi-card" style="background:rgba(13,31,23,.6);border:1px solid var(--border);border-radius:10px;padding:14px"><div style="font-size:11px;color:var(--muted);font-weight:700;margin-bottom:4px">📊 متوسط قيمة الطلب</div><div style="font-size:22px;font-weight:900;color:#fff">${d.avgOrder} ${escapeHtml(d.currency)}</div></div>
+        </div>
+        <div style="background:rgba(13,31,23,.6);border:1px solid var(--border);border-radius:10px;padding:14px">
+          <div style="font-weight:800;color:#e0b85f;margin-bottom:10px;font-size:14px">🏆 أكثر المنتجات مبيعاً</div>
+          ${topRows}
+        </div>
+      `;
+    } catch (e) { /* ignore */ }
   }
 
   function showNotif(text) {
@@ -342,7 +425,8 @@
     if (!ok) return;
     startTimer();
     loadOrders();
-    ordersTimer = setInterval(loadOrders, 3000); // poll كل 3 ثوانٍ
+    loadAccounting();
+    ordersTimer = setInterval(() => { loadOrders(); loadAccounting(); }, 3000); // poll كل 3 ثوانٍ
   })();
 </script>
 
