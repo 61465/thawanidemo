@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة الإدارة — تجربة منصة ثواني</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#08120e;--bg2:#0d1f17;--green:#1b5e20;--gold:#c9a24b;--gold2:#e0b85f;--accent:#34d399;--text:#f1f5f4;--muted:#a3b3ab;--card:#0e1a14;--border:rgba(201,162,75,.15)}
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Cairo','Tajawal',sans-serif}
+  body{background:var(--bg);color:var(--text);min-height:100vh}
+
+  /* Top Demo Bar */
+  .demo-bar{position:sticky;top:0;background:linear-gradient(135deg,#0d1f17,#1b5e20);color:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.3);flex-wrap:wrap;gap:10px}
+  .demo-bar .left{display:flex;align-items:center;gap:10px}
+  .demo-bar .tag{background:var(--gold);color:#08120e;padding:3px 10px;border-radius:999px;font-weight:800;font-size:11px}
+  .demo-bar .label{font-size:13px;opacity:.95}
+  .demo-bar .right{display:flex;align-items:center;gap:10px}
+  .demo-bar .timer{font-family:monospace;font-weight:800;font-size:14px;color:var(--gold2);background:rgba(0,0,0,.2);padding:4px 10px;border-radius:6px}
+  .demo-bar .exit-btn{background:rgba(255,255,255,.12);border:1px solid rgba(201,162,75,.4);color:#fff;padding:5px 12px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:11px;font-weight:700}
+
+  /* Main */
+  .wrap{max-width:1200px;margin:0 auto;padding:24px 20px}
+  .header{display:flex;align-items:center;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+  .store-info{flex:1;min-width:240px}
+  .store-info h1{font-size:24px;font-weight:900;color:var(--gold2);margin-bottom:4px}
+  .store-info .sub{color:var(--muted);font-size:13px}
+  .bot-phone-card{background:rgba(46,125,50,.15);border:1.5px solid rgba(52,211,153,.4);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:14px}
+  .bot-phone-card .ico{font-size:28px}
+  .bot-phone-card .info .lbl{font-size:11px;color:#34d399;font-weight:700;margin-bottom:2px}
+  .bot-phone-card .info .phone{font-family:monospace;font-size:16px;color:#fff;font-weight:800;direction:ltr}
+
+  .instructions{background:rgba(201,162,75,.08);border:1px solid rgba(201,162,75,.25);border-radius:12px;padding:16px 20px;margin-bottom:24px;color:var(--gold2);font-size:13px;line-height:1.8}
+  .instructions b{color:#fff}
+
+  /* Tabs */
+  .tabs{display:flex;gap:4px;background:rgba(13,31,23,.6);border:1px solid var(--border);border-radius:12px;padding:4px;margin-bottom:20px;overflow-x:auto}
+  .tab{flex:1;padding:10px 14px;background:transparent;border:none;color:var(--muted);font-family:inherit;font-weight:700;font-size:13px;cursor:pointer;border-radius:8px;transition:.15s;white-space:nowrap;min-width:fit-content}
+  .tab.active{background:linear-gradient(135deg,var(--green),#2e7d32);color:#fff}
+  .tab:hover:not(.active){background:rgba(255,255,255,.04);color:var(--text)}
+
+  /* Sections */
+  section{display:none}
+  section.active{display:block;animation:fadeIn .25s}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+  .card-h{font-size:15px;font-weight:800;color:var(--gold2);margin-bottom:14px;display:flex;align-items:center;gap:8px;padding-bottom:10px;border-bottom:1px dashed var(--border)}
+
+  /* Orders */
+  .order-card{background:var(--card);border:1px solid var(--border);border-right:4px solid var(--gold);border-radius:12px;padding:16px;margin-bottom:12px}
+  .order-card .top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;flex-wrap:wrap;gap:8px}
+  .order-card .customer{font-size:15px;font-weight:800;color:#fff;margin-bottom:3px}
+  .order-card .phone{font-size:12px;color:var(--muted);direction:ltr;font-family:monospace}
+  .order-card .total{background:rgba(46,125,50,.25);color:#34d399;padding:6px 12px;border-radius:8px;font-weight:800;font-size:14px;border:1px solid rgba(52,211,153,.3)}
+  .order-card .meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-bottom:10px}
+  .order-card .meta-item{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;padding:8px 10px}
+  .order-card .meta-item .lbl{font-size:10px;color:var(--muted);font-weight:600;margin-bottom:2px;text-transform:uppercase;letter-spacing:.4px}
+  .order-card .meta-item .val{font-size:13px;color:#fff;font-weight:700}
+  .order-card .items{background:rgba(0,0,0,.2);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--muted);line-height:1.7}
+  .order-card .items b{color:var(--gold2)}
+  .order-card .status{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700}
+  .order-card .status.pending{background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.3)}
+  .order-card .status.confirmed{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(74,222,128,.3)}
+
+  /* Products grid */
+  .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .prod{background:rgba(13,31,23,.7);border:1px solid var(--border);border-radius:10px;padding:14px}
+  .prod h4{font-size:14px;font-weight:700;color:#fff;margin-bottom:6px}
+  .prod .price{color:var(--gold2);font-weight:800;font-size:14px}
+  .prod .cat-tag{font-size:11px;color:var(--muted);margin-top:4px}
+
+  /* Empty */
+  .empty{text-align:center;padding:50px 20px;color:var(--muted);font-size:14px}
+  .empty .big{font-size:48px;margin-bottom:14px;display:block}
+
+  .footer{text-align:center;margin-top:36px;color:var(--muted);font-size:12px;padding-top:20px;border-top:1px dashed var(--border)}
+  .footer a{color:var(--gold2);text-decoration:none}
+
+  @media(max-width:640px){
+    .header{flex-direction:column;align-items:stretch}
+    .bot-phone-card{justify-content:center}
+    .wrap{padding:16px}
+  }
+</style>
+</head>
+<body>
+
+<!-- Demo top bar -->
+<div class="demo-bar">
+  <div class="left">
+    <span class="tag">DEMO</span>
+    <span class="label" id="demoLabel">جاري التحميل...</span>
+  </div>
+  <div class="right">
+    <span class="timer" id="timer">--:--</span>
+    <a href="./index.html" class="exit-btn">✕ إنهاء</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="header">
+    <div class="store-info">
+      <h1 id="storeName">جاري التحميل...</h1>
+      <div class="sub">لوحة إدارة تجريبية — كل تغيير غير محفوظ</div>
+    </div>
+    <div class="bot-phone-card">
+      <div class="ico">📱</div>
+      <div class="info">
+        <div class="lbl">رقم البوت المتصل</div>
+        <div class="phone" id="botPhone">—</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="instructions">
+    💡 <b>كيف تجرّب:</b> افتح واتساب من <b>رقم آخر</b> ↻ أرسل أي رسالة (مثل "ابدأ") لرقم البوت أعلاه ↻ تابع المحادثة لتقديم طلب ↻ ستظهر طلباتك هنا فوراً.
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="orders">📦 الطلبات الواردة</button>
+    <button class="tab"        data-tab="products">🛍️ المنتجات</button>
+    <button class="tab"        data-tab="info">ℹ️ معلومات</button>
+  </div>
+
+  <!-- Orders -->
+  <section id="ordersSection" class="active">
+    <div id="ordersList">
+      <div class="empty">
+        <span class="big">⏳</span>
+        جاري تحميل الطلبات...
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="productsSection">
+    <div class="card">
+      <div class="card-h">🛍️ منتجات المتجر التجريبي (<span id="prodCount">0</span>)</div>
+      <div class="prod-grid" id="prodGrid"></div>
+    </div>
+  </section>
+
+  <!-- Info -->
+  <section id="infoSection">
+    <div class="card">
+      <div class="card-h">ℹ️ معلومات الجلسة</div>
+      <div id="infoBox" style="font-size:13px;line-height:2;color:var(--muted)">جاري التحميل...</div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <p>💎 أعجبتك التجربة؟ <a href="https://wa.me/966508572902?text=أريد الاشتراك في منصة ثواني">تواصل للاشتراك في النسخة الكاملة</a></p>
+  </div>
+</div>
+
+<script>
+  const API_BASE = "https://bothatim-vps.tail19ddab.ts.net";
+
+  const params = new URLSearchParams(location.search);
+  const slotId = params.get("slot");
+  const sector = params.get("sector");
+
+  if (!slotId) {
+    document.body.innerHTML = `<div class="wrap" style="text-align:center;padding:60px"><h2 style="color:#ef4444">⚠️ جلسة غير صالحة</h2><p style="margin-top:14px"><a href="./index.html" style="color:#c9a24b">← العودة للديمو</a></p></div>`;
+    throw new Error("No slot");
+  }
+
+  let storeInfo = null;
+  let expiresAt = null;
+  let ordersTimer = null;
+  let timerInterval = null;
+  let lastSeenOrderIds = new Set();
+
+  // ─── Tabs ────────────────────────────────────────
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      const tabId = tab.getAttribute("data-tab");
+      document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+      document.getElementById(tabId + "Section").classList.add("active");
+    });
+  });
+
+  // ─── Load store info ─────────────────────────────
+  async function loadStore() {
+    try {
+      const r = await fetch(`${API_BASE}/try/store/${encodeURIComponent(slotId)}`);
+      const d = await r.json();
+      if (!r.ok) {
+        document.getElementById("storeName").textContent = "⚠️ جلسة منتهية";
+        document.getElementById("demoLabel").textContent = d.error || "خطأ";
+        return false;
+      }
+      storeInfo = d;
+      expiresAt = d.expiresAt;
+      document.getElementById("storeName").textContent = d.storeName;
+      document.getElementById("demoLabel").textContent = d.storeName;
+      document.getElementById("botPhone").textContent = d.botPhone ? "+" + d.botPhone : "—";
+      renderProducts(d);
+      renderInfo(d);
+      return true;
+    } catch (e) {
+      document.getElementById("storeName").textContent = "⚠️ تعذّر الاتصال";
+      return false;
+    }
+  }
+
+  function renderProducts(s) {
+    document.getElementById("prodCount").textContent = (s.products || []).length;
+    const grid = document.getElementById("prodGrid");
+    grid.innerHTML = (s.products || []).map(p => {
+      const cat = (s.categories || []).find(c => c.id === p.category);
+      return `<div class="prod">
+        <h4>${escapeHtml(p.name)}</h4>
+        <div class="price">${p.price} ${escapeHtml(s.currency)}</div>
+        ${cat ? `<div class="cat-tag">${cat.emoji||""} ${escapeHtml(cat.name)}</div>` : ""}
+      </div>`;
+    }).join("");
+  }
+
+  function renderInfo(s) {
+    const start = s.initAt ? new Date(s.initAt).toLocaleTimeString("ar-EG") : "—";
+    const end   = s.expiresAt ? new Date(s.expiresAt).toLocaleTimeString("ar-EG") : "—";
+    document.getElementById("infoBox").innerHTML = `
+      <div>🏪 المتجر: <b style="color:#fff">${escapeHtml(s.storeName)}</b></div>
+      <div>📦 القطاع: <b style="color:#fff">${escapeHtml(s.sector)}</b></div>
+      <div>📱 رقم البوت: <b style="color:#fff;direction:ltr">${s.botPhone ? "+" + s.botPhone : "—"}</b></div>
+      <div>💰 العملة: <b style="color:#fff">${escapeHtml(s.currency)}</b></div>
+      <div>🚚 رسوم التوصيل: <b style="color:#fff">${s.deliveryFee} ${escapeHtml(s.currency)}</b></div>
+      <div>🕒 بدأت الجلسة: <b style="color:#fff">${start}</b></div>
+      <div>⏰ تنتهي: <b style="color:#fff">${end}</b></div>
+      <div style="margin-top:14px;padding:12px;background:rgba(201,162,75,.08);border-radius:8px;color:#e0b85f;font-size:12px">
+        💡 المنتجات والإعدادات هنا للقراءة فقط. للنسخة الكاملة مع التعديل: <a href="https://wa.me/966508572902" style="color:#34d399">تواصل معنا</a>
+      </div>
+    `;
+  }
+
+  // ─── Load orders ─────────────────────────────────
+  async function loadOrders() {
+    try {
+      const r = await fetch(`${API_BASE}/try/orders/${encodeURIComponent(slotId)}`);
+      const d = await r.json();
+      if (!r.ok) return;
+      renderOrders(d.orders || []);
+    } catch (e) { /* ignore */ }
+  }
+
+  function renderOrders(orders) {
+    const box = document.getElementById("ordersList");
+    if (!orders.length) {
+      box.innerHTML = `<div class="empty"><span class="big">📭</span>لا توجد طلبات بعد<br><br><small style="font-size:12px">جرّب إرسال "ابدأ" لرقم البوت من رقم آخر</small></div>`;
+      return;
+    }
+    // notify عند طلب جديد
+    orders.forEach(o => {
+      if (!lastSeenOrderIds.has(o.orderId) && lastSeenOrderIds.size > 0) {
+        showNotif("🛎️ طلب جديد من " + (o.customerName || "—"));
+      }
+      lastSeenOrderIds.add(o.orderId);
+    });
+    box.innerHTML = orders.map(o => {
+      const items = (o.items || []).map(i => `<b>${escapeHtml(i.name)}</b> × ${i.qty}`).join("، ") || "—";
+      const dt = o.timestamp ? new Date(o.timestamp).toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" }) : "—";
+      const statusClass = o.status === "confirmed" ? "confirmed" : "pending";
+      const statusLabel = o.status === "confirmed" ? "✓ مؤكد" : "⏳ بانتظار التأكيد";
+      return `<div class="order-card">
+        <div class="top">
+          <div>
+            <div class="customer">${escapeHtml(o.customerName||"—")}</div>
+            <div class="phone">${escapeHtml(o.customerPhone||"")}</div>
+            <span class="status ${statusClass}" style="margin-top:6px;display:inline-block">${statusLabel}</span>
+          </div>
+          <div class="total">${(o.total||0)} ${escapeHtml(o.currency||"ر.س")}</div>
+        </div>
+        <div class="meta">
+          ${o.customerLocation ? `<div class="meta-item"><div class="lbl">📍 العنوان</div><div class="val">${escapeHtml(o.customerLocation)}</div></div>` : ""}
+          <div class="meta-item"><div class="lbl">🕒 الوقت</div><div class="val">${dt}</div></div>
+          <div class="meta-item"><div class="lbl">🆔 رقم الطلب</div><div class="val" style="font-family:monospace;font-size:11px">${escapeHtml(o.orderId||"—")}</div></div>
+        </div>
+        <div class="items">📦 ${items}</div>
+      </div>`;
+    }).join("");
+  }
+
+  function showNotif(text) {
+    const n = document.createElement("div");
+    n.style.cssText = "position:fixed;top:60px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#1b5e20,#2e7d32);color:#fff;padding:10px 18px;border-radius:24px;font-weight:700;font-size:13px;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,.4);animation:slideDown .3s";
+    n.textContent = text;
+    document.body.appendChild(n);
+    setTimeout(() => n.remove(), 3500);
+  }
+
+  function escapeHtml(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  // ─── Timer ───────────────────────────────────────
+  function startTimer() {
+    timerInterval = setInterval(() => {
+      if (!expiresAt) return;
+      const left = expiresAt - Date.now();
+      if (left <= 0) {
+        document.getElementById("timer").textContent = "00:00";
+        showExpired();
+        clearInterval(timerInterval);
+        return;
+      }
+      const m = String(Math.floor(left / 60000)).padStart(2, "0");
+      const s = String(Math.floor((left % 60000) / 1000)).padStart(2, "0");
+      document.getElementById("timer").textContent = `${m}:${s}`;
+      if (left < 5 * 60_000) document.getElementById("timer").style.color = "#fbbf24";
+      if (left < 60_000)     document.getElementById("timer").style.color = "#ef4444";
+    }, 1000);
+  }
+
+  function showExpired() {
+    if (document.getElementById("expBox")) return;
+    const o = document.createElement("div");
+    o.id = "expBox";
+    o.style.cssText = "position:fixed;inset:0;background:rgba(8,18,14,.96);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px";
+    o.innerHTML = `<div style="background:linear-gradient(135deg,#0d1f17,#1b5e20);border:2px solid #c9a24b;border-radius:20px;padding:36px;max-width:420px;text-align:center;color:#fff">
+      <div style="font-size:56px;margin-bottom:14px">⏰</div>
+      <h2 style="font-size:22px;color:#c9a24b;margin-bottom:10px">انتهت التجربة</h2>
+      <p style="opacity:.9;margin-bottom:22px;line-height:1.7">شكراً لتجربة منصة ثواني!<br>للاشتراك في النسخة الكاملة:</p>
+      <a href="https://wa.me/966508572902?text=أريد الاشتراك في منصة ثواني" style="background:#c9a24b;color:#08120e;padding:12px 24px;border-radius:10px;font-weight:800;text-decoration:none;display:block;margin-bottom:8px">💬 تواصل للاشتراك</a>
+      <a href="./index.html" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(201,162,75,.4);padding:12px 24px;border-radius:10px;font-weight:700;text-decoration:none;display:block">🔄 تجربة جديدة</a>
+    </div>`;
+    document.body.appendChild(o);
+  }
+
+  // ─── Init ────────────────────────────────────────
+  (async () => {
+    const ok = await loadStore();
+    if (!ok) return;
+    startTimer();
+    loadOrders();
+    ordersTimer = setInterval(loadOrders, 3000); // poll كل 3 ثوانٍ
+  })();
+</script>
+
+</body>
+</html>
