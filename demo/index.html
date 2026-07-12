@@ -1,273 +1,1330 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html dir="rtl" lang="ar">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>منصة ثواني — تجربة البوت الحقيقي</title>
-<meta name="description" content="جرّب بوت ثواني حقيقياً على واتساب — اربط رقمك لمدة 45 دقيقة">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="../favicon-192.png">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>تجربة تفاعلية كاملة — منصة ثواني</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#08120e;--bg2:#0d1f17;--green:#1b5e20;--green2:#2e7d32;--gold:#c9a24b;--gold2:#e0b85f;--accent:#34d399;--text:#f1f5f4;--muted:#a3b3ab}
-  *{box-sizing:border-box;margin:0;padding:0;font-family:'Cairo','Tajawal',sans-serif}
-  body{background:var(--bg);color:var(--text);min-height:100vh;background-image:linear-gradient(135deg,#08120e 0%,#0d1f17 100%)}
-  .wrap{max-width:1100px;margin:0 auto;padding:48px 20px}
-  .hero{text-align:center;margin-bottom:42px}
-  .badge{display:inline-block;background:rgba(201,162,75,.15);color:var(--gold);border:1px solid rgba(201,162,75,.4);padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:18px}
-  h1{font-size:38px;font-weight:900;margin-bottom:12px;background:linear-gradient(135deg,#fff 0%,var(--gold2) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
-  .sub{font-size:16px;color:var(--muted);max-width:620px;margin:0 auto;line-height:1.7}
-  .step-title{font-size:20px;font-weight:800;margin-bottom:22px;text-align:center;color:var(--gold2)}
-  .step-title small{display:block;font-size:13px;color:var(--muted);font-weight:500;margin-top:6px}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Tajawal', 'Cairo', system-ui, sans-serif;
+  background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
+  color: #1a1a1a;
+  min-height: 100vh;
+  padding: 20px 16px;
+}
+.container { max-width: 1200px; margin: 0 auto; }
 
-  .sectors{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-bottom:30px}
-  .sector{background:rgba(13,31,23,.7);border:1.5px solid rgba(201,162,75,.18);border-radius:18px;padding:28px 22px;text-align:center;cursor:pointer;transition:all .25s;backdrop-filter:blur(14px)}
-  .sector:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 20px 50px rgba(201,162,75,.15)}
-  .sector .ico{font-size:50px;margin-bottom:12px;display:block}
-  .sector h3{font-size:19px;font-weight:800;margin-bottom:8px;color:#fff}
-  .sector p{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:14px}
-  .sector .features{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:14px}
-  .sector .features span{font-size:11px;background:rgba(46,125,50,.2);color:#34d399;border:1px solid rgba(52,211,153,.3);padding:3px 8px;border-radius:999px;font-weight:600}
-  .sector button{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;border:none;padding:11px 24px;border-radius:10px;font-family:inherit;font-weight:800;font-size:14px;cursor:pointer;width:100%;transition:.2s}
-  .sector:hover button{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#08120e}
+/* ═══ HEADER + PROGRESS ═══ */
+.hdr {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: #fff;
+  border-radius: 20px;
+  padding: 22px 28px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 30px rgba(16,185,129,0.25);
+}
+.hdr h1 { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.hdr p { font-size: 14px; opacity: 0.95; line-height: 1.7; }
 
-  /* QR card */
-  .qr-card{display:none;background:rgba(13,31,23,.85);border:1.5px solid rgba(201,162,75,.3);border-radius:20px;padding:30px 26px;max-width:760px;margin:0 auto;backdrop-filter:blur(14px)}
-  .qr-card.active{display:block;animation:fadeIn .4s}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.progress-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 16px;
+  padding: 14px 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  gap: 8px;
+}
+.step {
+  flex: 1;
+  text-align: center;
+  padding: 10px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #94a3b8;
+  border: 2px solid transparent;
+}
+.step.active {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(16,185,129,0.35);
+}
+.step.done {
+  color: #059669;
+  background: rgba(16,185,129,0.10);
+  border-color: rgba(16,185,129,0.30);
+}
+.step-num {
+  display: inline-block;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  line-height: 24px;
+  font-size: 12px;
+  font-weight: 900;
+  margin-left: 6px;
+}
+.step-arrow { color: #cbd5e1; font-size: 16px; }
 
-  .qr-grid{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;margin:22px 0}
-  .qr-box{background:#fff;padding:16px;border-radius:14px;display:flex;align-items:center;justify-content:center;min-width:240px;min-height:240px}
-  #qrContainer canvas, #qrContainer img{display:block;width:240px;height:240px}
-  .qr-info h3{font-size:17px;font-weight:800;margin-bottom:10px;color:var(--gold2)}
-  .qr-info ol{margin:0 18px 0 0;padding:0;color:var(--muted);line-height:2;font-size:14px}
-  .qr-info ol li b{color:#fff}
-  .qr-info .note{background:rgba(201,162,75,.08);border:1px solid rgba(201,162,75,.2);border-radius:8px;padding:10px 14px;margin-top:14px;font-size:12px;color:var(--gold2);line-height:1.7}
+/* ═══ STAGE PANELS ═══ */
+.stage { display: none; animation: fadein 0.4s; }
+.stage.active { display: block; }
+@keyframes fadein { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-  .status-pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:18px;font-size:12px;font-weight:700;background:rgba(13,31,23,.6);border:1px solid rgba(201,162,75,.2);color:var(--muted);margin-bottom:14px}
-  .status-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
-  .status-pill.preparing{color:#f59e0b;border-color:rgba(245,158,11,.4)}
-  .status-pill.preparing .dot{background:#f59e0b;animation:pulse 1.5s ease-in-out infinite}
-  .status-pill.qr{color:var(--gold2);border-color:rgba(201,162,75,.5)}
-  .status-pill.qr .dot{background:var(--gold);animation:pulse 1.2s ease-in-out infinite}
-  .status-pill.connected{color:#34d399;border-color:rgba(52,211,153,.4)}
-  .status-pill.connected .dot{background:#34d399}
-  .status-pill.error{color:#ef4444;border-color:rgba(239,68,68,.4)}
-  .status-pill.error .dot{background:#ef4444}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.stage-hdr {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.stage-icon { font-size: 42px; }
+.stage-hdr h2 { font-size: 20px; font-weight: 900; color: #059669; margin-bottom: 4px; }
+.stage-hdr p { font-size: 13.5px; color: #64748b; line-height: 1.7; }
 
-  .spinner{width:48px;height:48px;border:4px solid rgba(255,255,255,.1);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
+/* ═══ STAGE 1: OWNER — PRODUCT MANAGER ═══ */
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
 
-  .error-msg{display:none;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#fca5a5;padding:12px 16px;border-radius:10px;font-size:13px;margin-top:16px;text-align:center;line-height:1.6}
-  .error-msg.show{display:block}
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px 24px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+.card h3 {
+  font-size: 16px;
+  font-weight: 900;
+  color: #1e293b;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-  .footer{text-align:center;margin-top:40px;color:var(--muted);font-size:13px}
-  .footer a{color:var(--gold2);text-decoration:none}
-  .footer a:hover{text-decoration:underline}
+.field { margin-bottom: 14px; }
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+  color: #374151;
+  margin-bottom: 6px;
+}
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 11px 14px;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  color: #1a1a1a;
+  transition: all 0.15s;
+}
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  background: #fff;
+  border-color: #059669;
+  box-shadow: 0 0 0 4px rgba(16,185,129,0.10);
+}
 
-  @media(max-width:640px){
-    h1{font-size:28px}
-    .wrap{padding:32px 14px}
-    .qr-grid{grid-template-columns:1fr;text-align:center}
-    .qr-info ol{text-align:right;margin:0;padding-right:18px}
-  }
+.upload-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-height: 120px;
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 20px;
+  text-align: center;
+}
+.upload-box:hover { background: #f0fdf4; border-color: #10b981; }
+.upload-box.has-image {
+  padding: 0;
+  min-height: 140px;
+  overflow: hidden;
+  border-style: solid;
+  border-color: #10b981;
+}
+.upload-box.has-image img { width: 100%; height: 140px; object-fit: cover; }
+.upload-hint { color: #64748b; font-size: 12.5px; font-weight: 700; }
+.upload-emoji { font-size: 36px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(16,185,129,0.30);
+}
+.btn-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn-secondary {
+  background: #f1f5f9;
+  color: #475569;
+  border: 2px solid #e2e8f0;
+}
+.btn-secondary:hover { background: #e2e8f0; }
+.btn-danger { background: #fee2e2; color: #991b1b; border: none; }
+.btn-danger:hover { background: #fecaca; }
+
+.product-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.product-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  transition: all 0.15s;
+}
+.product-item:hover { background: #f0fdf4; border-color: #86efac; }
+.product-thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  background: #e2e8f0;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.product-body { flex: 1; min-width: 0; }
+.product-name { font-weight: 900; font-size: 14px; color: #1e293b; margin-bottom: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.product-meta { font-size: 12px; color: #64748b; }
+.product-price { font-weight: 900; color: #059669; font-size: 15px; }
+.product-item .btn-danger { padding: 6px 10px; font-size: 12px; }
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #94a3b8;
+}
+.empty-state .emoji { font-size: 48px; margin-bottom: 10px; opacity: 0.6; }
+.empty-state div { font-size: 13.5px; font-weight: 700; }
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border: 1.5px solid #93c5fd;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-top: 14px;
+  color: #1e40af;
+  font-weight: 800;
+}
+.status-bar.done {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border-color: #6ee7b7;
+  color: #065f46;
+}
+.count-badge {
+  background: #fff;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 13px;
+}
+
+/* ═══ TIP OVERLAY ═══ */
+.tip {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border: 1.5px solid #f59e0b;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 16px 0;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #78350f;
+}
+.tip-icon { font-size: 20px; flex-shrink: 0; }
+.tip b { color: #92400e; }
+
+/* ═══ STAGE 2: CUSTOMER — PHONE MOCKUP ═══ */
+.phone-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.phone-frame {
+  background: #1a1a1a;
+  border-radius: 40px;
+  padding: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  flex-shrink: 0;
+}
+.phone-screen {
+  background: #eae0d5;
+  border-radius: 28px;
+  overflow: hidden;
+  width: 340px;
+  height: 620px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.phone-notch {
+  position: absolute;
+  top: 4px; left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 24px;
+  background: #1a1a1a;
+  border-radius: 0 0 14px 14px;
+  z-index: 10;
+}
+.wa-header {
+  background: linear-gradient(135deg, #075e54, #128c7e);
+  color: #fff;
+  padding: 30px 14px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wa-avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.wa-title { flex: 1; }
+.wa-name { font-weight: 900; font-size: 15px; }
+.wa-status { font-size: 11px; opacity: 0.85; }
+.wa-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #eae0d5;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'><g fill-opacity='0.05'><circle cx='30' cy='30' r='2' fill='%23000'/></g></svg>");
+}
+.msg {
+  max-width: 80%;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  animation: slidein 0.3s;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+@keyframes slidein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.msg.bot {
+  background: #fff;
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.msg.customer {
+  background: #dcf8c6;
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.msg-time { font-size: 10px; color: #94a3b8; text-align: end; margin-top: 4px; }
+.msg-btn {
+  display: block;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 12px;
+  margin-top: 8px;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  font-family: inherit;
+}
+.msg-img { width: 100%; border-radius: 8px; margin-top: 4px; }
+
+.wa-composer {
+  background: #f0f2f5;
+  padding: 8px 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border-top: 1px solid #d1d5db;
+}
+.wa-composer input {
+  flex: 1;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 13px;
+  background: #fff;
+}
+.wa-send-btn {
+  background: #128c7e;
+  color: #fff;
+  border: none;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Menu bottom sheet (inside phone) */
+.menu-sheet {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  max-height: 78%;
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+  z-index: 20;
+  animation: slideup 0.3s;
+}
+@keyframes slideup { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.menu-sheet.show { display: flex; }
+.menu-hdr {
+  padding: 14px 16px;
+  background: #128c7e;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.menu-hdr h4 { font-size: 15px; font-weight: 900; }
+.menu-close {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: #fff;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+}
+.menu-body { flex: 1; overflow-y: auto; padding: 10px; }
+.menu-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: #f8fafc;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+.menu-item img { width: 50px; height: 50px; border-radius: 8px; object-fit: cover; }
+.menu-item-info { flex: 1; min-width: 0; }
+.menu-item-name { font-weight: 800; font-size: 13px; }
+.menu-item-price { color: #059669; font-weight: 800; font-size: 13px; }
+.menu-item-actions { display: flex; align-items: center; gap: 4px; }
+.qty-btn {
+  width: 28px; height: 28px;
+  background: #10b981;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 13px;
+}
+.qty-val { min-width: 20px; text-align: center; font-weight: 900; font-size: 13px; }
+
+.menu-footer {
+  padding: 12px 16px;
+  background: #fff;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.menu-total { flex: 1; font-weight: 900; font-size: 15px; color: #059669; }
+.menu-checkout-btn {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 900;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+/* ═══ INFO PANEL BESIDE PHONE ═══ */
+.info-panel {
+  flex: 1;
+  min-width: 280px;
+  max-width: 500px;
+}
+.info-panel h3 { font-size: 17px; font-weight: 900; margin-bottom: 10px; color: #1e293b; }
+.info-panel p { color: #475569; line-height: 1.8; font-size: 13.5px; margin-bottom: 12px; }
+.step-list { list-style: none; padding: 0; margin: 14px 0; }
+.step-list li {
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #f8fafc;
+  border-radius: 10px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #334155;
+  line-height: 1.7;
+}
+.step-list li.done {
+  background: rgba(16,185,129,0.08);
+  border-right: 3px solid #10b981;
+  color: #065f46;
+}
+.step-list .step-num-sm {
+  width: 22px; height: 22px;
+  background: #cbd5e1;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.step-list li.done .step-num-sm { background: #10b981; }
+.step-list li.active { background: #dbeafe; border-right: 3px solid #3b82f6; color: #1e40af; font-weight: 800; }
+.step-list li.active .step-num-sm { background: #3b82f6; }
+
+/* ═══ STAGE 3: ADMIN DASHBOARD ═══ */
+.admin-panel {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+.admin-hdr {
+  background: #1e293b;
+  color: #fff;
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.admin-hdr h3 { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 8px; }
+.admin-hdr .live-badge {
+  background: #ef4444;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+.order-row {
+  padding: 16px 22px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: slidein 0.4s;
+}
+.order-row:last-child { border-bottom: none; }
+.order-num { background: #eff6ff; color: #1e40af; padding: 6px 12px; border-radius: 8px; font-weight: 900; font-size: 13px; }
+.order-info { flex: 1; }
+.order-customer { font-weight: 800; font-size: 14px; color: #1e293b; }
+.order-details { font-size: 12.5px; color: #64748b; margin-top: 2px; }
+.order-total { font-weight: 900; color: #059669; font-size: 16px; }
+.order-status {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 800;
+}
+.status-pending { background: #fef3c7; color: #92400e; }
+.status-confirmed { background: #d1fae5; color: #065f46; }
+.status-preparing { background: #fed7aa; color: #9a3412; }
+.status-out { background: #dbeafe; color: #1e40af; }
+.status-completed { background: #e0e7ff; color: #3730a3; }
+.status-rejected { background: #fee2e2; color: #991b1b; }
+
+.order-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.act-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  transition: all 0.15s;
+}
+.act-accept { background: #10b981; color: #fff; }
+.act-reject { background: #ef4444; color: #fff; }
+.act-preparing { background: #f59e0b; color: #fff; }
+.act-out { background: #3b82f6; color: #fff; }
+.act-done { background: #059669; color: #fff; }
+.act-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  padding: 20px 22px;
+  background: #f8fafc;
+  border-bottom: 1px solid #f1f5f9;
+}
+.stat {
+  background: #fff;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+.stat-label { font-size: 11.5px; color: #64748b; font-weight: 700; margin-bottom: 4px; }
+.stat-value { font-size: 22px; font-weight: 900; color: #059669; }
+.stat.blue .stat-value { color: #3b82f6; }
+.stat.orange .stat-value { color: #f59e0b; }
+.stat.red .stat-value { color: #ef4444; }
+
+.empty-orders { text-align: center; padding: 60px 20px; color: #94a3b8; }
+.empty-orders .emoji { font-size: 56px; margin-bottom: 14px; opacity: 0.5; }
+
+/* ═══ TOAST ═══ */
+.toast {
+  position: fixed;
+  bottom: 24px; left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 800;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  z-index: 10000;
+  animation: toastin 0.3s;
+  max-width: 90vw;
+  text-align: center;
+}
+@keyframes toastin { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+/* ═══ NAV BUTTONS ═══ */
+.nav-btns { display: flex; justify-content: space-between; margin-top: 24px; gap: 12px; }
+.nav-btns .btn { flex: 1; max-width: 280px; }
+
+/* ═══ CTA END ═══ */
+.cta-end {
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: #fff;
+  border-radius: 20px;
+  padding: 36px 24px;
+  text-align: center;
+  margin-top: 24px;
+  box-shadow: 0 12px 40px rgba(16,185,129,0.35);
+}
+.cta-end h2 { font-size: 24px; font-weight: 900; margin-bottom: 10px; }
+.cta-end p { font-size: 15px; opacity: 0.95; margin-bottom: 20px; line-height: 1.7; max-width: 600px; margin-left: auto; margin-right: auto; }
+.cta-end .btn { padding: 14px 30px; font-size: 15px; background: #fff; color: #059669; box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+@media (max-width: 640px) {
+  body { padding: 12px 10px; }
+  .hdr { padding: 16px 18px; }
+  .hdr h1 { font-size: 18px; }
+  .stage-hdr { flex-direction: column; text-align: center; padding: 16px; }
+  .stage-hdr h2 { font-size: 17px; }
+  .phone-frame { padding: 10px; border-radius: 32px; }
+  .phone-screen { width: 300px; height: 550px; border-radius: 24px; }
+  .order-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .step { font-size: 11px; padding: 8px 4px; }
+  .step-arrow { display: none; }
+}
 </style>
 </head>
 <body>
+<div class="container">
 
-<div class="wrap">
+<!-- ═══ HEADER + PROGRESS ═══ -->
+<div class="hdr">
+  <h1>🎯 تجربة تفاعلية كاملة — منصة ثواني</h1>
+  <p>خطوة بخطوة: أنت المالك → تضيف منتجاتك → تجرب كعميل → ترى الإدارة. تجربة حقيقية 100%، بدون تسجيل.</p>
+</div>
 
-  <div class="hero">
-    <span class="badge">⏱️ تجربة حقيقية 45 دقيقة</span>
-    <h1>جرّب بوت ثواني على واتساب الحقيقي</h1>
-    <p class="sub">اختر نوع متجرك، ثم اربط رقم واتساب جوالك بالبوت لمدة 45 دقيقة.<br>اطلب من رقم آخر — سترى الطلب يصل لوحة الإدارة فوراً.</p>
+<div class="progress-bar">
+  <div class="step active" id="step1Btn" onclick="goStage(1)"><span class="step-num">1</span>🏪 المالك</div>
+  <span class="step-arrow">←</span>
+  <div class="step" id="step2Btn" onclick="goStage(2)"><span class="step-num">2</span>📱 العميل</div>
+  <span class="step-arrow">←</span>
+  <div class="step" id="step3Btn" onclick="goStage(3)"><span class="step-num">3</span>🎛️ الإدارة</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- ═══ STAGE 1: OWNER — Add products ═══                           -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="stage active" id="stage1">
+  <div class="stage-hdr">
+    <div class="stage-icon">🏪</div>
+    <div>
+      <h2>مرحلة المالك — أضف منتجاتك</h2>
+      <p>تخيل أنك افتتحت مطعم/كافيه جديد. الخطوة الأولى: <b>أضف 5 منتجات على الأقل بصورك الخاصة</b>. لا حاجة لتسجيل — نصنع كل شيء هنا.</p>
+    </div>
   </div>
 
-  <!-- Step 1: Sector picker -->
-  <div id="step1">
-    <h2 class="step-title">اختر قطاع متجرك<small>كل قطاع له منتجات وأقسام جاهزة</small></h2>
-    <div class="sectors">
-      <div class="sector" data-sector="pharmacy">
-        <span class="ico">💊</span>
-        <h3>صيدلية</h3>
-        <p>مسكنات، فيتامينات، عناية شخصية، احتياجات أطفال</p>
-        <div class="features"><span>12 منتج</span><span>4 أقسام</span></div>
-        <button>ابدأ التجربة</button>
+  <div class="tip">
+    <div class="tip-icon">💡</div>
+    <div>
+      <b>ملاحظة:</b> الصور من جهازك (تُحفظ في متصفحك فقط، لا ترسل لأي سيرفر). اسم المتجر والمنتجات ستراها في المرحلة القادمة كعميل.
+    </div>
+  </div>
+
+  <div class="field" style="max-width:500px">
+    <label>🏬 اسم متجرك</label>
+    <input type="text" id="storeName" placeholder="مثال: مطعم النخبة" value="مطعم النخبة" oninput="_saveState()">
+  </div>
+
+  <div class="grid">
+    <!-- Left: Add form -->
+    <div class="card">
+      <h3>➕ إضافة منتج جديد</h3>
+      <div class="field">
+        <label>اسم المنتج *</label>
+        <input type="text" id="pName" placeholder="مثال: برجر لحم">
       </div>
-      <div class="sector" data-sector="grocery">
-        <span class="ico">🛒</span>
-        <h3>بقالة / سوبرماركت</h3>
-        <p>ألبان، خبز، مشروبات، منظفات</p>
-        <div class="features"><span>12 منتج</span><span>4 أقسام</span></div>
-        <button>ابدأ التجربة</button>
+      <div class="field">
+        <label>وصف قصير (اختياري)</label>
+        <input type="text" id="pDesc" placeholder="مثال: مع صوص خاص وبطاطس">
       </div>
-      <div class="sector" data-sector="cafe">
-        <span class="ico">☕</span>
-        <h3>كافيه / مطعم</h3>
-        <p>قهوة، حلويات، وجبات خفيفة</p>
-        <div class="features"><span>12 منتج</span><span>4 أقسام</span></div>
-        <button>ابدأ التجربة</button>
+      <div class="field">
+        <label>السعر (ريال) *</label>
+        <input type="number" id="pPrice" placeholder="25" min="0" step="0.5">
+      </div>
+      <div class="field">
+        <label>الصورة *</label>
+        <label class="upload-box" id="pImageBox">
+          <div class="upload-emoji" id="pImageEmoji">📸</div>
+          <div class="upload-hint" id="pImageHint">اضغط لرفع صورة من جهازك</div>
+          <input type="file" id="pImage" accept="image/*" style="display:none" onchange="_onImageUpload(this)">
+        </label>
+      </div>
+      <button class="btn btn-primary" style="width:100%" onclick="addProduct()">✅ إضافة المنتج</button>
+    </div>
+
+    <!-- Right: Product list -->
+    <div class="card">
+      <h3>📋 منتجاتك <span id="prodCount" style="margin-inline-start:auto;background:#dbeafe;color:#1e40af;padding:3px 10px;border-radius:999px;font-size:12px">0 من 5</span></h3>
+      <div id="productList" class="product-list"></div>
+      <div id="emptyProds" class="empty-state">
+        <div class="emoji">📦</div>
+        <div>لم تُضف منتجات بعد</div>
+      </div>
+      <div class="status-bar" id="prodStatus">
+        <div>💪 أضف <b>5 منتجات</b> على الأقل للانتقال للمرحلة القادمة</div>
+        <div class="count-badge" id="prodCountBadge">0/5</div>
       </div>
     </div>
   </div>
 
-  <!-- Step 2: QR + Pairing -->
-  <div id="step2" class="qr-card">
-    <h2 class="step-title">📱 اربط رقمك — <span id="sectorLabel"></span><small>سيفتح لك لوحة الإدارة تلقائياً بعد الربط</small></h2>
+  <div class="nav-btns">
+    <div></div>
+    <button class="btn btn-primary" id="toStage2Btn" onclick="goStage(2)" disabled>التالي: تجربة كعميل ←</button>
+  </div>
+</div>
 
-    <div style="text-align:center">
-      <span id="statusPill" class="status-pill preparing"><span class="dot"></span><span id="statusTxt">جاري تجهيز الجلسة...</span></span>
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- ═══ STAGE 2: CUSTOMER — Phone simulator ═══                    -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="stage" id="stage2">
+  <div class="stage-hdr">
+    <div class="stage-icon">📱</div>
+    <div>
+      <h2>مرحلة العميل — تجربة الطلب من الهاتف</h2>
+      <p>الآن أنت <b>عميل</b>! فتحت واتساب وأرسلت رسالة لمطعمك. شاهد كيف يرد البوت خلال ثانية.</p>
     </div>
+  </div>
 
-    <div class="qr-grid">
-      <div class="qr-box" id="qrBox">
-        <div class="spinner" id="spinner"></div>
-        <div id="qrContainer" style="display:none"></div>
-      </div>
-      <div class="qr-info">
-        <h3>كيفية الربط:</h3>
-        <ol>
-          <li>افتح <b>واتساب</b> على هاتفك</li>
-          <li>الإعدادات → <b>الأجهزة المرتبطة</b></li>
-          <li>اضغط <b>ربط جهاز</b></li>
-          <li>وجّه الكاميرا نحو <b>الـ QR</b> هنا</li>
-        </ol>
-        <div class="note">
-          🔒 <b>لن نحفظ أي رسائل أو بيانات شخصية.</b> الجلسة تنتهي تلقائياً بعد 45 دقيقة.
+  <div class="phone-container">
+    <!-- Phone -->
+    <div class="phone-frame">
+      <div class="phone-screen">
+        <div class="phone-notch"></div>
+        <div class="wa-header">
+          <div class="wa-avatar">🍔</div>
+          <div class="wa-title">
+            <div class="wa-name" id="phoneStoreName">مطعم النخبة</div>
+            <div class="wa-status">✓✓ متصل الآن</div>
+          </div>
+        </div>
+        <div class="wa-messages" id="phoneMsgs"></div>
+
+        <!-- Menu bottom sheet -->
+        <div class="menu-sheet" id="menuSheet">
+          <div class="menu-hdr">
+            <h4>🛍️ المنيو</h4>
+            <button class="menu-close" onclick="closeMenu()">✕</button>
+          </div>
+          <div class="menu-body" id="menuBody"></div>
+          <div class="menu-footer">
+            <div class="menu-total">الإجمالي: <span id="menuTotal">0</span> ر.س</div>
+            <button class="menu-checkout-btn" onclick="checkout()">📦 إرسال الطلب</button>
+          </div>
+        </div>
+
+        <div class="wa-composer">
+          <input type="text" id="chatInput" placeholder="اكتب رسالة..." onkeypress="if(event.key==='Enter')sendChat()">
+          <button class="wa-send-btn" onclick="sendChat()">➤</button>
         </div>
       </div>
     </div>
 
-    <div class="error-msg" id="errorMsg"></div>
-
-    <div style="text-align:center;margin-top:18px">
-      <button id="restartBtn" onclick="resetSelection()" style="background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(201,162,75,.3);padding:10px 20px;border-radius:10px;font-family:inherit;font-weight:700;font-size:13px;cursor:pointer">↻ تغيير القطاع</button>
+    <!-- Info panel -->
+    <div class="info-panel">
+      <h3>💡 ماذا يحصل هنا؟</h3>
+      <p>هذه محاكاة كاملة لتجربة العميل. جرّب بنفسك:</p>
+      <ul class="step-list" id="customerSteps">
+        <li id="cs1"><span class="step-num-sm">1</span>اكتب "مرحبا" أو "السلام" في الشات</li>
+        <li id="cs2"><span class="step-num-sm">2</span>البوت يرد فوراً ويعرض المنيو</li>
+        <li id="cs3"><span class="step-num-sm">3</span>اضغط "افتح المنيو" واختر منتجات</li>
+        <li id="cs4"><span class="step-num-sm">4</span>اضغط "إرسال الطلب" — البوت يستقبل ويؤكد</li>
+      </ul>
+      <div class="tip">
+        <div class="tip-icon">✨</div>
+        <div>البوت شغّال <b>24 ساعة</b> — لا يحتاج موظف مبيعات. يستقبل طلبات لا نهاية له بالتوازي.</div>
+      </div>
+      <div class="tip" style="background:linear-gradient(135deg,#ecfdf5,#d1fae5);border-color:#6ee7b7;color:#065f46">
+        <div class="tip-icon">🎯</div>
+        <div><b>القيمة الحقيقية:</b> بدل ما العميل يكلمك ويعيد، ويسألك عن الأسعار، ويسأل عن التوفر... البوت يجاوب كل ذلك تلقائي في ثوانٍ.</div>
+      </div>
     </div>
   </div>
 
-  <div class="footer">
-    <p>🏠 <a href="../index.html">العودة للصفحة الرئيسية</a> · <a href="https://wa.me/966508572902">💬 تواصل للاشتراك</a></p>
+  <div class="nav-btns">
+    <button class="btn btn-secondary" onclick="goStage(1)">→ رجوع للمالك</button>
+    <button class="btn btn-primary" id="toStage3Btn" onclick="goStage(3)" disabled>التالي: مشاهدة الإدارة ←</button>
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════════════════════════ -->
+<!-- ═══ STAGE 3: ADMIN — Order dashboard ═══                       -->
+<!-- ══════════════════════════════════════════════════════════════ -->
+<div class="stage" id="stage3">
+  <div class="stage-hdr">
+    <div class="stage-icon">🎛️</div>
+    <div>
+      <h2>مرحلة الإدارة — الطلب وصلك</h2>
+      <p>الآن أنت <b>صاحب المتجر</b> مرة أخرى. جرّب الأزرار: اقبل / حضّر / سلّم. شاهد الرسائل تصل للعميل تلقائي.</p>
+    </div>
+  </div>
+
+  <div class="tip">
+    <div class="tip-icon">🎯</div>
+    <div>
+      كل زر تضغطه هنا → <b>يرسل رسالة تلقائية للعميل على واتساب</b>. اضغط الأزرار وشوف كيف يستفيد العميل.
+    </div>
+  </div>
+
+  <div class="admin-panel">
+    <div class="admin-hdr">
+      <h3>📦 لوحة الطلبات الحية <span class="live-badge">● مباشر</span></h3>
+      <div style="font-size:12.5px;opacity:0.85"><span id="adminStoreName">مطعم النخبة</span></div>
+    </div>
+
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-label">إجمالي المبيعات</div><div class="stat-value" id="statRevenue">0 ر.س</div></div>
+      <div class="stat blue"><div class="stat-label">عدد الطلبات</div><div class="stat-value" id="statCount">0</div></div>
+      <div class="stat orange"><div class="stat-label">قيد التنفيذ</div><div class="stat-value" id="statActive">0</div></div>
+      <div class="stat"><div class="stat-label">مكتملة</div><div class="stat-value" id="statCompleted">0</div></div>
+    </div>
+
+    <div id="ordersList"></div>
+  </div>
+
+  <div class="cta-end">
+    <h2>🚀 هذا فقط جزء بسيط من الإمكانيات!</h2>
+    <p>
+      ثواني تدير مطعمك 24/7 — البوت يستقبل، يعرض المنيو، يؤكد الطلبات، يتابع مع العميل، يرسل الفواتير.
+      أنت فقط تشوف اللوحة وتقبل. اشترك الآن وابدأ خلال 30 دقيقة.
+    </p>
+    <a href="https://wa.me/966508572902?text=أبغى%20أشترك%20في%20ثواني" class="btn" target="_blank">
+      💚 ابدأ اشتراكك الآن
+    </a>
+  </div>
+
+  <div class="nav-btns">
+    <button class="btn btn-secondary" onclick="goStage(2)">→ رجوع للعميل</button>
+    <button class="btn btn-secondary" onclick="resetDemo()">🔄 إعادة التجربة من البداية</button>
+  </div>
+</div>
+
+</div>
+
 <script>
-  const API_BASE = "https://thawani.tail19ddab.ts.net";
+// ═══════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════
+const state = {
+  storeName: "مطعم النخبة",
+  products: [],
+  pendingImage: null,
+  chatHistory: [],
+  cart: {},
+  orders: [],
+  stage: 1,
+};
 
-  const SECTORS = {
-    pharmacy: { emoji: "💊", label: "صيدلية الديمو" },
-    grocery:  { emoji: "🛒", label: "بقالة الديمو" },
-    cafe:     { emoji: "☕", label: "كافيه الديمو" },
-  };
+const LS_KEY = "thawani_interactive_demo_v1";
 
-  let slotId = null;
-  let pollTimer = null;
-  let qrInstance = null;
-  let lastQr = null;
-  let currentSector = null;
+function _loadState(){
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return;
+    const s = JSON.parse(raw);
+    Object.assign(state, s);
+  } catch(e){}
+}
+function _saveState(){
+  try {
+    localStorage.setItem(LS_KEY, JSON.stringify({
+      storeName: document.getElementById("storeName")?.value || state.storeName,
+      products: state.products,
+      chatHistory: state.chatHistory,
+      orders: state.orders,
+    }));
+  } catch(e){}
+}
 
-  document.querySelectorAll(".sector").forEach(el => {
-    el.addEventListener("click", () => startDemo(el.getAttribute("data-sector")));
+// ═══════════════════════════════════════════════════════════════
+// STAGE NAV
+// ═══════════════════════════════════════════════════════════════
+function goStage(n){
+  // Guards
+  if (n === 2 && state.products.length < 5) {
+    _toast("⚠️ يجب إضافة 5 منتجات على الأقل أولاً");
+    return;
+  }
+  if (n === 3 && state.orders.length === 0) {
+    _toast("⚠️ أرسل طلب من مرحلة العميل أولاً");
+    return;
+  }
+
+  state.stage = n;
+  document.querySelectorAll(".stage").forEach(s => s.classList.remove("active"));
+  document.getElementById("stage" + n).classList.add("active");
+
+  document.querySelectorAll(".progress-bar .step").forEach((el, i) => {
+    el.classList.remove("active", "done");
+    if (i + 1 === n) el.classList.add("active");
+    else if (i + 1 < n) el.classList.add("done");
   });
 
-  async function startDemo(sector) {
-    currentSector = sector;
-    const meta = SECTORS[sector];
-    document.getElementById("sectorLabel").textContent = `${meta.emoji} ${meta.label}`;
-    document.getElementById("step1").style.display = "none";
-    document.getElementById("step2").classList.add("active");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  // Sync store name to phone header
+  document.getElementById("phoneStoreName").textContent = document.getElementById("storeName").value || state.storeName;
+  document.getElementById("adminStoreName").textContent = document.getElementById("storeName").value || state.storeName;
 
-    // إعادة تعيين الـ UI
-    setStatus("preparing", "جاري تجهيز الجلسة...");
-    document.getElementById("spinner").style.display = "block";
-    document.getElementById("qrContainer").style.display = "none";
-    document.getElementById("qrContainer").innerHTML = "";
-    document.getElementById("errorMsg").classList.remove("show");
-    lastQr = null;
+  // Stage-specific init
+  if (n === 2) _initPhone();
+  if (n === 3) _renderAdmin();
 
-    try {
-      const r = await fetch(`${API_BASE}/try/init?sector=${encodeURIComponent(sector)}`, { method: "POST" });
-      const d = await r.json();
-      if (!r.ok || !d.slotId) {
-        showError(d.error || "فشل بدء الجلسة. حاول لاحقاً.");
-        return;
-      }
-      slotId = d.slotId;
-      pollStatus();
-      if (pollTimer) clearInterval(pollTimer);
-      pollTimer = setInterval(pollStatus, 2500);
-    } catch (e) {
-      showError("تعذّر الاتصال بالخادم. تحقق من اتصالك بالإنترنت.");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// STAGE 1: PRODUCTS
+// ═══════════════════════════════════════════════════════════════
+function _onImageUpload(input){
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) { _toast("⚠️ الصورة أكبر من 5MB"); return; }
+  const reader = new FileReader();
+  reader.onload = () => {
+    state.pendingImage = reader.result;
+    const box = document.getElementById("pImageBox");
+    box.classList.add("has-image");
+    box.innerHTML = '<img src="' + reader.result + '"><input type="file" id="pImage" accept="image/*" style="display:none" onchange="_onImageUpload(this)">';
+  };
+  reader.readAsDataURL(file);
+}
+
+function addProduct(){
+  const name = document.getElementById("pName").value.trim();
+  const desc = document.getElementById("pDesc").value.trim();
+  const price = parseFloat(document.getElementById("pPrice").value) || 0;
+  const img = state.pendingImage;
+
+  if (!name) { _toast("⚠️ اسم المنتج مطلوب"); return; }
+  if (price <= 0) { _toast("⚠️ السعر يجب أن يكون أكبر من 0"); return; }
+  if (!img) { _toast("⚠️ الصورة مطلوبة"); return; }
+
+  state.products.push({
+    id: "p_" + Date.now(),
+    name, desc, price, image: img,
+  });
+
+  // Reset form
+  document.getElementById("pName").value = "";
+  document.getElementById("pDesc").value = "";
+  document.getElementById("pPrice").value = "";
+  document.getElementById("pImageBox").classList.remove("has-image");
+  document.getElementById("pImageBox").innerHTML = '<div class="upload-emoji">📸</div><div class="upload-hint">اضغط لرفع صورة من جهازك</div><input type="file" id="pImage" accept="image/*" style="display:none" onchange="_onImageUpload(this)">';
+  state.pendingImage = null;
+
+  _renderProducts();
+  _saveState();
+  _toast("✅ أُضيف: " + name);
+}
+
+function removeProduct(id){
+  state.products = state.products.filter(p => p.id !== id);
+  _renderProducts();
+  _saveState();
+}
+
+function _renderProducts(){
+  const list = document.getElementById("productList");
+  const empty = document.getElementById("emptyProds");
+  const count = document.getElementById("prodCount");
+  const badge = document.getElementById("prodCountBadge");
+  const status = document.getElementById("prodStatus");
+  const nextBtn = document.getElementById("toStage2Btn");
+
+  if (state.products.length === 0) {
+    list.innerHTML = "";
+    empty.style.display = "block";
+  } else {
+    empty.style.display = "none";
+    list.innerHTML = state.products.map(p => `
+      <div class="product-item">
+        <img class="product-thumb" src="${p.image}" alt="">
+        <div class="product-body">
+          <div class="product-name">${_esc(p.name)}</div>
+          <div class="product-meta">${p.desc ? _esc(p.desc) : "—"}</div>
+        </div>
+        <div class="product-price">${p.price} ر.س</div>
+        <button class="btn btn-danger" onclick="removeProduct('${p.id}')">🗑️</button>
+      </div>
+    `).join("");
+  }
+
+  count.textContent = state.products.length + " من 5";
+  badge.textContent = state.products.length + "/5";
+
+  if (state.products.length >= 5) {
+    status.classList.add("done");
+    status.querySelector("div").innerHTML = "🎉 ممتاز! يمكنك الانتقال للمرحلة القادمة";
+    nextBtn.disabled = false;
+  } else {
+    status.classList.remove("done");
+    status.querySelector("div").innerHTML = `💪 أضف <b>${5 - state.products.length} منتج${5 - state.products.length === 1 ? '' : 'ات'}</b> أخرى للانتقال`;
+    nextBtn.disabled = true;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// STAGE 2: PHONE SIMULATOR
+// ═══════════════════════════════════════════════════════════════
+function _initPhone(){
+  if (state.chatHistory.length === 0) {
+    // Fresh init: nothing yet
+    document.getElementById("phoneMsgs").innerHTML = '<div style="text-align:center;color:#94a3b8;font-size:12px;padding:20px">💬 اكتب "مرحبا" لبدء المحادثة مع البوت</div>';
+    _updateSteps(1);
+  } else {
+    _renderMessages();
+  }
+}
+
+function _addMsg(text, from, extras){
+  state.chatHistory.push({ text, from, extras: extras || {}, time: new Date().toISOString() });
+  _renderMessages();
+  _saveState();
+}
+
+function _renderMessages(){
+  const box = document.getElementById("phoneMsgs");
+  if (!state.chatHistory.length) { _initPhone(); return; }
+  box.innerHTML = state.chatHistory.map(m => {
+    let content = _esc(m.text);
+    if (m.extras && m.extras.button) {
+      content += '<button class="msg-btn" onclick="openMenu()">🛒 افتح المنيو</button>';
     }
-  }
-
-  async function pollStatus() {
-    if (!slotId) return;
-    try {
-      const r = await fetch(`${API_BASE}/try/status/${encodeURIComponent(slotId)}`);
-      const d = await r.json();
-      if (d.status === "open") {
-        setStatus("connected", "✓ تم الربط بنجاح!");
-        if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
-        // ✨ Auto-redirect لـ admin demo بعد ثانية
-        setTimeout(() => {
-          location.href = `./admin.html?slot=${encodeURIComponent(slotId)}&sector=${encodeURIComponent(currentSector)}`;
-        }, 1000);
-        return;
-      }
-      if (d.qr) {
-        setStatus("qr", "📲 امسح الكود من واتساب الآن");
-        renderQR(d.qr);
-        return;
-      }
-      if (d.status === "connecting") {
-        setStatus("preparing", "جاري الاتصال...");
-        return;
-      }
-      setStatus("preparing", "جاري التحضير...");
-    } catch (e) {
-      console.warn("poll failed:", e);
+    if (m.extras && m.extras.invoice) {
+      const inv = m.extras.invoice;
+      content = _esc(m.text);
     }
+    const time = new Date(m.time).toLocaleTimeString("ar-EG", { hour: "2-digit", minute: "2-digit" });
+    return '<div class="msg ' + m.from + '">' + content + '<div class="msg-time">' + time + '</div></div>';
+  }).join("");
+  box.scrollTop = box.scrollHeight;
+}
+
+function sendChat(){
+  const input = document.getElementById("chatInput");
+  const val = input.value.trim();
+  if (!val) return;
+  input.value = "";
+  _addMsg(val, "customer");
+  _botRespond(val);
+}
+
+function _botRespond(userText){
+  const lower = userText.toLowerCase();
+  setTimeout(() => {
+    if (/مرحبا|السلام|هلا|هاي|مساء|صباح|hi|hello/i.test(lower)) {
+      const name = document.getElementById("storeName").value || state.storeName;
+      _addMsg(`👋 أهلاً بك في *${name}*!\nيسعدنا خدمتك 🌸\n\nاضغط الزر أدناه لتصفح المنيو الكامل واختيار طلبك 👇`, "bot", { button: true });
+      _updateSteps(2);
+    } else if (/منيو|قائمة|طلب|menu/i.test(lower)) {
+      _addMsg("🛍️ اضغط الزر لفتح المنيو:", "bot", { button: true });
+    } else if (/شكر|thanks/i.test(lower)) {
+      _addMsg("💚 شكراً لك! نتشرف بخدمتك في أي وقت.", "bot");
+    } else {
+      _addMsg("لتصفح المنيو وطلب المنتجات، اضغط 👇", "bot", { button: true });
+    }
+  }, 700);
+}
+
+function openMenu(){
+  _updateSteps(3);
+  const body = document.getElementById("menuBody");
+  body.innerHTML = state.products.map(p => `
+    <div class="menu-item">
+      <img src="${p.image}">
+      <div class="menu-item-info">
+        <div class="menu-item-name">${_esc(p.name)}</div>
+        <div class="menu-item-price">${p.price} ر.س</div>
+      </div>
+      <div class="menu-item-actions">
+        <button class="qty-btn" onclick="chgQty('${p.id}', -1)">−</button>
+        <span class="qty-val" id="q_${p.id}">${state.cart[p.id] || 0}</span>
+        <button class="qty-btn" onclick="chgQty('${p.id}', +1)">+</button>
+      </div>
+    </div>
+  `).join("");
+  document.getElementById("menuSheet").classList.add("show");
+  _updateMenuTotal();
+}
+function closeMenu(){ document.getElementById("menuSheet").classList.remove("show"); }
+function chgQty(pid, delta){
+  state.cart[pid] = Math.max(0, (state.cart[pid] || 0) + delta);
+  document.getElementById("q_" + pid).textContent = state.cart[pid];
+  _updateMenuTotal();
+}
+function _updateMenuTotal(){
+  let total = 0;
+  state.products.forEach(p => { total += (state.cart[p.id] || 0) * p.price; });
+  document.getElementById("menuTotal").textContent = total;
+}
+
+function checkout(){
+  const items = state.products.filter(p => state.cart[p.id] > 0).map(p => ({
+    name: p.name, price: p.price, qty: state.cart[p.id],
+  }));
+  if (!items.length) { _toast("⚠️ اختر منتج على الأقل"); return; }
+  const total = items.reduce((s, i) => s + i.price * i.qty, 0);
+  closeMenu();
+
+  // Create order
+  const orderId = "ORD-" + Date.now().toString().slice(-7);
+  const order = {
+    id: orderId,
+    items,
+    total,
+    status: "pending",
+    createdAt: new Date().toISOString(),
+    customerName: "عميل",
+    address: "حي النخيل — الرياض",
+  };
+  state.orders.unshift(order);
+  state.cart = {};
+
+  // Bot confirms
+  const itemsText = items.map(i => `• ${i.name} × ${i.qty}`).join("\n");
+  _addMsg(`✅ *تأكيد طلبك*\nرقم: *${orderId}*\n\n${itemsText}\n\n💰 الإجمالي: *${total} ر.س*\n\n_طلبك وصل للمتجر — سيتم التواصل معك قريباً_ 🌸`, "bot");
+
+  _updateSteps(4);
+  document.getElementById("toStage3Btn").disabled = false;
+  _saveState();
+
+  setTimeout(() => {
+    _toast("🎉 الطلب انطلق! انتقل للإدارة لتشاهد ما يحصل");
+  }, 800);
+}
+
+function _updateSteps(active){
+  ["cs1","cs2","cs3","cs4"].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove("done", "active");
+    if (i + 1 < active) el.classList.add("done");
+    else if (i + 1 === active) el.classList.add("active");
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// STAGE 3: ADMIN
+// ═══════════════════════════════════════════════════════════════
+function _renderAdmin(){
+  const list = document.getElementById("ordersList");
+  if (!state.orders.length) {
+    list.innerHTML = '<div class="empty-orders"><div class="emoji">📭</div><div>لا توجد طلبات بعد</div></div>';
+  } else {
+    list.innerHTML = state.orders.map(o => {
+      const stCls = {
+        pending: "status-pending", confirmed: "status-confirmed",
+        preparing: "status-preparing", out_for_delivery: "status-out",
+        completed: "status-completed", rejected: "status-rejected",
+      }[o.status] || "status-pending";
+      const stLbl = {
+        pending: "⏳ بانتظار التأكيد", confirmed: "✅ مؤكد",
+        preparing: "👨‍🍳 قيد التحضير", out_for_delivery: "🚴 خارج للتوصيل",
+        completed: "🏁 مكتمل", rejected: "❌ مرفوض",
+      }[o.status] || o.status;
+
+      let actions = "";
+      if (o.status === "pending") {
+        actions = `
+          <button class="act-btn act-accept" onclick="updOrder('${o.id}','confirmed')">✅ قبول</button>
+          <button class="act-btn act-reject" onclick="updOrder('${o.id}','rejected')">❌ رفض</button>`;
+      } else if (o.status === "confirmed") {
+        actions = `
+          <button class="act-btn act-preparing" onclick="updOrder('${o.id}','preparing')">👨‍🍳 بدء التحضير</button>
+          <button class="act-btn act-out" onclick="updOrder('${o.id}','out_for_delivery')">🚴 المندوب في الطريق</button>
+          <button class="act-btn act-done" onclick="updOrder('${o.id}','completed')">✅ تم التسليم</button>`;
+      } else if (o.status === "preparing" || o.status === "out_for_delivery") {
+        actions = `<button class="act-btn act-done" onclick="updOrder('${o.id}','completed')">✅ تم التسليم</button>`;
+      }
+
+      const itemsBrief = o.items.map(i => i.name + " ×" + i.qty).join(" • ");
+      return `
+        <div class="order-row">
+          <div class="order-num">${o.id.slice(-6)}</div>
+          <div class="order-info">
+            <div class="order-customer">👤 ${_esc(o.customerName)} — ${_esc(o.address)}</div>
+            <div class="order-details">${_esc(itemsBrief)}</div>
+          </div>
+          <div class="order-total">${o.total} ر.س</div>
+          <div class="order-status ${stCls}">${stLbl}</div>
+          <div class="order-actions">${actions}</div>
+        </div>
+      `;
+    }).join("");
+  }
+  _updateStats();
+}
+
+function updOrder(id, newStatus){
+  const o = state.orders.find(x => x.id === id);
+  if (!o) return;
+  o.status = newStatus;
+
+  // Bot sends message to customer
+  const messages = {
+    confirmed: `✅ *تم تأكيد طلبك!*\nرقم: *${id}*\nسيتم تحضيره الآن ⏱️`,
+    rejected: `❌ *عذراً، تم رفض طلبك*\nرقم: *${id}*\nيمكنك التواصل معنا للاستفسار.`,
+    preparing: `👨‍🍳 *طلبك قيد التحضير الآن*\nرقم: *${id}*\nسيصلك قريباً 🙏`,
+    out_for_delivery: `🚴 *المندوب في الطريق إليك*\nرقم: *${id}*\nاستعد لاستلام طلبك`,
+    completed: `🏁 *تم تسليم طلبك*\nرقم: *${id}*\nنتمنى أن يعجبك 💚\nشكراً لاختيارك ${document.getElementById("storeName").value || state.storeName}!`,
+  };
+  if (messages[newStatus]) {
+    _addMsg(messages[newStatus], "bot");
   }
 
-  function setStatus(cls, txt) {
-    const pill = document.getElementById("statusPill");
-    pill.className = "status-pill " + cls;
-    document.getElementById("statusTxt").textContent = txt;
-  }
+  _renderAdmin();
+  _saveState();
+  _toast("📤 " + { confirmed: "تم القبول", rejected: "تم الرفض", preparing: "بدأ التحضير", out_for_delivery: "خرج للتوصيل", completed: "تم التسليم" }[newStatus]);
+}
 
-  function renderQR(text) {
-    if (text === lastQr) return;
-    lastQr = text;
-    document.getElementById("spinner").style.display = "none";
-    const ct = document.getElementById("qrContainer");
-    ct.style.display = "flex";
-    ct.innerHTML = "";
-    try {
-      qrInstance = new QRCode(ct, {
-        text, width: 240, height: 240,
-        correctLevel: QRCode.CorrectLevel.M,
-        colorDark: "#08120e", colorLight: "#ffffff",
-      });
-    } catch (e) { console.error("QR render failed:", e); }
-  }
+function _updateStats(){
+  const revenue = state.orders.filter(o => o.status === "completed").reduce((s, o) => s + o.total, 0);
+  const active = state.orders.filter(o => ["pending","confirmed","preparing","out_for_delivery"].includes(o.status)).length;
+  const completed = state.orders.filter(o => o.status === "completed").length;
+  document.getElementById("statRevenue").textContent = revenue + " ر.س";
+  document.getElementById("statCount").textContent = state.orders.length;
+  document.getElementById("statActive").textContent = active;
+  document.getElementById("statCompleted").textContent = completed;
+}
 
-  function showError(msg) {
-    document.getElementById("errorMsg").textContent = "❌ " + msg;
-    document.getElementById("errorMsg").classList.add("show");
-    setStatus("error", "حدث خطأ");
-  }
+// ═══════════════════════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════════════════════
+function _esc(s){
+  return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
+}
 
-  function resetSelection() {
-    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
-    slotId = null;
-    document.getElementById("step1").style.display = "";
-    document.getElementById("step2").classList.remove("active");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+let _toastTimer = null;
+function _toast(msg){
+  document.querySelectorAll(".toast").forEach(t => t.remove());
+  const t = document.createElement("div");
+  t.className = "toast";
+  t.textContent = msg;
+  document.body.appendChild(t);
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => t.remove(), 2600);
+}
+
+function resetDemo(){
+  if (!confirm("مسح كل شيء وإعادة التجربة من الصفر؟")) return;
+  localStorage.removeItem(LS_KEY);
+  location.reload();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════════════════════
+_loadState();
+if (state.storeName) document.getElementById("storeName").value = state.storeName;
+_renderProducts();
+
+// If products exist, enable stage 2
+if (state.products.length >= 5) {
+  document.getElementById("toStage2Btn").disabled = false;
+}
+if (state.orders.length > 0) {
+  document.getElementById("toStage3Btn").disabled = false;
+}
 </script>
-
 </body>
 </html>
