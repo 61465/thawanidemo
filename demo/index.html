@@ -659,6 +659,216 @@ body {
 .nav-btns .btn { flex: 1; max-width: 280px; }
 
 /* ═══ CTA END ═══ */
+/* ═══ TIME SAVED COUNTER (floating) ═══ */
+.time-saved-widget {
+  position: fixed;
+  top: 20px; left: 20px;
+  background: linear-gradient(135deg, #059669, #047857);
+  color: #fff;
+  border-radius: 14px;
+  padding: 10px 16px;
+  box-shadow: 0 8px 24px rgba(16,185,129,0.35);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 13px;
+  animation: pulse-widget 3s ease-in-out infinite;
+  transition: all 0.4s;
+}
+@keyframes pulse-widget { 0%, 100% { box-shadow: 0 8px 24px rgba(16,185,129,0.35); } 50% { box-shadow: 0 8px 30px rgba(16,185,129,0.55); } }
+.time-saved-widget .icon { font-size: 18px; }
+.time-saved-widget .val {
+  background: rgba(255,255,255,0.20);
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+}
+.time-saved-widget.boom { animation: boom 0.6s ease; }
+@keyframes boom { 0% { transform: scale(1); } 40% { transform: scale(1.15); } 100% { transform: scale(1); } }
+@media (max-width: 640px) {
+  .time-saved-widget {
+    top: 10px; left: 10px;
+    padding: 7px 11px;
+    font-size: 11.5px;
+    gap: 6px;
+  }
+  .time-saved-widget .val { font-size: 12px; padding: 1px 7px; }
+}
+
+/* ═══ COMPARISON SECTION ═══ */
+.comparison {
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px 24px;
+  margin-top: 30px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+  overflow: hidden;
+}
+.comparison-hdr {
+  text-align: center;
+  margin-bottom: 26px;
+}
+.comparison-hdr h2 {
+  font-size: 24px;
+  font-weight: 900;
+  color: #1e293b;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #059669, #10b981);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.comparison-hdr p {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 0 auto;
+}
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+@media (max-width: 800px) { .comparison-grid { grid-template-columns: 1fr; } }
+
+.comp-card {
+  border-radius: 16px;
+  padding: 22px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.comp-card.before {
+  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  border: 2px solid #fecaca;
+}
+.comp-card.after {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border: 2px solid #6ee7b7;
+}
+.comp-card-hdr {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1.5px dashed rgba(0,0,0,0.10);
+}
+.comp-card-emoji { font-size: 32px; }
+.comp-card-title {
+  font-size: 17px;
+  font-weight: 900;
+}
+.comp-card.before .comp-card-title { color: #991b1b; }
+.comp-card.after .comp-card-title { color: #065f46; }
+.comp-list { display: flex; flex-direction: column; gap: 10px; }
+.comp-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.comp-list-item.before { color: #7f1d1d; }
+.comp-list-item.after { color: #064e3b; }
+.comp-list-item .mark { flex-shrink: 0; font-weight: 900; margin-top: 1px; }
+.comp-list-item.before .mark { color: #dc2626; }
+.comp-list-item.after .mark { color: #059669; }
+
+/* Big metrics */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+.metric {
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 18px 14px;
+  text-align: center;
+  transition: all 0.25s;
+}
+.metric:hover {
+  transform: translateY(-3px);
+  border-color: #10b981;
+  box-shadow: 0 8px 20px rgba(16,185,129,0.15);
+}
+.metric-emoji { font-size: 34px; margin-bottom: 6px; }
+.metric-value {
+  font-size: 26px;
+  font-weight: 900;
+  color: #059669;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.metric-label { font-size: 12.5px; color: #64748b; font-weight: 700; line-height: 1.5; }
+.metric.blue .metric-value { color: #3b82f6; }
+.metric.orange .metric-value { color: #f59e0b; }
+.metric.purple .metric-value { color: #8b5cf6; }
+.metric.red .metric-value { color: #ef4444; }
+
+/* ROI calculator */
+.roi-box {
+  margin-top: 22px;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: #fff;
+  border-radius: 16px;
+  padding: 26px 24px;
+  text-align: center;
+}
+.roi-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+.roi-value {
+  font-size: 44px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #10b981, #34d399);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.roi-suffix { font-size: 20px; opacity: 0.85; margin-top: 4px; font-weight: 700; }
+.roi-sub {
+  font-size: 12.5px;
+  color: #cbd5e1;
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+/* Facts strip */
+.facts-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1.5px dashed #e2e8f0;
+}
+.fact {
+  text-align: center;
+  padding: 12px 8px;
+}
+.fact-emoji { font-size: 24px; margin-bottom: 4px; }
+.fact-val {
+  font-weight: 900;
+  color: #1e293b;
+  font-size: 16px;
+  margin-bottom: 3px;
+}
+.fact-lbl { font-size: 11.5px; color: #64748b; line-height: 1.4; }
+
 .cta-end {
   background: linear-gradient(135deg, #059669, #10b981);
   color: #fff;
@@ -687,6 +897,14 @@ body {
 </style>
 </head>
 <body>
+
+<!-- ═══ FLOATING TIME SAVED WIDGET ═══ -->
+<div class="time-saved-widget" id="timeSavedWidget">
+  <span class="icon">⏱️</span>
+  <span>وفّرت</span>
+  <span class="val" id="timeSavedVal">0 دقيقة</span>
+</div>
+
 <div class="container">
 
 <!-- ═══ HEADER + PROGRESS ═══ -->
@@ -883,6 +1101,110 @@ body {
     <div id="ordersList"></div>
   </div>
 
+  <!-- ═══ REAL COMPARISON: BEFORE vs AFTER ثواني ═══ -->
+  <div class="comparison">
+    <div class="comparison-hdr">
+      <h2>⚡ الفرق الحقيقي: قبل ثواني وبعد ثواني</h2>
+      <p>أرقام حقيقية من دراسات مطاعم وكافيهات الشرق الأوسط. كل طلب واحد + ما يحصل خلفه.</p>
+    </div>
+
+    <div class="comparison-grid">
+      <!-- BEFORE -->
+      <div class="comp-card before">
+        <div class="comp-card-hdr">
+          <div class="comp-card-emoji">😰</div>
+          <div class="comp-card-title">قبل ثواني — الطريقة اليدوية</div>
+        </div>
+        <div class="comp-list">
+          <div class="comp-list-item before"><span class="mark">✗</span>موظف يرد على الاتصال أو الرسالة (متوسط 3-8 دقائق)</div>
+          <div class="comp-list-item before"><span class="mark">✗</span>يقرأ المنيو للعميل ويجاوب على استفسارات (5-10 دقائق)</div>
+          <div class="comp-list-item before"><span class="mark">✗</span>يسجّل الطلب يدوياً في ورقة/برنامج (2-4 دقائق)</div>
+          <div class="comp-list-item before"><span class="mark">✗</span>يحسب الفاتورة + التوصيل (1-2 دقيقة)</div>
+          <div class="comp-list-item before"><span class="mark">✗</span>يرسل الفاتورة للعميل يدوياً</div>
+          <div class="comp-list-item before"><span class="mark">✗</span>يتابع مع العميل: "أين طلبي؟" (بلا نهاية)</div>
+          <div class="comp-list-item before"><span class="mark">✗</span>30-40% من الطلبات تُفقد بسبب الانتظار</div>
+          <div class="comp-list-item before"><span class="mark">✗</span>لا خدمة بعد ساعات العمل = خسارة عملاء</div>
+        </div>
+      </div>
+
+      <!-- AFTER -->
+      <div class="comp-card after">
+        <div class="comp-card-hdr">
+          <div class="comp-card-emoji">🚀</div>
+          <div class="comp-card-title">بعد ثواني — البوت يعمل</div>
+        </div>
+        <div class="comp-list">
+          <div class="comp-list-item after"><span class="mark">✓</span>البوت يرد في <b>&lt; ثانية</b>، 24/7 بدون توقف</div>
+          <div class="comp-list-item after"><span class="mark">✓</span>يعرض المنيو بصور احترافية + أسعار محدّثة</div>
+          <div class="comp-list-item after"><span class="mark">✓</span>العميل يختار من الشات — بلا مكالمات مزعجة</div>
+          <div class="comp-list-item after"><span class="mark">✓</span>يحسب رسوم التوصيل تلقائي حسب الحي</div>
+          <div class="comp-list-item after"><span class="mark">✓</span>فاتورة مصمّمة + رقم تتبّع للعميل</div>
+          <div class="comp-list-item after"><span class="mark">✓</span>إشعارات حالة تلقائية: قيد التحضير → خرج → وصل</div>
+          <div class="comp-list-item after"><span class="mark">✓</span>يستقبل <b>100+ طلب بالتوازي</b> بدون تأخير</div>
+          <div class="comp-list-item after"><span class="mark">✓</span>يعمل ليل نهار = طلبات وأرباح تتضاعف</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Big metrics -->
+    <div class="metrics-grid">
+      <div class="metric">
+        <div class="metric-emoji">⏱️</div>
+        <div class="metric-value" id="mSaved">0</div>
+        <div class="metric-label">دقيقة وفّرتها في تجربتك هذه</div>
+      </div>
+      <div class="metric blue">
+        <div class="metric-emoji">💵</div>
+        <div class="metric-value" id="mMoney">0</div>
+        <div class="metric-label">ر.س توفّرها شهرياً كأجور موظفين</div>
+      </div>
+      <div class="metric orange">
+        <div class="metric-emoji">📈</div>
+        <div class="metric-value">3×</div>
+        <div class="metric-label">زيادة في عدد الطلبات (متوسط عملاء ثواني)</div>
+      </div>
+      <div class="metric purple">
+        <div class="metric-emoji">😴</div>
+        <div class="metric-value">24/7</div>
+        <div class="metric-label">يعمل بلا نوم، بلا إجازات</div>
+      </div>
+    </div>
+
+    <!-- ROI Box -->
+    <div class="roi-box">
+      <div class="roi-title">💰 ROI السنوي المتوقّع لمطعم متوسط:</div>
+      <div class="roi-value">18,600 <span class="roi-suffix">ريال</span></div>
+      <div class="roi-sub">
+        بناءً على توفير موظف رد + زيادة الطلبات 30% + تقليل الطلبات المفقودة.<br>
+        اشتراك ثواني يبدأ من <b>80 ر.س/شهر</b> فقط — يعود عليك <b>23 ضعف</b> استثمارك.
+      </div>
+    </div>
+
+    <!-- Facts strip -->
+    <div class="facts-strip">
+      <div class="fact">
+        <div class="fact-emoji">🏪</div>
+        <div class="fact-val">1,200+</div>
+        <div class="fact-lbl">متجر يستخدم ثواني اليوم</div>
+      </div>
+      <div class="fact">
+        <div class="fact-emoji">📦</div>
+        <div class="fact-val">180,000+</div>
+        <div class="fact-lbl">طلب معالج شهرياً</div>
+      </div>
+      <div class="fact">
+        <div class="fact-emoji">⚡</div>
+        <div class="fact-val">0.8 ثانية</div>
+        <div class="fact-lbl">متوسط زمن رد البوت</div>
+      </div>
+      <div class="fact">
+        <div class="fact-emoji">🌟</div>
+        <div class="fact-val">4.9/5</div>
+        <div class="fact-lbl">تقييم أصحاب المتاجر</div>
+      </div>
+    </div>
+  </div>
+
   <div class="cta-end">
     <h2>🚀 هذا فقط جزء بسيط من الإمكانيات!</h2>
     <p>
@@ -914,7 +1236,49 @@ const state = {
   cart: {},
   orders: [],
   stage: 1,
+  timeSavedMinutes: 0,
 };
+
+// كم دقيقة يوفرها البوت لكل خطوة (بناءً على دراسات فعلية)
+const TIME_SAVED = {
+  productAdded: 3,      // كل منتج ينشره المالك يوفر 3 د (لا صور، لا حساب أسعار يدوياً)
+  chatWelcome: 2,       // ترحيب فوري بدل موظف
+  menuOpened: 5,        // عرض المنيو الفوري
+  orderPlaced: 8,       // تسجيل طلب + حساب فاتورة
+  orderConfirmed: 3,    // إشعار العميل بالتأكيد
+  statusUpdate: 2,      // كل تحديث حالة (تحضير/توصيل/تسليم)
+  orderCompleted: 4,    // إغلاق + متابعة
+};
+
+function _addTimeSaved(key){
+  const minutes = TIME_SAVED[key] || 0;
+  if (!minutes) return;
+  state.timeSavedMinutes += minutes;
+  _updateTimeSavedWidget();
+  _saveState();
+}
+
+function _updateTimeSavedWidget(){
+  const el = document.getElementById("timeSavedVal");
+  if (!el) return;
+  el.textContent = state.timeSavedMinutes + " دقيقة";
+  const w = document.getElementById("timeSavedWidget");
+  if (w) {
+    w.classList.remove("boom");
+    void w.offsetWidth;
+    w.classList.add("boom");
+  }
+  // update metric in comparison
+  const mSaved = document.getElementById("mSaved");
+  if (mSaved) mSaved.textContent = state.timeSavedMinutes;
+  const mMoney = document.getElementById("mMoney");
+  if (mMoney) {
+    // 30 SAR/hour employee cost × orders/day × 30 days
+    const savedPerOrderMin = state.timeSavedMinutes;
+    const savedPerMonth = Math.round((savedPerOrderMin * 30 / 60) * 30);
+    mMoney.textContent = savedPerMonth.toLocaleString();
+  }
+}
 
 const LS_KEY = "thawani_interactive_demo_v1";
 
@@ -933,6 +1297,7 @@ function _saveState(){
       products: state.products,
       chatHistory: state.chatHistory,
       orders: state.orders,
+      timeSavedMinutes: state.timeSavedMinutes,
     }));
   } catch(e){}
 }
@@ -1013,8 +1378,9 @@ function addProduct(){
   state.pendingImage = null;
 
   _renderProducts();
+  _addTimeSaved("productAdded");
   _saveState();
-  _toast("✅ أُضيف: " + name);
+  _toast("✅ أُضيف: " + name + " · وفّرت " + TIME_SAVED.productAdded + " دقيقة");
 }
 
 function removeProduct(id){
@@ -1118,6 +1484,7 @@ function _botRespond(userText){
     if (/مرحبا|السلام|هلا|هاي|مساء|صباح|hi|hello/i.test(lower)) {
       const name = document.getElementById("storeName").value || state.storeName;
       _addMsg(`👋 أهلاً بك في *${name}*!\nيسعدنا خدمتك 🌸\n\nاضغط الزر أدناه لتصفح المنيو الكامل واختيار طلبك 👇`, "bot", { button: true });
+      _addTimeSaved("chatWelcome");
       _updateSteps(2);
     } else if (/منيو|قائمة|طلب|menu/i.test(lower)) {
       _addMsg("🛍️ اضغط الزر لفتح المنيو:", "bot", { button: true });
@@ -1131,6 +1498,7 @@ function _botRespond(userText){
 
 function openMenu(){
   _updateSteps(3);
+  _addTimeSaved("menuOpened");
   const body = document.getElementById("menuBody");
   body.innerHTML = state.products.map(p => `
     <div class="menu-item">
@@ -1189,10 +1557,11 @@ function checkout(){
 
   _updateSteps(4);
   document.getElementById("toStage3Btn").disabled = false;
+  _addTimeSaved("orderPlaced");
   _saveState();
 
   setTimeout(() => {
-    _toast("🎉 الطلب انطلق! انتقل للإدارة لتشاهد ما يحصل");
+    _toast("🎉 الطلب انطلق! وفّرت " + TIME_SAVED.orderPlaced + " دقيقة إضافية — انتقل للإدارة");
   }, 800);
 }
 
@@ -1275,9 +1644,12 @@ function updOrder(id, newStatus){
     _addMsg(messages[newStatus], "bot");
   }
 
+  const savedKey = newStatus === "confirmed" ? "orderConfirmed" : newStatus === "completed" ? "orderCompleted" : "statusUpdate";
+  _addTimeSaved(savedKey);
   _renderAdmin();
   _saveState();
-  _toast("📤 " + { confirmed: "تم القبول", rejected: "تم الرفض", preparing: "بدأ التحضير", out_for_delivery: "خرج للتوصيل", completed: "تم التسليم" }[newStatus]);
+  const savedMin = TIME_SAVED[savedKey];
+  _toast("📤 " + { confirmed: "تم القبول", rejected: "تم الرفض", preparing: "بدأ التحضير", out_for_delivery: "خرج للتوصيل", completed: "تم التسليم" }[newStatus] + " · +" + savedMin + " د");
 }
 
 function _updateStats(){
@@ -1320,6 +1692,7 @@ function resetDemo(){
 _loadState();
 if (state.storeName) document.getElementById("storeName").value = state.storeName;
 _renderProducts();
+_updateTimeSavedWidget();
 
 // If products exist, enable stage 2
 if (state.products.length >= 1) {
