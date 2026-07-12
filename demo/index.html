@@ -718,7 +718,7 @@ body {
   <div class="tip">
     <div class="tip-icon">💡</div>
     <div>
-      <b>ملاحظة:</b> الصور من جهازك (تُحفظ في متصفحك فقط، لا ترسل لأي سيرفر). اسم المتجر والمنتجات ستراها في المرحلة القادمة كعميل.
+      <b>ملاحظة:</b> أضف منتج واحد على الأقل (أو أكثر) بصور من جهازك. الصور تُحفظ في متصفحك فقط ولا ترسل لأي سيرفر.
     </div>
   </div>
 
@@ -756,15 +756,15 @@ body {
 
     <!-- Right: Product list -->
     <div class="card">
-      <h3>📋 منتجاتك <span id="prodCount" style="margin-inline-start:auto;background:#dbeafe;color:#1e40af;padding:3px 10px;border-radius:999px;font-size:12px">0 من 5</span></h3>
+      <h3>📋 منتجاتك <span id="prodCount" style="margin-inline-start:auto;background:#dbeafe;color:#1e40af;padding:3px 10px;border-radius:999px;font-size:12px">0</span></h3>
       <div id="productList" class="product-list"></div>
       <div id="emptyProds" class="empty-state">
         <div class="emoji">📦</div>
         <div>لم تُضف منتجات بعد</div>
       </div>
       <div class="status-bar" id="prodStatus">
-        <div>💪 أضف <b>5 منتجات</b> على الأقل للانتقال للمرحلة القادمة</div>
-        <div class="count-badge" id="prodCountBadge">0/5</div>
+        <div>💪 أضف <b>منتج واحد على الأقل</b> للانتقال للمرحلة القادمة</div>
+        <div class="count-badge" id="prodCountBadge">0</div>
       </div>
     </div>
   </div>
@@ -942,8 +942,8 @@ function _saveState(){
 // ═══════════════════════════════════════════════════════════════
 function goStage(n){
   // Guards
-  if (n === 2 && state.products.length < 5) {
-    _toast("⚠️ يجب إضافة 5 منتجات على الأقل أولاً");
+  if (n === 2 && state.products.length < 1) {
+    _toast("⚠️ أضف منتج واحد على الأقل أولاً");
     return;
   }
   if (n === 3 && state.orders.length === 0) {
@@ -1049,16 +1049,19 @@ function _renderProducts(){
     `).join("");
   }
 
-  count.textContent = state.products.length + " من 5";
-  badge.textContent = state.products.length + "/5";
+  count.textContent = state.products.length;
+  badge.textContent = state.products.length;
 
-  if (state.products.length >= 5) {
+  if (state.products.length >= 1) {
     status.classList.add("done");
-    status.querySelector("div").innerHTML = "🎉 ممتاز! يمكنك الانتقال للمرحلة القادمة";
+    const suffix = state.products.length === 1
+      ? "🎉 رائع! يمكنك الانتقال للمرحلة القادمة (أو أضف المزيد)"
+      : `🎉 ممتاز! لديك ${state.products.length} منتج${state.products.length === 2 ? 'ان' : 'ات'} — انتقل للمرحلة القادمة`;
+    status.querySelector("div").innerHTML = suffix;
     nextBtn.disabled = false;
   } else {
     status.classList.remove("done");
-    status.querySelector("div").innerHTML = `💪 أضف <b>${5 - state.products.length} منتج${5 - state.products.length === 1 ? '' : 'ات'}</b> أخرى للانتقال`;
+    status.querySelector("div").innerHTML = `💪 أضف <b>منتج واحد على الأقل</b> للانتقال`;
     nextBtn.disabled = true;
   }
 }
@@ -1319,7 +1322,7 @@ if (state.storeName) document.getElementById("storeName").value = state.storeNam
 _renderProducts();
 
 // If products exist, enable stage 2
-if (state.products.length >= 5) {
+if (state.products.length >= 1) {
   document.getElementById("toStage2Btn").disabled = false;
 }
 if (state.orders.length > 0) {
