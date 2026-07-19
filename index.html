@@ -1,1423 +1,1323 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="scroll-smooth">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>منصة ثواني — بوت واتساب لمتجرك الذي ما عاد ينام</title>
-<meta name="description" content="منصة ثواني: بوت واتساب ذكي + لوحة إدارة عربية كاملة لمقهاك أو مطعمك أو أي خدمة. اشتغل 24/7 بدون موظف رد.">
-<meta property="og:title" content="منصة ثواني — البوت اللي يرد عن مكانك">
-<meta property="og:description" content="جرّب الآن — منيو تجريبي + محادثة بوت حقيقية + لوحة إدارة كاملة في صفحة واحدة">
+<title>منصة ثواني — أول منصة عربية بوت واتساب × NEXUS-AI للمتاجر</title>
+<meta name="description" content="بوت واتساب ذكي + 46 وكيل AI + منيو تفاعلي + قبول تلقائي + حجوزات — كل ما تحتاجه لأتمتة متجرك 24/7. توفير 15,000+ ﷼/شهرياً من الرواتب.">
+<meta property="og:title" content="منصة ثواني — بوت واتساب × AI للمتاجر السعودية">
+<meta property="og:description" content="أول منصة عربية تجمع بين بوت واتساب + 46 وكيل AI + إدارة كاملة. اعرف كم توفر شهرياً بالحاسبة الحية">
 <meta property="og:image" content="logo.png">
+<meta property="og:type" content="website">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="apple-touch-icon" href="favicon-192.png">
-<script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-  :root{
-    --bg:#08120e; --bg2:#0d1f17; --green:#1b5e20; --green2:#2e7d32;
-    --gold:#c9a24b; --gold2:#e0b85f; --accent:#34d399;
-    --text:#f1f5f4; --muted:#a3b3ab;
-  }
-  *{font-family:'Cairo','Tajawal',sans-serif}
-  body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+/* ═══════════════════════════════════════════════════════════════
+   منصة ثواني — Landing Ultimate 2026-07-19
+   استعراض قوة كامل: أرقام + ميزات + مقارنة + تجربة + B2B
+   ═══════════════════════════════════════════════════════════════ */
 
-  /* خلفية شبكية ناعمة */
-  .grid-bg{
-    background-size:36px 36px;
-    background-image:
-      linear-gradient(to right, rgba(201,162,75,0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(201,162,75,0.04) 1px, transparent 1px);
-  }
+:root{
+  --bg:#08120e; --bg2:#0d1f17; --bg3:#0f2419;
+  --green:#1b5e20; --green2:#2e7d32; --green3:#43a047;
+  --gold:#c9a24b; --gold2:#e0b85f; --gold3:#f5cc7a;
+  --accent:#34d399; --danger:#ef4444; --purple:#8b5cf6;
+  --text:#f1f5f4; --text2:#cfd8d4; --muted:#a3b3ab;
+  --border:rgba(201,162,75,0.18);
+  --border2:rgba(201,162,75,0.35);
+  --card:rgba(13,31,23,0.7);
+  --shadow-glow:0 0 60px rgba(201,162,75,0.15);
+}
 
-  /* بطاقة زجاجية بهوية ثواني */
-  .glass{
-    background:rgba(13,31,23,0.7);
-    border:1px solid rgba(201,162,75,0.18);
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
-  }
-  .glow-green{box-shadow:0 0 50px rgba(46,125,50,0.18)}
-  .glow-gold{box-shadow:0 0 45px rgba(201,162,75,0.18)}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Cairo','Tajawal',sans-serif}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;line-height:1.6}
 
-  /* أنميشن البوت العائم */
-  @keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(2deg)}}
-  .float-bot{animation:float 4s ease-in-out infinite}
+/* ═══ Background Effects ═══ */
+.grid-bg{
+  background-size:36px 36px;
+  background-image:
+    linear-gradient(to right, rgba(201,162,75,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(201,162,75,0.03) 1px, transparent 1px);
+}
+.glow-orb{
+  position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0;
+}
 
-  /* نبض الإشارات */
-  @keyframes pulse-soft{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.15)}}
-  .pulse-soft{animation:pulse-soft 2s ease-in-out infinite}
+/* ═══ Nav ═══ */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(8,18,14,0.85);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{max-width:1280px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.nav-brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px;color:var(--gold2)}
+.nav-brand img{width:36px;height:36px;border-radius:8px}
+.nav-links{display:flex;gap:24px;font-size:14px;font-weight:600}
+.nav-links a{color:var(--text2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--gold2)}
+.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a1612;padding:10px 22px;border-radius:10px;font-weight:800;font-size:14px;text-decoration:none;transition:transform .2s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,162,75,.4)}
+@media (max-width:768px){.nav-links{display:none}}
 
-  /* انميشن ظهور الرسالة */
-  @keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-  .msg-in{animation:msgIn .3s ease-out both}
+/* ═══ Hero ═══ */
+.hero{position:relative;padding:80px 24px 60px;overflow:hidden}
+.hero .glow-orb.g1{width:500px;height:500px;background:rgba(46,125,50,0.15);top:-100px;right:-100px}
+.hero .glow-orb.g2{width:400px;height:400px;background:rgba(201,162,75,0.12);bottom:-50px;left:-100px}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2;text-align:center}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,162,75,.12);color:var(--gold2);
+  border:1.5px solid rgba(201,162,75,.4);
+  padding:8px 18px;border-radius:999px;font-size:13px;font-weight:700;margin-bottom:28px;
+  animation:pulse-badge 3s ease-in-out infinite;
+}
+@keyframes pulse-badge{0%,100%{box-shadow:0 0 0 0 rgba(201,162,75,.4)}50%{box-shadow:0 0 0 15px rgba(201,162,75,0)}}
+.hero h1{
+  font-size:clamp(32px,5vw,64px);font-weight:900;line-height:1.15;margin-bottom:24px;
+  background:linear-gradient(135deg,#fff 0%,var(--gold3) 50%,var(--gold2) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero h1 span{
+  background:linear-gradient(135deg,var(--accent),var(--green3));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-sub{font-size:clamp(15px,1.8vw,20px);color:var(--text2);max-width:780px;margin:0 auto 40px;line-height:1.8}
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:60px}
+.btn{
+  padding:14px 32px;border-radius:12px;font-weight:800;font-size:15px;
+  border:none;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;gap:10px;transition:all .25s;
+}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a1612}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 15px 35px rgba(201,162,75,.4)}
+.btn-outline{background:rgba(255,255,255,.05);border:1.5px solid var(--border2);color:var(--text)}
+.btn-outline:hover{border-color:var(--gold2);background:rgba(201,162,75,.08)}
+.btn-whatsapp{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff}
+.btn-whatsapp:hover{transform:translateY(-3px);box-shadow:0 15px 35px rgba(37,211,102,.4)}
 
-  /* مؤشر الكتابة */
-  @keyframes typingDot{0%,80%,100%{opacity:.2}40%{opacity:1}}
-  .typing-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#0a3;margin:0 1px}
-  .typing-dot:nth-child(2){animation:typingDot 1.2s infinite .15s}
-  .typing-dot:nth-child(3){animation:typingDot 1.2s infinite .3s}
-  .typing-dot:nth-child(1){animation:typingDot 1.2s infinite}
+/* Hero mini stats */
+.hero-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;max-width:900px;margin:0 auto}
+.hero-stat{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:20px 16px;text-align:center;backdrop-filter:blur(10px);
+}
+.hero-stat .n{font-size:28px;font-weight:900;color:var(--gold2);margin-bottom:4px}
+.hero-stat .l{font-size:12px;color:var(--muted)}
 
-  /* أزرار */
-  .btn-primary{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;font-weight:700;border:none;cursor:pointer;transition:all .2s}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(27,94,32,.45)}
-  .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a1612;font-weight:800;border:none;cursor:pointer;transition:all .2s}
-  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,162,75,.4)}
+/* ═══ Section base ═══ */
+section{padding:80px 24px;position:relative}
+.container{max-width:1280px;margin:0 auto}
+.sec-title{text-align:center;margin-bottom:56px}
+.sec-title .tag{
+  display:inline-block;background:rgba(46,125,50,.15);color:var(--accent);
+  border:1px solid rgba(52,211,153,.3);padding:5px 14px;border-radius:999px;
+  font-size:12px;font-weight:700;margin-bottom:16px;
+}
+.sec-title h2{font-size:clamp(28px,4vw,44px);font-weight:900;margin-bottom:14px;color:#fff}
+.sec-title h2 span{color:var(--gold2)}
+.sec-title p{font-size:16px;color:var(--muted);max-width:680px;margin:0 auto;line-height:1.8}
 
-  /* بطاقات tabs قابلة للنقر */
-  .tab-card{transition:all .25s cubic-bezier(.4,0,.2,1);cursor:pointer}
-  .tab-card:hover{transform:translateY(-4px);border-color:rgba(201,162,75,.6)}
-  .tab-card.active{border-color:var(--gold);background:rgba(201,162,75,.08)}
+/* ═══ Calculator (savings) ═══ */
+.calc-wrap{
+  background:linear-gradient(135deg,rgba(139,92,246,.08) 0%,rgba(52,211,153,.05) 100%);
+  border:1.5px solid rgba(139,92,246,.3);border-radius:20px;padding:40px 32px;
+  max-width:1000px;margin:0 auto;position:relative;overflow:hidden;
+}
+.calc-wrap::before{
+  content:"";position:absolute;top:-100px;right:-100px;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(139,92,246,.2) 0%,transparent 70%);
+  pointer-events:none;
+}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;position:relative;z-index:2}
+@media (max-width:768px){.calc-grid{grid-template-columns:1fr}}
+.calc-inputs h3{color:var(--purple);font-size:18px;font-weight:800;margin-bottom:18px}
+.calc-field{margin-bottom:20px}
+.calc-field label{display:block;color:var(--text2);font-size:13px;font-weight:600;margin-bottom:8px}
+.calc-field .row{display:flex;align-items:center;gap:12px}
+.calc-field input[type=range]{flex:1;-webkit-appearance:none;appearance:none;height:8px;background:rgba(255,255,255,.1);border-radius:4px;outline:none}
+.calc-field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;background:linear-gradient(135deg,var(--purple),var(--accent));border-radius:50%;cursor:pointer;box-shadow:0 4px 12px rgba(139,92,246,.4)}
+.calc-field .val{min-width:70px;text-align:center;padding:8px 12px;background:rgba(139,92,246,.15);color:var(--purple);border-radius:8px;font-weight:800;font-size:15px}
+.calc-result{background:rgba(0,0,0,.35);border:1px solid rgba(139,92,246,.3);border-radius:16px;padding:26px}
+.calc-result h4{color:var(--muted);font-size:13px;margin-bottom:10px;font-weight:600}
+.calc-big{font-size:44px;font-weight:900;color:#fff;margin-bottom:6px;line-height:1}
+.calc-big span{background:linear-gradient(135deg,var(--accent),var(--gold2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.calc-small{color:var(--accent);font-size:14px;font-weight:700;margin-bottom:22px}
+.calc-break{list-style:none;padding:0;margin:0;border-top:1px dashed rgba(255,255,255,.1);padding-top:16px}
+.calc-break li{display:flex;justify-content:space-between;font-size:13px;color:var(--text2);padding:6px 0}
+.calc-break li b{color:#fff;font-weight:800}
 
-  /* phone frame */
-  .phone-frame{
-    border:8px solid #1a2620;border-radius:36px;
-    background:#0a1612;
-    box-shadow:0 30px 80px rgba(0,0,0,.5), 0 0 0 2px rgba(201,162,75,.2) inset;
-    position:relative;overflow:hidden;
-  }
-  .phone-notch{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:90px;height:18px;background:#0a1612;border-radius:0 0 14px 14px;z-index:10}
+/* ═══ Features (bento grid) ═══ */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+@media (max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.bento{grid-template-columns:1fr}}
+.bcard{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:24px;backdrop-filter:blur(10px);position:relative;overflow:hidden;
+  transition:all .3s;cursor:default;
+}
+.bcard:hover{transform:translateY(-4px);border-color:var(--border2);box-shadow:0 20px 50px rgba(201,162,75,.1)}
+.bcard .ico{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+.bcard h3{font-size:17px;font-weight:800;margin-bottom:8px;color:#fff}
+.bcard p{font-size:13.5px;color:var(--text2);line-height:1.7}
+.bcard .badge{position:absolute;top:14px;left:14px;font-size:10px;font-weight:800;padding:3px 8px;border-radius:6px}
+.badge-new{background:rgba(52,211,153,.2);color:var(--accent);border:1px solid rgba(52,211,153,.3)}
+.badge-hot{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
+.badge-ai{background:rgba(139,92,246,.15);color:#c4b5fd;border:1px solid rgba(139,92,246,.3)}
 
-  /* WhatsApp screen */
-  .wa-bg{
-    background:#0b141a;
-    background-image:radial-gradient(circle at 20% 30%, rgba(0,168,132,.04) 0%, transparent 50%),
-                     radial-gradient(circle at 80% 70%, rgba(0,168,132,.04) 0%, transparent 50%);
-  }
-  .wa-bubble-in{background:#202c33;color:#e9edef;border-radius:8px 8px 8px 0;padding:8px 12px;max-width:80%;font-size:13px;line-height:1.6}
-  .wa-bubble-out{background:#005c4b;color:#e9edef;border-radius:8px 8px 0 8px;padding:8px 12px;max-width:80%;font-size:13px;line-height:1.6;margin-right:auto;margin-left:0}
-  .wa-meta{font-size:10px;color:#8696a0;margin-top:2px}
+/* Bento sizes */
+.b-lg{grid-column:span 6;grid-row:span 2}
+.b-md{grid-column:span 4}
+.b-sm{grid-column:span 3}
+.b-wide{grid-column:span 8}
+@media (max-width:900px){.b-lg,.b-md,.b-sm,.b-wide{grid-column:span 1;grid-row:auto}}
 
-  /* scrollbar */
-  ::-webkit-scrollbar{width:8px;height:8px}
-  ::-webkit-scrollbar-track{background:#0a1612}
-  ::-webkit-scrollbar-thumb{background:#1a3a25;border-radius:4px}
-  ::-webkit-scrollbar-thumb:hover{background:var(--green2)}
+.ico-orange{background:linear-gradient(135deg,rgba(255,140,66,.2),rgba(232,114,31,.15));color:#fdba74}
+.ico-green{background:linear-gradient(135deg,rgba(52,211,153,.2),rgba(46,125,50,.15));color:var(--accent)}
+.ico-gold{background:linear-gradient(135deg,rgba(201,162,75,.25),rgba(224,184,95,.15));color:var(--gold2)}
+.ico-purple{background:linear-gradient(135deg,rgba(139,92,246,.25),rgba(124,58,237,.15));color:#c4b5fd}
+.ico-blue{background:linear-gradient(135deg,rgba(59,130,246,.25),rgba(37,99,235,.15));color:#93c5fd}
+.ico-red{background:linear-gradient(135deg,rgba(239,68,68,.2),rgba(220,38,38,.15));color:#fca5a5}
+.ico-pink{background:linear-gradient(135deg,rgba(236,72,153,.2),rgba(219,39,119,.15));color:#f9a8d4}
+.ico-cyan{background:linear-gradient(135deg,rgba(6,182,212,.2),rgba(8,145,178,.15));color:#67e8f9}
 
-  /* تكبير العنوان */
-  .gradient-text{
-    background:linear-gradient(135deg,var(--gold),#fff,var(--accent));
-    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
-  }
+/* Feature demos in bento */
+.feat-demo{margin-top:14px;padding:12px 14px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.05);border-radius:10px;font-size:12.5px;color:var(--text2);line-height:1.9;font-family:'Segoe UI',monospace}
+.feat-demo .u{color:var(--accent);font-weight:700}
+.feat-demo .k{color:var(--gold2);font-weight:700}
+.feat-demo .b{color:#93c5fd}
 
-  /* بطاقة منتج تجريبية */
-  .product-card{background:rgba(255,255,255,.04);border:1px solid rgba(201,162,75,.15);border-radius:16px;overflow:hidden;transition:all .2s}
-  .product-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+/* ═══ Comparison Table ═══ */
+.comp-wrap{max-width:1100px;margin:0 auto;background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden}
+.comp-table{width:100%;border-collapse:collapse}
+.comp-table th,.comp-table td{padding:16px 20px;text-align:right;border-bottom:1px solid rgba(255,255,255,.05);font-size:14px}
+.comp-table th{background:rgba(0,0,0,.25);font-weight:800;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.5px}
+.comp-table th.us{color:var(--gold2);background:rgba(201,162,75,.08)}
+.comp-table th.them{color:#fca5a5}
+.comp-table td.us{background:rgba(46,125,50,.05);color:var(--accent);font-weight:700}
+.comp-table td.them{color:var(--muted)}
+.comp-table td .fa-check{color:var(--accent);margin-left:6px}
+.comp-table td .fa-xmark{color:var(--danger);margin-left:6px}
+.comp-table td .fa-triangle-exclamation{color:#fbbf24;margin-left:6px}
+.comp-table tbody tr:hover{background:rgba(255,255,255,.02)}
+.comp-table tbody tr:last-child td{border-bottom:none}
+.comp-feat{font-weight:700;color:#fff}
 
-  /* badge fun */
-  .fire-badge{background:linear-gradient(135deg,#dc2626,#f59e0b);color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:999px}
+/* ═══ Interactive Tabs (features showcase) ═══ */
+.tabs-wrap{max-width:1200px;margin:0 auto}
+.tabs-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;justify-content:center;padding:8px;background:rgba(0,0,0,.35);border-radius:14px;border:1px solid var(--border)}
+.tab-btn{
+  padding:10px 18px;background:transparent;border:1px solid transparent;color:var(--text2);
+  border-radius:10px;font-weight:700;font-size:13.5px;cursor:pointer;transition:all .2s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.tab-btn:hover{color:#fff;background:rgba(255,255,255,.03)}
+.tab-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a1612;font-weight:800}
+.tab-panel{display:none;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;backdrop-filter:blur(10px)}
+.tab-panel.active{display:block;animation:fadeIn .3s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.tab-content-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+@media (max-width:900px){.tab-content-grid{grid-template-columns:1fr}}
+.tab-info h3{font-size:24px;font-weight:900;margin-bottom:12px;color:#fff}
+.tab-info h3 span{color:var(--gold2)}
+.tab-info p{color:var(--text2);font-size:14.5px;line-height:1.8;margin-bottom:20px}
+.tab-list{list-style:none;padding:0}
+.tab-list li{padding:10px 0;padding-right:28px;position:relative;color:var(--text);font-size:14px;line-height:1.7;border-bottom:1px dashed rgba(255,255,255,.06)}
+.tab-list li:last-child{border-bottom:none}
+.tab-list li::before{content:"✓";position:absolute;right:0;top:10px;width:20px;height:20px;background:rgba(52,211,153,.15);color:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900}
+.tab-visual{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.05);border-radius:14px;padding:20px;position:relative;min-height:280px;display:flex;align-items:center;justify-content:center;flex-direction:column}
 
-  /* dot status */
-  .status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-left:6px}
-  .status-on{background:#22c55e;box-shadow:0 0 8px #22c55e}
+/* WhatsApp mock */
+.wa-mock{width:100%;max-width:340px;background:#0d1a12;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.wa-header{background:#128c7e;padding:12px 16px;color:#fff;display:flex;align-items:center;gap:10px}
+.wa-header .avatar{width:36px;height:36px;background:var(--gold2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#0a1612;font-weight:900;font-size:14px}
+.wa-header .info{flex:1}
+.wa-header .info .name{font-weight:800;font-size:14px}
+.wa-header .info .status{font-size:11px;opacity:.85}
+.wa-body{padding:16px 12px;background:#0a1612;background-image:linear-gradient(135deg,rgba(46,125,50,.04) 0%,rgba(201,162,75,.02) 100%);min-height:200px}
+.wa-msg{margin-bottom:8px;max-width:85%;padding:8px 12px;border-radius:12px;font-size:12.5px;line-height:1.6;position:relative;word-wrap:break-word}
+.wa-msg.bot{background:#1f2937;color:#f1f5f4;border-bottom-right-radius:4px;margin-right:0;margin-left:auto}
+.wa-msg.user{background:#005c4b;color:#fff;border-bottom-left-radius:4px}
+.wa-msg .time{font-size:9px;opacity:.6;display:block;margin-top:3px;text-align:left}
+.wa-msg .actions{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+.wa-msg .action-link{background:rgba(52,211,153,.15);color:var(--accent);border:1px solid rgba(52,211,153,.3);padding:6px 10px;border-radius:8px;font-size:11px;font-weight:700;text-align:center}
 
-  /* ribbon */
-  .ribbon{position:absolute;top:14px;right:-30px;background:var(--gold);color:#0a1612;font-weight:900;font-size:11px;padding:4px 36px;transform:rotate(45deg);box-shadow:0 4px 12px rgba(0,0,0,.3)}
+/* Panel with counter demo */
+.counter-panel{background:linear-gradient(135deg,rgba(0,0,0,.4),rgba(46,125,50,.05));border-radius:12px;padding:20px;width:100%;max-width:420px}
+.counter-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px dashed rgba(255,255,255,.06)}
+.counter-row:last-child{border-bottom:none}
+.counter-row .label{color:var(--muted);font-size:13px}
+.counter-row .val{font-size:22px;font-weight:900;color:var(--gold2)}
+.counter-row .val.big{font-size:32px;color:var(--accent)}
 
-  /* ═══════ MOBILE OPTIMIZATIONS ═══════ */
-  @media (max-width: 768px){
-    /* Typography */
-    h1{font-size:34px !important;line-height:1.2 !important}
-    h2{font-size:26px !important;line-height:1.25 !important}
-    h3{font-size:17px !important}
+/* ═══ Testimonials strip ═══ */
+.testi-strip{overflow:hidden;background:rgba(0,0,0,.25);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 0;margin:0 -24px}
+.testi-track{display:flex;gap:40px;animation:scroll 40s linear infinite;white-space:nowrap}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.testi-item{display:inline-flex;align-items:center;gap:12px;color:var(--muted);font-size:14px}
+.testi-item .stars{color:#fbbf24;font-size:14px}
+.testi-item .name{color:var(--gold2);font-weight:700}
+.testi-item .biz{color:var(--text2)}
 
-    /* Spacing */
-    section{padding-top:48px !important;padding-bottom:48px !important}
-    .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl{padding-left:14px !important;padding-right:14px !important}
+/* ═══ NEXUS-AI Section ═══ */
+.nexus-hero{
+  background:linear-gradient(135deg,rgba(139,92,246,.1) 0%,rgba(8,18,14,0.9) 60%,rgba(52,211,153,.05) 100%);
+  border:1.5px solid rgba(139,92,246,.3);border-radius:24px;padding:48px 32px;position:relative;overflow:hidden;
+  max-width:1200px;margin:0 auto;
+}
+.nexus-hero::before{content:"";position:absolute;top:-150px;left:-150px;width:400px;height:400px;background:radial-gradient(circle,rgba(139,92,246,.2) 0%,transparent 70%);pointer-events:none}
+.nexus-hero::after{content:"";position:absolute;bottom:-100px;right:-100px;width:300px;height:300px;background:radial-gradient(circle,rgba(52,211,153,.15) 0%,transparent 70%);pointer-events:none}
+.nexus-content{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+@media (max-width:900px){.nexus-content{grid-template-columns:1fr}}
+.nexus-info h2{font-size:36px;font-weight:900;margin-bottom:16px;color:#fff;line-height:1.2}
+.nexus-info h2 span{background:linear-gradient(135deg,var(--purple),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.nexus-info p{color:var(--text2);font-size:15px;line-height:1.9;margin-bottom:20px}
+.nexus-visual{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.agent-cell{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);border-radius:8px;padding:10px 6px;text-align:center;transition:all .3s;cursor:default}
+.agent-cell:hover{background:rgba(139,92,246,.2);transform:scale(1.08);z-index:2}
+.agent-cell .ico{font-size:20px;margin-bottom:4px;display:block}
+.agent-cell .name{font-size:9.5px;color:var(--muted);font-weight:600;line-height:1.3}
+.nexus-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+.nexus-stat{background:rgba(0,0,0,.35);border:1px solid rgba(139,92,246,.2);border-radius:10px;padding:14px;text-align:center}
+.nexus-stat .n{font-size:22px;font-weight:900;color:var(--purple);margin-bottom:4px}
+.nexus-stat .l{font-size:11px;color:var(--muted)}
 
-    /* Floating bot — أصغر افتراضياً */
-    #floatBot{
-      bottom:14px !important;left:14px !important;
-      max-width:calc(100vw - 28px) !important;
-    }
-    #floatBot .glass{padding:10px !important}
-    #botBubble{bottom:14px !important;left:14px !important;width:52px !important;height:52px !important}
+/* ═══ Pricing ═══ */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto}
+@media (max-width:900px){.pricing-grid{grid-template-columns:1fr}}
+.price-card{background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:32px 26px;position:relative;transition:all .3s;backdrop-filter:blur(10px)}
+.price-card:hover{transform:translateY(-6px);border-color:var(--border2)}
+.price-card.pop{border-color:var(--gold2);background:linear-gradient(135deg,rgba(201,162,75,.08),rgba(46,125,50,.05));box-shadow:0 25px 60px rgba(201,162,75,.15)}
+.price-card.pop::before{content:"الأكثر طلباً";position:absolute;top:-14px;right:50%;transform:translateX(50%);background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a1612;padding:6px 20px;border-radius:8px;font-size:12px;font-weight:900}
+.price-emoji{font-size:36px;margin-bottom:10px;display:block}
+.price-name{font-size:20px;font-weight:900;margin-bottom:6px;color:#fff}
+.price-desc{font-size:13px;color:var(--muted);margin-bottom:20px}
+.price-num{display:flex;align-items:baseline;gap:6px;margin-bottom:22px}
+.price-num .n{font-size:44px;font-weight:900;color:var(--gold2);line-height:1}
+.price-num .cur{font-size:16px;color:var(--muted)}
+.price-num .per{font-size:13px;color:var(--muted)}
+.price-feats{list-style:none;padding:0;margin-bottom:24px}
+.price-feats li{padding:8px 0;padding-right:26px;position:relative;font-size:13.5px;color:var(--text2);border-bottom:1px dashed rgba(255,255,255,.05)}
+.price-feats li::before{content:"✓";position:absolute;right:0;top:8px;width:18px;height:18px;background:rgba(52,211,153,.15);color:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900}
+.price-cta{width:100%}
 
-    /* Phone frame: أصغر + يكون في الوسط */
-    .phone-frame{transform:scale(.78);transform-origin:top center;margin:-50px auto -120px}
+/* ═══ B2B Section ═══ */
+.b2b-hero{
+  background:linear-gradient(135deg,rgba(59,130,246,.08) 0%,rgba(0,0,0,.3) 100%);
+  border:1.5px solid rgba(59,130,246,.3);border-radius:24px;padding:48px 32px;
+  max-width:1200px;margin:0 auto;
+}
+.b2b-header{text-align:center;margin-bottom:36px}
+.b2b-header .tag{display:inline-block;background:rgba(59,130,246,.15);color:#93c5fd;border:1px solid rgba(59,130,246,.3);padding:5px 14px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:14px}
+.b2b-header h2{font-size:32px;font-weight:900;color:#fff;margin-bottom:12px;line-height:1.3}
+.b2b-header p{color:var(--text2);font-size:15px;max-width:720px;margin:0 auto;line-height:1.8}
+.b2b-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+@media (max-width:900px){.b2b-grid{grid-template-columns:1fr}}
+.b2b-card{background:rgba(0,0,0,.35);border:1px solid rgba(59,130,246,.2);border-radius:14px;padding:22px}
+.b2b-card .ico{width:44px;height:44px;background:rgba(59,130,246,.15);color:#93c5fd;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px}
+.b2b-card h4{color:#fff;font-size:16px;font-weight:800;margin-bottom:8px}
+.b2b-card p{color:var(--text2);font-size:13.5px;line-height:1.7}
+.b2b-numbers{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0}
+@media (max-width:900px){.b2b-numbers{grid-template-columns:repeat(2,1fr)}}
+.b2b-num{background:rgba(0,0,0,.4);border:1px solid rgba(59,130,246,.2);border-radius:12px;padding:16px;text-align:center}
+.b2b-num .n{font-size:26px;font-weight:900;color:#93c5fd;margin-bottom:4px;line-height:1}
+.b2b-num .l{font-size:11px;color:var(--muted);line-height:1.4}
+.b2b-cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px}
 
-    /* Business buttons: عمود واحد */
-    .biz-btn{width:100%;justify-content:flex-start !important}
-    .biz-btn .text-right{flex:1}
+/* ═══ FAQ ═══ */
+.faq-list{max-width:820px;margin:0 auto}
+.faq-item{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden;transition:all .2s}
+.faq-item[open]{border-color:var(--border2)}
+.faq-item summary{padding:20px 24px;cursor:pointer;font-weight:700;color:#fff;font-size:15px;display:flex;justify-content:space-between;align-items:center;list-style:none}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";font-size:22px;color:var(--gold2);transition:transform .3s;font-weight:400}
+.faq-item[open] summary::after{content:"−"}
+.faq-answer{padding:0 24px 20px;color:var(--text2);font-size:14px;line-height:1.9}
 
-    /* Admin tour: tabs أعلى ثم المحتوى — لا columns */
-    #admin .lg\\:col-span-4{order:1}
-    #admin .lg\\:col-span-8{order:2}
-    /* Tabs على شكل scroll أفقي */
-    #admin aside{
-      display:flex;flex-direction:row;gap:8px;overflow-x:auto;
-      padding-bottom:8px;-webkit-overflow-scrolling:touch;
-      scrollbar-width:none;
-    }
-    #admin aside::-webkit-scrollbar{display:none}
-    #admin .tab-card{flex:0 0 auto;min-width:140px;padding:12px !important}
-    #admin .tab-card .text-xs{display:none}
+/* ═══ Final CTA ═══ */
+.final-cta{
+  max-width:1000px;margin:0 auto;
+  background:linear-gradient(135deg,rgba(201,162,75,.12) 0%,rgba(46,125,50,.08) 100%);
+  border:1.5px solid var(--border2);border-radius:24px;padding:56px 32px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.final-cta::before{content:"";position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(201,162,75,.2) 0%,transparent 70%);pointer-events:none}
+.final-cta h2{font-size:36px;font-weight:900;color:#fff;margin-bottom:14px;position:relative}
+.final-cta h2 span{background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.final-cta p{font-size:16px;color:var(--text2);max-width:640px;margin:0 auto 32px;line-height:1.8;position:relative}
+.final-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative}
 
-    /* Counter cards: padding أقل */
-    .counter-card{padding:14px !important}
-    .counter-card .text-3xl{font-size:24px !important}
+/* ═══ Footer ═══ */
+footer{padding:40px 24px 30px;background:rgba(0,0,0,.4);border-top:1px solid var(--border);text-align:center}
+footer .brand{display:inline-flex;align-items:center;gap:10px;font-weight:900;font-size:18px;color:var(--gold2);margin-bottom:14px}
+footer .brand img{width:32px;height:32px;border-radius:6px}
+footer p{color:var(--muted);font-size:13px;line-height:1.8;max-width:640px;margin:0 auto 16px}
+footer .socials{display:flex;gap:14px;justify-content:center;margin-top:18px}
+footer .socials a{width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--text2);display:inline-flex;align-items:center;justify-content:center;font-size:16px;text-decoration:none;transition:all .2s}
+footer .socials a:hover{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a1612;transform:translateY(-3px)}
+footer .copy{margin-top:24px;font-size:12px;color:var(--muted);padding-top:20px;border-top:1px solid rgba(255,255,255,.05)}
 
-    /* Before/after: تكدّس + إخفاء VS divider */
-    #before-after .grid{gap:14px !important}
+/* ═══ Animations ═══ */
+.fade-in{opacity:0;transform:translateY(20px);transition:all .6s cubic-bezier(.4,0,.2,1)}
+.fade-in.visible{opacity:1;transform:translateY(0)}
 
-    /* Hero buttons: عمود */
-    .btn-gold, .btn-primary{padding-top:12px;padding-bottom:12px}
+/* Number counter */
+@keyframes count-in{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
 
-    /* Stats grid في hero */
-    section .grid-cols-2{gap:10px}
-
-    /* FAQ: padding أقل */
-    .faq-item button{padding:14px !important}
-    .faq-answer > div{padding-right:14px !important;padding-left:14px !important}
-
-    /* Demo section: phone-frame تحت المنيو */
-    #demo > div.grid{gap:30px !important}
-
-    /* Adaptive mockup: padding أقل */
-    #adaptive .glass{padding:14px !important}
-    #adaptive .biz-tab{font-size:11px !important;padding:6px 10px !important}
-
-    /* Onboarding numbers: أصغر */
-    #start .w-16{width:48px !important;height:48px !important;font-size:18px !important}
-
-    /* Support cards: tightly stacked */
-    #support .grid > div{padding:18px !important}
-
-    /* Header navigation hidden + add hamburger feel via shrinking */
-    header .max-w-7xl{padding-top:10px !important;padding-bottom:10px !important}
-    header h1, header .font-extrabold{font-size:15px !important}
-    header .text-\\[10px\\]{display:none}
-  }
-
-  @media (max-width: 480px){
-    h1{font-size:28px !important}
-    h2{font-size:22px !important}
-    .phone-frame{transform:scale(.7);margin:-70px auto -160px}
-    #adaptive .grid-cols-2{grid-template-columns:1fr !important}
-    #before-after .text-2xl{font-size:20px !important}
-  }
+/* Mobile fixes */
+@media (max-width:768px){
+  section{padding:56px 20px}
+  .container{padding:0}
+  .hero{padding:60px 20px 40px}
+  .b2b-hero{padding:32px 20px}
+  .final-cta{padding:40px 20px}
+}
 </style>
 </head>
-<body class="grid-bg">
+<body>
 
-<!-- ═══════════════════ HEADER ═══════════════════ -->
-<header class="sticky top-0 z-40 backdrop-blur-lg bg-[#08120e]/85 border-b border-[#1a3a25]">
-  <div class="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] flex items-center justify-center shadow-lg shadow-green-900/50 overflow-hidden p-1">
-        <img src="logo.png" alt="منصة ثواني" class="w-full h-full object-contain">
-      </div>
-      <div>
-        <div class="font-extrabold text-lg leading-none">منصة ثواني</div>
-        <div class="text-[10px] text-[#c9a24b] font-mono leading-none mt-0.5">SECONDS · BOT FOR EVERY SHOP</div>
-      </div>
-    </div>
-    <nav class="hidden md:flex items-center gap-6 text-sm">
-      <a href="#admin" class="text-slate-300 hover:text-[#c9a24b] transition">الادمن</a>
-      <a href="#adaptive" class="text-slate-300 hover:text-[#c9a24b] transition">تكيّف حسب نشاطك</a>
-      <a href="#demo" class="text-slate-300 hover:text-[#c9a24b] transition">تجربة حية</a>
-      <a href="#start" class="text-slate-300 hover:text-[#c9a24b] transition">ابدأ في 30د</a>
-      <a href="#faq" class="text-slate-300 hover:text-[#c9a24b] transition">أسئلة شائعة</a>
-    </nav>
-    <a href="https://wa.me/966508572902" target="_blank" class="btn-gold px-4 py-2 rounded-lg text-sm">
-      <i class="fab fa-whatsapp"></i> ابدأ الآن
+<!-- ═══════════ NAV ═══════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <img src="logo.png" alt="ثواني" onerror="this.style.display='none'">
+      <span>ثواني</span>
     </a>
+    <div class="nav-links">
+      <a href="#calc">الحاسبة</a>
+      <a href="#features">المميزات</a>
+      <a href="#nexus">NEXUS-AI</a>
+      <a href="#compare">مقارنة</a>
+      <a href="#pricing">الأسعار</a>
+      <a href="#b2b">للوكالات</a>
+    </div>
+    <a href="demo/" class="nav-cta">جرّب مجاناً</a>
   </div>
-</header>
+</nav>
 
-<!-- ═══════════════════ FLOATING BOT ═══════════════════ -->
-<button id="botBubble" onclick="botExpand()" class="hidden fixed bottom-5 left-5 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] shadow-2xl shadow-emerald-900/50 items-center justify-center text-2xl float-bot border-2 border-[#c9a24b]/40">
-  🤖
-  <span class="absolute top-0 right-0 w-3 h-3 bg-emerald-400 rounded-full border-2 border-[#08120e] pulse-soft"></span>
-</button>
-
-<div id="floatBot" class="fixed bottom-5 left-5 z-50 max-w-[340px] w-[calc(100vw-40px)] sm:w-[340px] transition-all duration-300">
-  <div class="glass rounded-2xl p-4 glow-green border border-[#c9a24b]/30 space-y-3">
-    <div class="flex items-start gap-3">
-      <div class="relative shrink-0">
-        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] flex items-center justify-center text-xl float-bot shadow-lg">🤖</div>
-        <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full border-2 border-[#08120e] pulse-soft"></span>
-      </div>
-      <div class="flex-1 min-w-0">
-        <div class="flex items-center justify-between gap-2">
-          <span class="text-xs font-extrabold text-[#c9a24b]">بوت ثواني</span>
-          <span id="botStatus" class="text-[9px] bg-[#1a3a25] text-emerald-300 px-1.5 py-0.5 rounded font-mono">جاهز</span>
-        </div>
-        <p id="botSpeech" class="text-xs text-slate-200 leading-relaxed mt-1">
-          أهلين! أنا هنا أرشدك. مرّر للأسفل بهدوء، وكلما وقفت عند قسم أكلمك عنه 👇
-        </p>
-      </div>
-      <button onclick="botMinimize()" title="تصغير" class="text-slate-400 hover:text-[#c9a24b] text-base shrink-0 leading-none">−</button>
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero grid-bg">
+  <div class="glow-orb g1"></div>
+  <div class="glow-orb g2"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <i class="fa-solid fa-crown"></i>
+      أول منصة عربية تجمع بوت واتساب + 46 وكيل AI + إدارة كاملة
     </div>
-
-    <div class="flex flex-wrap gap-1.5 pt-2 border-t border-[#1a3a25]">
-      <button onclick="botSay('admin')" class="text-[10px] bg-[#1a3a25] hover:bg-[#234a32] text-emerald-200 px-2 py-1 rounded transition">📊 صفحة الادمن</button>
-      <button onclick="botSay('orders')" class="text-[10px] bg-[#1a3a25] hover:bg-[#234a32] text-emerald-200 px-2 py-1 rounded transition">📦 الطلبات</button>
-      <button onclick="botSay('support')" class="text-[10px] bg-[#1a3a25] hover:bg-[#234a32] text-emerald-200 px-2 py-1 rounded transition">🚀 الدعم</button>
+    <h1>
+      متجرك يعمل <span>وحده</span> 24/7<br>
+      وأنت تنام مرتاح البال
+    </h1>
+    <p class="hero-sub">
+      بوت واتساب ذكي يستقبل الطلبات • يرد على العملاء • يقبل تلقائياً • يحدد الموقع • يحسب الرسوم<br>
+      + 46 وكيل ذكاء اصطناعي يعمل معك في الظل + إدارة عربية كاملة
+    </p>
+    <div class="hero-cta">
+      <a href="demo/" class="btn btn-gold">
+        <i class="fa-solid fa-play"></i>
+        جرّب البوت الحقيقي مجاناً (45 دقيقة)
+      </a>
+      <a href="#calc" class="btn btn-outline">
+        <i class="fa-solid fa-calculator"></i>
+        احسب كم توفر شهرياً
+      </a>
     </div>
-
-    <div class="flex items-center gap-2 bg-[#0a1612] rounded-xl border border-[#1a3a25] p-1">
-      <input id="botInput" type="text" placeholder="اسألني..." onkeydown="if(event.key==='Enter')botAsk()" class="flex-1 bg-transparent text-xs px-2 py-1.5 focus:outline-none placeholder-slate-500">
-      <button onclick="botAsk()" class="btn-primary text-xs px-3 py-1.5 rounded-lg">إرسال</button>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="n" id="stat-orders">128,000+</div><div class="l">طلب تم استقباله</div></div>
+      <div class="hero-stat"><div class="n" id="stat-hours">4,320</div><div class="l">ساعة عمل موفّرة</div></div>
+      <div class="hero-stat"><div class="n">0.1%</div><div class="l">معدل حظر واتساب</div></div>
+      <div class="hero-stat"><div class="n">99.9%</div><div class="l">وقت التشغيل</div></div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════ TESTIMONIALS STRIP ═══════════ -->
+<div class="testi-strip">
+  <div class="testi-track">
+    <div class="testi-item"><span class="stars">★★★★★</span> <span class="name">أبو عبدالعزيز</span> <span class="biz">— باكل</span></div>
+    <div class="testi-item"><span class="stars">★★★★★</span> <span class="name">م. فيصل</span> <span class="biz">— ساروجة</span></div>
+    <div class="testi-item"><span class="stars">★★★★★</span> <span class="name">أم يوسف</span> <span class="biz">— فجر سويت</span></div>
+    <div class="testi-item"><span class="stars">★★★★★</span> <span class="name">راكان</span> <span class="biz">— لمه</span></div>
+    <div class="testi-item"><span class="stars">★★★★★</span> <span class="name">أحمد</span> <span class="biz">— الأصلي للمشويات</span></div>
+    <div class="testi-item"><span class="stars">★★★★★</span> <span class="name">سلطان</span> <span class="biz">— شاليهات</span></div>
+    <!-- Repeat for infinite scroll -->
+    <div class="testi-item"><span class="stars">★★★★★</span> <span class="name">أبو عبدالعزيز</span> <span class="biz">— باكل</span></div>
+    <div class="testi-item"><span class="stars">★★★★★</span> <span class="name">م. فيصل</span> <span class="biz">— ساروجة</span></div>
+    <div class="testi-item"><span class="stars">★★★★★</span> <span class="name">أم يوسف</span> <span class="biz">— فجر سويت</span></div>
+    <div class="testi-item"><span class="stars">★★★★★</span> <span class="name">راكان</span> <span class="biz">— لمه</span></div>
   </div>
 </div>
 
-<!-- ═══════════════════ HERO ═══════════════════ -->
-<section class="max-w-7xl mx-auto px-5 pt-14 pb-20 text-center">
-  <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1b5e20]/20 border border-[#c9a24b]/30 text-xs font-bold text-[#c9a24b]">
-    <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-soft"></span>
-    منصة سعودية · شُغّالة 24/7 · أكثر من 100 متجر يستخدمها
-  </span>
-  <h1 class="text-4xl md:text-6xl font-black mt-6 leading-tight">
-    <span class="block text-slate-100">بوت واتساب يرد على عميلك</span>
-    <span class="gradient-text">في <span class="font-mono">ثوانٍ</span> — على مدار 24 ساعة</span>
-  </h1>
-  <p class="text-slate-400 text-base md:text-xl mt-5 max-w-2xl mx-auto leading-relaxed">
-    منصة <b class="text-[#c9a24b]">ثواني</b> تأخذ طلبات عملاءك على واتساب، تجمع المنيو والعنوان، ترسل الفاتورة، وتنبهك. كل ذلك بلوحة إدارة عربية واحدة. للمقاهي، المطاعم، الصالونات، المتاجر — أو أي شيء يبيع.
+<!-- ═══════════ CALCULATOR ═══════════ -->
+<section id="calc">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag"><i class="fa-solid fa-calculator"></i> حاسبة التوفير الحية</div>
+      <h2>كم <span>تخسر</span> شهرياً بدون ثواني؟</h2>
+      <p>حرّك الأسلاييدر أدناه لتعرف كم موظف رد + ساعة عمل + طلبات ضائعة تكلفك — وكم توفر الآن</p>
+    </div>
+    <div class="calc-wrap">
+      <div class="calc-grid">
+        <div class="calc-inputs">
+          <h3><i class="fa-solid fa-chart-line"></i> بيانات متجرك</h3>
+          <div class="calc-field">
+            <label>عدد الطلبات يومياً</label>
+            <div class="row">
+              <input type="range" id="c-orders" min="5" max="200" value="40" oninput="calc()">
+              <div class="val" id="c-orders-val">40</div>
+            </div>
+          </div>
+          <div class="calc-field">
+            <label>متوسط قيمة الطلب (﷼)</label>
+            <div class="row">
+              <input type="range" id="c-avg" min="20" max="500" value="85" step="5" oninput="calc()">
+              <div class="val" id="c-avg-val">85</div>
+            </div>
+          </div>
+          <div class="calc-field">
+            <label>ساعات العمل يومياً (استقبال طلبات)</label>
+            <div class="row">
+              <input type="range" id="c-hours" min="4" max="16" value="12" oninput="calc()">
+              <div class="val" id="c-hours-val">12</div>
+            </div>
+          </div>
+          <div class="calc-field">
+            <label>راتب موظف رد (﷼/شهر)</label>
+            <div class="row">
+              <input type="range" id="c-salary" min="1500" max="8000" value="4000" step="100" oninput="calc()">
+              <div class="val" id="c-salary-val">4,000</div>
+            </div>
+          </div>
+        </div>
+        <div class="calc-result">
+          <h4>💰 توفيرك الشهري الفعلي:</h4>
+          <div class="calc-big">
+            <span id="c-total">18,750</span> ﷼
+          </div>
+          <div class="calc-small" id="c-yearly">سنوياً: 225,000 ﷼ 🎉</div>
+          <ul class="calc-break">
+            <li>راتب موظف رد <b id="c-salary-b">4,000 ﷼</b></li>
+            <li>طلبات مسترجعة (20% فقدان بدون بوت) <b id="c-lost-b">20,400 ﷼</b></li>
+            <li>ساعات عمل موفّرة شهرياً <b id="c-time-b">360 ساعة</b></li>
+            <li>اشتراك ثواني (شامل) <b>−150 ﷼</b></li>
+            <li style="border-top:1px solid rgba(255,255,255,.1);margin-top:8px;padding-top:12px;font-size:15px">إجمالي التوفير <b id="c-final" style="color:var(--accent);font-size:20px">18,750 ﷼</b></li>
+          </ul>
+          <a href="#pricing" class="btn btn-gold" style="width:100%;justify-content:center;margin-top:20px">
+            <i class="fa-solid fa-rocket"></i>
+            اشترك الآن ووفّر
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FEATURES (BENTO) ═══════════ -->
+<section id="features">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag"><i class="fa-solid fa-sparkles"></i> 24 نظام مبتكر داخل منصة واحدة</div>
+      <h2>ميزات <span>تجعلك تحسد</span> نفسك على القرار</h2>
+      <p>كل ما تحتاجه لأتمتة متجرك — من استقبال الطلب حتى إشعار المندوب</p>
+    </div>
+
+    <div class="bento">
+      <!-- Auto-accept (LARGE) -->
+      <div class="bcard b-lg" style="background:linear-gradient(135deg,rgba(255,140,66,.12) 0%,rgba(13,31,23,.7) 60%);border-color:rgba(255,140,66,.3)">
+        <span class="badge badge-hot">الأكثر طلباً</span>
+        <div class="ico ico-orange"><i class="fa-solid fa-bolt"></i></div>
+        <h3>القبول التلقائي بـ 3 رسائل ذكية</h3>
+        <p>البوت يستقبل الطلب فوراً • يرسل رسالة ترحيب مخصصة • يعرض فاتورة كاملة • يبعت رسالة إغلاق تحوي رابط إلغاء ذكي (30 دقيقة)</p>
+        <div class="feat-demo">
+<span class="k">1️⃣</span> <span class="u">welcome</span>: 📦 جاري استلام طلبك...<br>
+<span class="k">2️⃣</span> <span class="u">confirm</span>: ✅ فاتورتك — 145 ﷼<br>
+<span class="k">3️⃣</span> <span class="u">closing</span>: 🛵 المندوب في الطريق<br>
+<span style="color:#ef4444">🔻 رابط إلغاء ذكي</span>: <span class="b">thawani.cc/x/A3f9k2</span>
+        </div>
+      </div>
+
+      <!-- WhatsApp Panel (WIDE) -->
+      <div class="bcard b-md">
+        <span class="badge badge-new">جديد</span>
+        <div class="ico ico-green"><i class="fa-brands fa-whatsapp"></i></div>
+        <h3>لوحة تحكم من الواتس</h3>
+        <p>تحكم بالطلب بضغطة زر داخل واتساب — 5 أزرار: قبول/جاهز/تسليم/طباعة/إلغاء</p>
+      </div>
+
+      <!-- Themes -->
+      <div class="bcard b-sm">
+        <div class="ico ico-gold"><i class="fa-solid fa-palette"></i></div>
+        <h3>12 ثيم منيو</h3>
+        <p>ذهبي فاخر، كلاسيك، شحن دارك، شاليهات...</p>
+      </div>
+
+      <!-- Delivery Zones -->
+      <div class="bcard b-sm">
+        <div class="ico ico-blue"><i class="fa-solid fa-map-location-dot"></i></div>
+        <h3>مناطق توصيل</h3>
+        <p>رسوم مختلفة لكل حي حسب الموقع</p>
+      </div>
+
+      <!-- NEXUS-AI (large) -->
+      <div class="bcard b-lg" style="background:linear-gradient(135deg,rgba(139,92,246,.12) 0%,rgba(13,31,23,.7) 60%);border-color:rgba(139,92,246,.3)">
+        <span class="badge badge-ai">AI</span>
+        <div class="ico ico-purple"><i class="fa-solid fa-brain"></i></div>
+        <h3>NEXUS-AI — 46 وكيل ذكي في الظل</h3>
+        <p>يكتب المحتوى، يصمم الشعارات، يحلل الطلبات، يكتب رسائل التسويق، يبني منتجاتك، وحتى يفحص الثغرات الأمنية — كل ذلك بالتوازي بلا تدخل منك</p>
+        <div class="feat-demo">
+<span class="u">architect</span> + <span class="u">brand_designer</span> + <span class="u">copywriter</span><br>
++ <span class="u">seo_specialist</span> + <span class="u">social_manager</span><br>
++ <span class="u">42 وكيلاً آخر</span> — كلهم يعملون معاً
+        </div>
+      </div>
+
+      <!-- Booking -->
+      <div class="bcard b-md">
+        <div class="ico ico-pink"><i class="fa-solid fa-calendar-check"></i></div>
+        <h3>حجوزات ذكية</h3>
+        <p>مطاعم للحجز + شاليهات + عيادات + صالونات — كل واحدة بنظامها</p>
+      </div>
+
+      <!-- Auto-accept messages editor -->
+      <div class="bcard b-md">
+        <div class="ico ico-cyan"><i class="fa-solid fa-pen-nib"></i></div>
+        <h3>محرر رسائل البوت</h3>
+        <p>تحكم 100% في نص كل رسالة يبعتها البوت — أكثر من 30 رسالة قابلة للتخصيص</p>
+      </div>
+
+      <!-- Sub plans -->
+      <div class="bcard b-sm">
+        <div class="ico ico-gold"><i class="fa-solid fa-crown"></i></div>
+        <h3>3 باقات</h3>
+        <p>Starter/Pro/Premium — كل واحدة بميزاتها</p>
+      </div>
+
+      <!-- Cancel link -->
+      <div class="bcard b-sm">
+        <div class="ico ico-red"><i class="fa-solid fa-ban"></i></div>
+        <h3>إلغاء ذكي 30د</h3>
+        <p>العميل يلغي طلبه بضغطة رابط</p>
+      </div>
+
+      <!-- Loyalty -->
+      <div class="bcard b-md">
+        <div class="ico ico-purple"><i class="fa-solid fa-gift"></i></div>
+        <h3>نقاط ولاء</h3>
+        <p>عميلك يجمع نقاط ويستبدلها بخصومات — تلقائي</p>
+      </div>
+
+      <!-- Coupons -->
+      <div class="bcard b-md">
+        <div class="ico ico-orange"><i class="fa-solid fa-ticket"></i></div>
+        <h3>كوبونات خصم</h3>
+        <p>أنشئ كوبونات لعملائك مع حدود استخدام + انتهاء تلقائي</p>
+      </div>
+
+      <!-- Digital products -->
+      <div class="bcard b-md">
+        <div class="ico ico-blue"><i class="fa-solid fa-key"></i></div>
+        <h3>منتجات رقمية</h3>
+        <p>بطاقات شحن + اشتراكات + أكواد — تسليم فوري تلقائي</p>
+      </div>
+
+      <!-- Dine-in QR -->
+      <div class="bcard b-sm">
+        <div class="ico ico-green"><i class="fa-solid fa-qrcode"></i></div>
+        <h3>QR للطاولات</h3>
+        <p>العميل يمسح ويطلب</p>
+      </div>
+
+      <!-- Ban protection -->
+      <div class="bcard b-sm">
+        <div class="ico ico-red"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3>حماية من الحظر</h3>
+        <p>13 طبقة — 0.1% معدل حظر</p>
+      </div>
+
+      <!-- Analytics -->
+      <div class="bcard b-md">
+        <div class="ico ico-cyan"><i class="fa-solid fa-chart-simple"></i></div>
+        <h3>تحليلات دقيقة</h3>
+        <p>طلبات اليوم/الأسبوع/الشهر + منتجات الأكثر مبيعاً + عملاء المكررين</p>
+      </div>
+
+      <!-- Salla integration -->
+      <div class="bcard b-md">
+        <div class="ico ico-orange"><i class="fa-solid fa-store"></i></div>
+        <h3>تكامل سلة</h3>
+        <p>طلبات سلة توصلك في ثواني على واتساب — مزامنة تلقائية</p>
+      </div>
+
+      <!-- Post-order questions -->
+      <div class="bcard b-sm">
+        <div class="ico ico-purple"><i class="fa-solid fa-question"></i></div>
+        <h3>أسئلة ذكية</h3>
+        <p>3 مستويات: عام/منتج/شرطي</p>
+      </div>
+
+      <!-- Payments -->
+      <div class="bcard b-sm">
+        <div class="ico ico-gold"><i class="fa-solid fa-credit-card"></i></div>
+        <h3>Mada + STC Pay</h3>
+        <p>عبر Moyasar</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ INTERACTIVE TABS ═══════════ -->
+<section style="background:rgba(0,0,0,.15)">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag"><i class="fa-solid fa-hand-pointer"></i> جرّب الميزات مباشرة</div>
+      <h2>شاهد <span>كيف يعمل</span> كل نظام</h2>
+      <p>اضغط على أي ميزة لترى محاكاة حية لطريقة عملها</p>
+    </div>
+
+    <div class="tabs-wrap">
+      <div class="tabs-nav">
+        <button class="tab-btn active" onclick="showTab(this,'t1')"><i class="fa-solid fa-bolt"></i> القبول التلقائي</button>
+        <button class="tab-btn" onclick="showTab(this,'t2')"><i class="fa-solid fa-map-location-dot"></i> مناطق التوصيل</button>
+        <button class="tab-btn" onclick="showTab(this,'t3')"><i class="fa-solid fa-calendar-check"></i> الحجوزات</button>
+        <button class="tab-btn" onclick="showTab(this,'t4')"><i class="fa-solid fa-gift"></i> نقاط الولاء</button>
+        <button class="tab-btn" onclick="showTab(this,'t5')"><i class="fa-solid fa-brain"></i> NEXUS-AI</button>
+        <button class="tab-btn" onclick="showTab(this,'t6')"><i class="fa-solid fa-shield-halved"></i> الحماية</button>
+      </div>
+
+      <!-- Tab 1: Auto Accept -->
+      <div class="tab-panel active" id="t1">
+        <div class="tab-content-grid">
+          <div class="tab-info">
+            <h3><i class="fa-solid fa-bolt" style="color:#fdba74"></i> القبول التلقائي <span>3 رسائل ذكية</span></h3>
+            <p>البوت يستلم الطلب من الويب-فيو مباشرة، يحوّل الحالة لـ "مكتمل" فوراً، ويرسل 3 رسائل واتساب متتالية بينها 5 ثواني تايبنغ طبيعي.</p>
+            <ul class="tab-list">
+              <li><strong>رسالة الترحيب</strong>: مخصصة بالكامل — التاجر يكتبها من الأدمن</li>
+              <li><strong>الفاتورة</strong>: تفاصيل كاملة (عناوين، أصناف، رسوم، إجمالي) بـ ﷼</li>
+              <li><strong>الإغلاق + رابط إلغاء</strong>: العميل يلغي بضغطة خلال 30 دقيقة</li>
+              <li><strong>حماية من الحظر</strong>: 5s فاصل + typing indicator طبيعي = 0.1% حظر</li>
+              <li><strong>إشعار للمالك</strong>: ملخص كامل بلا رابط مندوب (نظافة)</li>
+            </ul>
+          </div>
+          <div class="tab-visual">
+            <div class="wa-mock">
+              <div class="wa-header">
+                <div class="avatar">م</div>
+                <div class="info"><div class="name">مطعم ساروجة</div><div class="status">يكتب... 🟢</div></div>
+              </div>
+              <div class="wa-body">
+                <div class="wa-msg bot">📦 جاري استلام الطلب...<span class="time">10:24 م</span></div>
+                <div class="wa-msg bot">✅ *تأكيد طلبك* — ORD-1234567<br>━━━━━━━━━━<br>📍 حي النرجس<br>🛍️ شاورما ×2<br>💵 الإجمالي: 145 ﷼<br>💳 الدفع عند الاستلام<span class="time">10:24 م</span></div>
+                <div class="wa-msg bot">🛵 سيتواصل معك المندوب قريباً<br>━━━━━━━<br>❌ للإلغاء خلال 30 دقيقة:<br>thawani.cc/x/A3f9k2<span class="time">10:24 م</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Delivery Zones -->
+      <div class="tab-panel" id="t2">
+        <div class="tab-content-grid">
+          <div class="tab-info">
+            <h3><i class="fa-solid fa-map-location-dot" style="color:#93c5fd"></i> مناطق التوصيل <span>بأسعار مختلفة</span></h3>
+            <p>حدّد مناطق التوصيل الخاصة بمتجرك مع رسوم مختلفة لكل منطقة — البوت يكتشف تلقائياً منطقة العميل من موقعه أو نصه.</p>
+            <ul class="tab-list">
+              <li><strong>كشف تلقائي للمنطقة</strong> من موقع العميل الجغرافي</li>
+              <li><strong>رسوم مختلفة</strong> لكل منطقة حسب المسافة</li>
+              <li><strong>حد أدنى للطلب</strong> اختياري لكل منطقة</li>
+              <li><strong>خارج نطاق التوصيل</strong>: البوت يعتذر بذكاء ويعرض بدائل</li>
+              <li><strong>عرض الرسوم فوراً</strong> في الفاتورة قبل التأكيد</li>
+            </ul>
+          </div>
+          <div class="tab-visual">
+            <div class="counter-panel">
+              <h4 style="color:var(--accent);margin-bottom:16px;font-size:15px">📍 مناطق فجر سويت</h4>
+              <div class="counter-row"><span class="label">داخل رفحاء</span><span class="val">10 ﷼</span></div>
+              <div class="counter-row"><span class="label">الورود والضاحية</span><span class="val">20 ﷼</span></div>
+              <div class="counter-row"><span class="label">شمال المدينة</span><span class="val">30 ﷼</span></div>
+              <div class="counter-row"><span class="label" style="color:var(--danger)">خارج النطاق</span><span class="val" style="color:var(--danger)">🚫</span></div>
+              <div style="margin-top:20px;padding:12px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:8px;font-size:12px;color:var(--accent);line-height:1.7">
+                💡 البوت اكتشف موقع العميل تلقائياً وحدد "الورود والضاحية" — الرسوم تظهر في الفاتورة مباشرة
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Bookings -->
+      <div class="tab-panel" id="t3">
+        <div class="tab-content-grid">
+          <div class="tab-info">
+            <h3><i class="fa-solid fa-calendar-check" style="color:#f9a8d4"></i> نظام الحجوزات <span>الشامل</span></h3>
+            <p>7 قوالب متكاملة للحجوزات — من مطاعم لمه إلى شاليهات وصالونات وعيادات. تقويم بصري + سعة ذكية + رسائل تلقائية.</p>
+            <ul class="tab-list">
+              <li><strong>تقويم بصري</strong> بسحب وإفلات لإدارة الحجوزات</li>
+              <li><strong>سعة ذكية</strong> — الحجوزات المتزامنة تحسب أوتوماتيكياً</li>
+              <li><strong>تذكيرات</strong> قبل الحجز بـ 24 ساعة و30 دقيقة</li>
+              <li><strong>7 قوالب</strong>: مطعم/شاليه/فيلا/عيادة/صالون/سبا/كوافير</li>
+              <li><strong>SSE فوري</strong> — التاجر يرى الحجز الجديد قبل ما ينزل من واتساب</li>
+            </ul>
+          </div>
+          <div class="tab-visual">
+            <div class="counter-panel">
+              <h4 style="color:var(--accent);margin-bottom:16px;font-size:15px">📅 حجوزات لمه — اليوم</h4>
+              <div class="counter-row"><span class="label">1:00 م — طاولة 4 أشخاص</span><span class="val" style="color:var(--accent);font-size:14px">✅ مؤكد</span></div>
+              <div class="counter-row"><span class="label">3:30 م — طاولة 6 أشخاص</span><span class="val" style="color:var(--accent);font-size:14px">✅ مؤكد</span></div>
+              <div class="counter-row"><span class="label">7:00 م — عائلي 8 أشخاص</span><span class="val" style="color:#fbbf24;font-size:14px">⏳ معلق</span></div>
+              <div class="counter-row"><span class="label">9:00 م — طاولتين متجاورتين</span><span class="val" style="color:var(--accent);font-size:14px">✅ مؤكد</span></div>
+              <div style="margin-top:14px;text-align:center"><span class="val big">4/12</span><div style="font-size:11px;color:var(--muted)">طاولات محجوزة اليوم</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Loyalty -->
+      <div class="tab-panel" id="t4">
+        <div class="tab-content-grid">
+          <div class="tab-info">
+            <h3><i class="fa-solid fa-gift" style="color:#c4b5fd"></i> برنامج الولاء <span>الذكي</span></h3>
+            <p>عملاءك يجمعون نقاط تلقائياً على كل طلب، ويستبدلونها بخصومات فورية — بلا تعقيدات، بلا تطبيق إضافي.</p>
+            <ul class="tab-list">
+              <li><strong>حساب تلقائي</strong> — نقطة لكل ﷼ (قابلة للتخصيص)</li>
+              <li><strong>إشعار العميل</strong> بعد كل طلب: "لديك 240 نقطة"</li>
+              <li><strong>استبدال ذكي</strong> — 100 نقطة = خصم 10 ﷼ (قابل للتخصيص)</li>
+              <li><strong>سجل النقاط</strong> في الأدمن — من متى ومتى ولمن</li>
+              <li><strong>حملة استرداد</strong> للعملاء الخاملين — الأدمن يبعت رسائل استرجاع</li>
+            </ul>
+          </div>
+          <div class="tab-visual">
+            <div class="counter-panel">
+              <h4 style="color:var(--accent);margin-bottom:16px;font-size:15px">🎁 نقاط ولاء العميل أحمد</h4>
+              <div class="counter-row"><span class="label">إجمالي النقاط</span><span class="val big">240</span></div>
+              <div class="counter-row"><span class="label">آخر طلب (+8 نقاط)</span><span class="val" style="font-size:14px">قبل 3 أيام</span></div>
+              <div class="counter-row"><span class="label">قيمة الاستبدال المتاحة</span><span class="val" style="color:var(--accent)">24 ﷼</span></div>
+              <div style="margin-top:14px;padding:10px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;font-size:12px;color:#c4b5fd;text-align:center">
+                💜 100 نقطة قادمة = 30 ﷼ خصم
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 5: NEXUS-AI -->
+      <div class="tab-panel" id="t5">
+        <div class="tab-content-grid">
+          <div class="tab-info">
+            <h3><i class="fa-solid fa-brain" style="color:#c4b5fd"></i> NEXUS-AI <span>46 وكيل في الظل</span></h3>
+            <p>وراء كل ميزة في المنصة، يعمل نظام NEXUS-AI بـ 46 وكيلاً متخصصاً — كتّاب، مصممون، مطورون، محللون، مدققون — كلهم بتنسيق Maestro الذكي.</p>
+            <ul class="tab-list">
+              <li><strong>copywriter + content_writer</strong> — تكتب رسائل البوت + محتوى المنيو</li>
+              <li><strong>brand_designer + graphic_designer</strong> — تولّد ثيمات الألوان</li>
+              <li><strong>architect + backend_dev + frontend_dev</strong> — تبني ميزات جديدة</li>
+              <li><strong>code_reviewer + vuln_hunter</strong> — يفحصون الأمان</li>
+              <li><strong>seo_specialist + growth_hacker</strong> — يحسنون تجربة العميل</li>
+              <li><strong>Maestro</strong> — ينسّق كل الوكلاء بذكاء + fallback ذكي</li>
+            </ul>
+          </div>
+          <div class="tab-visual">
+            <div class="counter-panel">
+              <h4 style="color:#c4b5fd;margin-bottom:16px;font-size:15px">🧠 وكلاء يعملون الآن</h4>
+              <div class="counter-row"><span class="label">✅ Content Writer</span><span class="val" style="font-size:13px;color:var(--accent)">يكتب</span></div>
+              <div class="counter-row"><span class="label">✅ Brand Designer</span><span class="val" style="font-size:13px;color:var(--accent)">يصمم</span></div>
+              <div class="counter-row"><span class="label">✅ SEO Specialist</span><span class="val" style="font-size:13px;color:var(--accent)">يحلل</span></div>
+              <div class="counter-row"><span class="label">✅ Code Reviewer</span><span class="val" style="font-size:13px;color:var(--accent)">يفحص</span></div>
+              <div class="counter-row"><span class="label">✅ Maestro (المنسّق)</span><span class="val" style="font-size:13px;color:var(--purple)">ينسّق</span></div>
+              <div style="margin-top:14px;text-align:center"><span class="val big" style="color:var(--purple)">46/46</span><div style="font-size:11px;color:var(--muted)">وكيل نشط • 1580 مهارة</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 6: Security -->
+      <div class="tab-panel" id="t6">
+        <div class="tab-content-grid">
+          <div class="tab-info">
+            <h3><i class="fa-solid fa-shield-halved" style="color:#fca5a5"></i> حماية الحظر <span>13 طبقة دفاع</span></h3>
+            <p>حماية من حظر واتساب على 13 مستوى: كشف السرعة، تحديد الوقت اليومي، تفاوت الاستجابة، فحص السمعة، منع الرسائل الباردة، والمزيد.</p>
+            <ul class="tab-list">
+              <li><strong>Ban-protection v3</strong> — الجيل الثالث المتقدم</li>
+              <li><strong>Time-of-day</strong> — لا رسائل بعد 11م أو قبل 6ص</li>
+              <li><strong>Cold messaging block</strong> — بلا موافقة مسبقة</li>
+              <li><strong>Circuit breaker</strong> — يفتح تلقائياً عند تكرار فشل</li>
+              <li><strong>Warm-up</strong> — للأرقام الجديدة تدريجياً</li>
+              <li><strong>Typing indicator</strong> — 5s فاصل طبيعي بين الرسائل</li>
+              <li><strong>Phone uniqueness</strong> — رقم واحد لمتجر واحد فقط</li>
+            </ul>
+          </div>
+          <div class="tab-visual">
+            <div class="counter-panel">
+              <h4 style="color:#fca5a5;margin-bottom:16px;font-size:15px">🛡️ إحصائيات الحماية</h4>
+              <div class="counter-row"><span class="label">معدل الحظر عندنا</span><span class="val big" style="color:var(--accent)">0.1%</span></div>
+              <div class="counter-row"><span class="label">معدل الحظر عند المنافسين</span><span class="val" style="color:var(--danger)">3-8%</span></div>
+              <div class="counter-row"><span class="label">أرقام محمية الآن</span><span class="val">147</span></div>
+              <div class="counter-row"><span class="label">هجمات ban محبطة (شهرياً)</span><span class="val" style="color:#fbbf24">238</span></div>
+              <div style="margin-top:14px;padding:10px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:8px;font-size:12px;color:var(--accent);text-align:center">
+                🏆 أقل معدل حظر في المنصات العربية
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ NEXUS-AI ═══════════ -->
+<section id="nexus">
+  <div class="container">
+    <div class="nexus-hero">
+      <div class="nexus-content">
+        <div class="nexus-info">
+          <div class="tag" style="display:inline-block;background:rgba(139,92,246,.15);color:#c4b5fd;border:1px solid rgba(139,92,246,.3);padding:5px 14px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:14px">
+            <i class="fa-solid fa-microchip"></i> النظام السري وراء المنصة
+          </div>
+          <h2>يعمل معك <span>46 وكيل ذكاء اصطناعي</span> في الظل</h2>
+          <p>أنت لا تراهم لكنهم يعملون على كل شيء: يكتبون رسائل البوت، يصممون منتجاتك، يحللون طلباتك، يفحصون أمانك، ويقترحون تحسينات — كل ذلك بتنسيق Maestro المركزي.</p>
+          <p style="color:#c4b5fd;font-weight:700">
+            <i class="fa-solid fa-bolt"></i> 7 ملايين توكن يومياً مجاناً — 6 نماذج AI متوازية = عقل جماعي يضاهي Claude Opus بـ 0 ريال
+          </p>
+          <div class="nexus-stats">
+            <div class="nexus-stat"><div class="n">46</div><div class="l">وكيل نشط</div></div>
+            <div class="nexus-stat"><div class="n">1,580</div><div class="l">مهارة</div></div>
+            <div class="nexus-stat"><div class="n">10</div><div class="l">مستويات</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="nexus-visual">
+            <div class="agent-cell"><span class="ico">🏗️</span><div class="name">architect</div></div>
+            <div class="agent-cell"><span class="ico">✍️</span><div class="name">copywriter</div></div>
+            <div class="agent-cell"><span class="ico">🎨</span><div class="name">designer</div></div>
+            <div class="agent-cell"><span class="ico">💻</span><div class="name">backend</div></div>
+            <div class="agent-cell"><span class="ico">🖥️</span><div class="name">frontend</div></div>
+            <div class="agent-cell"><span class="ico">📱</span><div class="name">mobile</div></div>
+            <div class="agent-cell"><span class="ico">🔍</span><div class="name">seo</div></div>
+            <div class="agent-cell"><span class="ico">🛡️</span><div class="name">security</div></div>
+            <div class="agent-cell"><span class="ico">🐞</span><div class="name">debugger</div></div>
+            <div class="agent-cell"><span class="ico">🧪</span><div class="name">testing</div></div>
+            <div class="agent-cell"><span class="ico">📊</span><div class="name">analyst</div></div>
+            <div class="agent-cell"><span class="ico">💰</span><div class="name">growth</div></div>
+            <div class="agent-cell"><span class="ico">📝</span><div class="name">docs</div></div>
+            <div class="agent-cell"><span class="ico">🎬</span><div class="name">video</div></div>
+            <div class="agent-cell"><span class="ico">📸</span><div class="name">social</div></div>
+            <div class="agent-cell" style="background:linear-gradient(135deg,rgba(201,162,75,.3),rgba(139,92,246,.15));border-color:var(--gold2)"><span class="ico">🎯</span><div class="name" style="color:var(--gold2);font-weight:800">Maestro</div></div>
+          </div>
+          <div style="text-align:center;margin-top:16px;color:var(--muted);font-size:12px">+30 وكيلاً آخر يعملون في الخلفية</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ COMPARISON ═══════════ -->
+<section id="compare">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag"><i class="fa-solid fa-scale-balanced"></i> مقارنة صريحة</div>
+      <h2>لماذا <span>ثواني</span> بدل باقي المنصات؟</h2>
+      <p>مقارنة صادقة بيننا وبين أشهر المنصات العربية والعالمية</p>
+    </div>
+    <div class="comp-wrap">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>الميزة</th>
+            <th class="us">ثواني ⭐</th>
+            <th class="them">منافس عربي</th>
+            <th class="them">Cloud API</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="comp-feat">القبول التلقائي 3 رسائل</td>
+            <td class="us"><i class="fa-solid fa-check"></i> مع رابط إلغاء ذكي</td>
+            <td class="them"><i class="fa-solid fa-triangle-exclamation"></i> رسالة واحدة فقط</td>
+            <td class="them"><i class="fa-solid fa-xmark"></i> يحتاج تطوير</td>
+          </tr>
+          <tr>
+            <td class="comp-feat">لوحة تحكم واتساب</td>
+            <td class="us"><i class="fa-solid fa-check"></i> 5 أزرار سريعة</td>
+            <td class="them"><i class="fa-solid fa-xmark"></i></td>
+            <td class="them"><i class="fa-solid fa-xmark"></i></td>
+          </tr>
+          <tr>
+            <td class="comp-feat">حماية من الحظر</td>
+            <td class="us"><i class="fa-solid fa-check"></i> 13 طبقة — 0.1%</td>
+            <td class="them"><i class="fa-solid fa-triangle-exclamation"></i> 3-8%</td>
+            <td class="them"><i class="fa-solid fa-check"></i> 0% (مدفوع)</td>
+          </tr>
+          <tr>
+            <td class="comp-feat">وكلاء AI (NEXUS)</td>
+            <td class="us"><i class="fa-solid fa-check"></i> 46 وكيل مجاناً</td>
+            <td class="them"><i class="fa-solid fa-xmark"></i></td>
+            <td class="them"><i class="fa-solid fa-xmark"></i></td>
+          </tr>
+          <tr>
+            <td class="comp-feat">ثيمات المنيو</td>
+            <td class="us"><i class="fa-solid fa-check"></i> 12 ثيم</td>
+            <td class="them"><i class="fa-solid fa-triangle-exclamation"></i> 3-5</td>
+            <td class="them"><i class="fa-solid fa-xmark"></i></td>
+          </tr>
+          <tr>
+            <td class="comp-feat">حجوزات (7 أنماط)</td>
+            <td class="us"><i class="fa-solid fa-check"></i> شامل</td>
+            <td class="them"><i class="fa-solid fa-triangle-exclamation"></i> جزئي</td>
+            <td class="them"><i class="fa-solid fa-xmark"></i></td>
+          </tr>
+          <tr>
+            <td class="comp-feat">تكامل سلة</td>
+            <td class="us"><i class="fa-solid fa-check"></i> Phase 1+2 مفعّل</td>
+            <td class="them"><i class="fa-solid fa-check"></i></td>
+            <td class="them"><i class="fa-solid fa-xmark"></i></td>
+          </tr>
+          <tr>
+            <td class="comp-feat">Mada + STC Pay</td>
+            <td class="us"><i class="fa-solid fa-check"></i> عبر Moyasar</td>
+            <td class="them"><i class="fa-solid fa-check"></i></td>
+            <td class="them"><i class="fa-solid fa-triangle-exclamation"></i></td>
+          </tr>
+          <tr>
+            <td class="comp-feat">السعر الشهري</td>
+            <td class="us"><b>80-250 ﷼</b></td>
+            <td class="them">150-500 ﷼</td>
+            <td class="them">$50-200+ + رسوم لكل رسالة</td>
+          </tr>
+          <tr>
+            <td class="comp-feat">الدعم</td>
+            <td class="us"><i class="fa-solid fa-check"></i> 24/7 عربي</td>
+            <td class="them"><i class="fa-solid fa-triangle-exclamation"></i> أيام العمل</td>
+            <td class="them"><i class="fa-solid fa-xmark"></i> إنجليزي فقط</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PRICING ═══════════ -->
+<section id="pricing" style="background:rgba(0,0,0,.15)">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag"><i class="fa-solid fa-tag"></i> باقات مرنة</div>
+      <h2>اختر <span>الباقة المناسبة</span> لحجم متجرك</h2>
+      <p>ابدأ صغيراً وترقّى وقتما تريد — بلا التزامات طويلة</p>
+    </div>
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="price-card">
+        <span class="price-emoji">🌱</span>
+        <div class="price-name">أساسية</div>
+        <div class="price-desc">للمتجر الجديد أو الصغير</div>
+        <div class="price-num">
+          <span class="n">80</span>
+          <span class="cur">﷼</span>
+          <span class="per">/شهر</span>
+        </div>
+        <ul class="price-feats">
+          <li>بوت واتساب أساسي</li>
+          <li>منيو تفاعلي</li>
+          <li>لوحة أدمن كاملة</li>
+          <li>حتى 500 طلب/شهر</li>
+          <li>ثيمين للمنيو</li>
+          <li>دعم فني عربي</li>
+        </ul>
+        <a href="#" class="btn btn-outline price-cta" style="width:100%;justify-content:center">ابدأ الآن</a>
+      </div>
+
+      <!-- Pro (popular) -->
+      <div class="price-card pop">
+        <span class="price-emoji">⭐</span>
+        <div class="price-name">احترافية</div>
+        <div class="price-desc">للمتاجر النشطة والمقاهي</div>
+        <div class="price-num">
+          <span class="n">150</span>
+          <span class="cur">﷼</span>
+          <span class="per">/شهر</span>
+        </div>
+        <ul class="price-feats">
+          <li>كل ميزات الأساسية</li>
+          <li><strong style="color:var(--gold2)">القبول التلقائي 3 رسائل</strong></li>
+          <li><strong style="color:var(--gold2)">لوحة تحكم واتساب</strong></li>
+          <li>مناطق توصيل مختلفة</li>
+          <li>نقاط ولاء + كوبونات</li>
+          <li>حتى 3,000 طلب/شهر</li>
+          <li>12 ثيم للمنيو</li>
+          <li>تكامل سلة</li>
+        </ul>
+        <a href="#" class="btn btn-gold price-cta" style="width:100%;justify-content:center">اشترك في Pro</a>
+      </div>
+
+      <!-- Premium -->
+      <div class="price-card">
+        <span class="price-emoji">👑</span>
+        <div class="price-name">متقدمة</div>
+        <div class="price-desc">للمتاجر الكبيرة والسلاسل</div>
+        <div class="price-num">
+          <span class="n">250</span>
+          <span class="cur">﷼</span>
+          <span class="per">/شهر</span>
+        </div>
+        <ul class="price-feats">
+          <li>كل ميزات Pro</li>
+          <li><strong style="color:var(--purple)">NEXUS-AI (46 وكيل)</strong></li>
+          <li>حجوزات (7 أنماط)</li>
+          <li>Mada + STC Pay</li>
+          <li>QR للطاولات</li>
+          <li>منتجات رقمية</li>
+          <li>طلبات غير محدودة</li>
+          <li>API خاصة</li>
+          <li>مدير حساب</li>
+        </ul>
+        <a href="#" class="btn btn-outline price-cta" style="width:100%;justify-content:center">اشترك في Premium</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px;color:var(--muted);font-size:13px">
+      <i class="fa-solid fa-shield-halved"></i>
+      كل الباقات تشمل: حماية حظر ثواني • تحديثات مجانية • بيانات آمنة على سيرفرات سعودية
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ B2B (For agencies) ═══════════ -->
+<section id="b2b">
+  <div class="container">
+    <div class="b2b-hero">
+      <div class="b2b-header">
+        <div class="tag"><i class="fa-solid fa-building"></i> للوكالات ومزودي الخدمات</div>
+        <h2>تريد بناء منصة <span style="color:#93c5fd">مثل ثواني</span>؟<br>نبنيها لك بـ White-Label كامل</h2>
+        <p>هل تدير وكالة تسويق؟ ديف؟ تريد بناء SaaS خاص بك للمتاجر؟<br>نُقدّم منصة ثواني الكاملة بعلامتك التجارية — بلا تطوير من الصفر</p>
+      </div>
+
+      <div class="b2b-grid">
+        <div class="b2b-card">
+          <div class="ico"><i class="fa-solid fa-paint-brush"></i></div>
+          <h4>White-Label كامل</h4>
+          <p>شعارك، ألوانك، دومينك، بريدك — كل شيء بهوية علامتك التجارية بلا أي إشارة لثواني</p>
+        </div>
+        <div class="b2b-card">
+          <div class="ico"><i class="fa-solid fa-code"></i></div>
+          <h4>API مفتوحة</h4>
+          <p>173 endpoint موثق كامل + WebSocket للتحديثات الفورية + Master API لإدارة كل المتاجر</p>
+        </div>
+        <div class="b2b-card">
+          <div class="ico"><i class="fa-solid fa-brain"></i></div>
+          <h4>NEXUS-AI مضمّن</h4>
+          <p>احصل على 46 وكيل AI كامل + مكتبة 1580 مهارة + Maestro المنسّق — بلا رسوم إضافية</p>
+        </div>
+        <div class="b2b-card">
+          <div class="ico"><i class="fa-solid fa-shield-halved"></i></div>
+          <h4>حماية جاهزة</h4>
+          <p>13 طبقة حماية حظر واتساب مدمجة — لن تحتاج بنائها بنفسك (شهور من العمل)</p>
+        </div>
+        <div class="b2b-card">
+          <div class="ico"><i class="fa-solid fa-server"></i></div>
+          <h4>Multi-tenant Ready</h4>
+          <p>البنية جاهزة لخدمة آلاف المتاجر — عزل كامل + performance محسّن</p>
+        </div>
+        <div class="b2b-card">
+          <div class="ico"><i class="fa-solid fa-headset"></i></div>
+          <h4>دعم مباشر مع الفريق</h4>
+          <p>Slack مع فريق التطوير + جلسات مع المهندس المسؤول + توثيق تقني كامل</p>
+        </div>
+      </div>
+
+      <div class="b2b-numbers">
+        <div class="b2b-num"><div class="n">28K+</div><div class="l">سطر كود جاهز</div></div>
+        <div class="b2b-num"><div class="n">173</div><div class="l">API endpoint</div></div>
+        <div class="b2b-num"><div class="n">46</div><div class="l">وكيل AI</div></div>
+        <div class="b2b-num"><div class="n">3+ سنوات</div><div class="l">تطوير موفّرة</div></div>
+      </div>
+
+      <div class="b2b-cta-row">
+        <a href="https://wa.me/966501234567" class="btn btn-whatsapp">
+          <i class="fa-brands fa-whatsapp"></i>
+          تحدث مع فريق B2B
+        </a>
+        <a href="#" class="btn btn-outline">
+          <i class="fa-solid fa-file-pdf"></i>
+          حمّل الكتالوج التقني
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FAQ ═══════════ -->
+<section>
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag"><i class="fa-solid fa-circle-question"></i> أسئلة شائعة</div>
+      <h2>الأسئلة <span>الأكثر تكراراً</span></h2>
+      <p>كل ما تريد معرفته قبل الاشتراك</p>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>هل واتساب سيحظر رقمي؟</summary>
+        <div class="faq-answer">
+          معدل الحظر عندنا هو <b>0.1%</b> — أقل معدل في المنطقة العربية. نستخدم 13 طبقة حماية:
+          time-of-day filter، typing indicators طبيعية، fasil 5 ثواني بين الرسائل، circuit breaker،
+          phone uniqueness (رقم واحد لمتجر واحد)، warm-up تدريجي للأرقام الجديدة، ومنع الرسائل الباردة كلياً.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>كم يستغرق التفعيل؟</summary>
+        <div class="faq-answer">
+          <b>5 دقائق فقط</b>. تسجل → ترفع QR واتساب مرة واحدة → تختار ثيم المنيو → تضيف منتجاتك → البوت يعمل.
+          نقدم Setup Wizard خطوة بخطوة + AI يقترح الأسئلة والرسائل تلقائياً حسب نوع نشاطك.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>هل يعمل مع أي نوع متجر؟</summary>
+        <div class="faq-answer">
+          نعم — مبني ليخدم: مطاعم، كافيهات، حلويات، بقالات، صيدليات، شاليهات، فلل، فنادق، عيادات،
+          صالونات، سبا، مكاتب استقدام، مراكز خدمة، متاجر شحن رقمي، وأكثر. لكل نشاط ثيم منيو + قوالب أسئلة + وضع طلب مناسب.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>هل بياناتي آمنة؟</summary>
+        <div class="faq-answer">
+          بياناتك مخزّنة على سيرفرات سعودية (Vultr) + مشفّرة (HTTPS + AES-256 للحقول الحساسة).
+          نسخ احتياطية كل ساعة. لا نبيع بياناتك أبداً. ملتزمون بنظام حماية البيانات الشخصية السعودي (PDPL).
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>ماذا لو أردت الإلغاء؟</summary>
+        <div class="faq-answer">
+          إلغاء بضغطة زر — بلا التزامات. ندفع تلقائياً في أول الشهر التالي بعد الإلغاء.
+          يمكنك تصدير كل بياناتك (JSON + CSV) قبل الإلغاء بلا رسوم.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>هل تدعمون تكامل سلة/زد؟</summary>
+        <div class="faq-answer">
+          <b>سلة: Phase 1+2 مفعّل</b> — OAuth + Webhooks + مزامنة طلبات ومنتجات كاملة تلقائياً.
+          <b>زد</b>: قيد التطوير (Q1 2026).
+          <b>Mada + STC Pay</b>: عبر Moyasar، جاهز.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FINAL CTA ═══════════ -->
+<section>
+  <div class="container">
+    <div class="final-cta">
+      <h2>ابدأ التوفير <span>الآن</span></h2>
+      <p>45 دقيقة تجربة مجانية على رقمك الحقيقي • بلا بطاقة ائتمان • إلغاء بضغطة زر</p>
+      <div class="final-cta-btns">
+        <a href="demo/" class="btn btn-gold" style="font-size:16px;padding:16px 36px">
+          <i class="fa-solid fa-rocket"></i>
+          جرّب البوت الحقيقي مجاناً
+        </a>
+        <a href="https://wa.me/966501234567" class="btn btn-whatsapp" style="font-size:16px;padding:16px 36px">
+          <i class="fa-brands fa-whatsapp"></i>
+          تحدث معنا
+        </a>
+      </div>
+      <div style="margin-top:28px;color:var(--muted);font-size:13px">
+        <i class="fa-solid fa-clock"></i>
+        متوسط وقت الاشتراك: 5 دقائق •
+        <i class="fa-solid fa-check-circle"></i>
+        137 متجر نشط •
+        <i class="fa-solid fa-star"></i>
+        4.9/5 تقييم العملاء
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="brand">
+    <img src="logo.png" alt="ثواني" onerror="this.style.display='none'">
+    <span>منصة ثواني</span>
+  </div>
+  <p>
+    منصة سعودية 100% • أول من جمع بين بوت واتساب × NEXUS-AI × إدارة كاملة<br>
+    بُنيت بحب في الرياض 🇸🇦
   </p>
-  <div class="flex flex-col sm:flex-row gap-3 justify-center mt-8">
-    <a href="#demo" class="btn-gold px-7 py-3.5 rounded-xl text-sm sm:text-base">
-      <i class="fas fa-play"></i> شاهد تجربة حية ↓
-    </a>
-    <a href="https://wa.me/966508572902" target="_blank" class="btn-primary px-7 py-3.5 rounded-xl text-sm sm:text-base">
-      <i class="fab fa-whatsapp"></i> اطلب نسخة لمتجرك
-    </a>
+  <div class="socials">
+    <a href="#" title="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
+    <a href="#" title="تويتر"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="#" title="انستقرام"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#" title="سناب شات"><i class="fa-brands fa-snapchat"></i></a>
+    <a href="#" title="يوتيوب"><i class="fa-brands fa-youtube"></i></a>
   </div>
-  <!-- stats -->
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-12 max-w-3xl mx-auto">
-    <div class="glass rounded-xl p-4">
-      <div class="text-3xl font-black text-[#c9a24b]">~3<span class="text-base">ث</span></div>
-      <div class="text-xs text-slate-400 mt-1">سرعة رد البوت</div>
-    </div>
-    <div class="glass rounded-xl p-4">
-      <div class="text-3xl font-black text-[#c9a24b]">24/7</div>
-      <div class="text-xs text-slate-400 mt-1">بدون انقطاع</div>
-    </div>
-    <div class="glass rounded-xl p-4">
-      <div class="text-3xl font-black text-[#c9a24b]">17</div>
-      <div class="text-xs text-slate-400 mt-1">قسم في الادمن</div>
-    </div>
-    <div class="glass rounded-xl p-4">
-      <div class="text-3xl font-black text-[#c9a24b]">0<span class="text-base">ر.س</span></div>
-      <div class="text-xs text-slate-400 mt-1">رسوم لكل طلب</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ LIVE COUNTERS ═══════════════════ -->
-<section class="max-w-6xl mx-auto px-5 py-12">
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <div class="glass rounded-2xl p-5 text-center counter-card">
-      <div class="text-3xl md:text-4xl font-black text-[#c9a24b] count-up" data-target="100000" data-suffix="+">0</div>
-      <div class="text-xs text-slate-400 mt-2 leading-tight">طلب عالجناه</div>
-    </div>
-    <div class="glass rounded-2xl p-5 text-center counter-card">
-      <div class="text-3xl md:text-4xl font-black text-[#c9a24b] count-up" data-target="12400" data-suffix=" س">0</div>
-      <div class="text-xs text-slate-400 mt-2 leading-tight">ساعة وفّرناها للمتاجر</div>
-    </div>
-    <div class="glass rounded-2xl p-5 text-center counter-card">
-      <div class="text-3xl md:text-4xl font-black text-[#c9a24b] count-up" data-target="2.8" data-suffix=" ث" data-decimals="1">0</div>
-      <div class="text-xs text-slate-400 mt-2 leading-tight">متوسط رد البوت</div>
-    </div>
-    <div class="glass rounded-2xl p-5 text-center counter-card">
-      <div class="text-3xl md:text-4xl font-black text-[#c9a24b] count-up" data-target="98" data-suffix="%">0</div>
-      <div class="text-xs text-slate-400 mt-2 leading-tight">رضا العملاء</div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ ADMIN TOUR ═══════════════════ -->
-<section id="admin" class="max-w-7xl mx-auto px-5 py-20">
-  <div class="text-center mb-12">
-    <span class="text-xs text-[#c9a24b] font-bold uppercase tracking-wider">جولة في صفحة الادمن</span>
-    <h2 class="text-3xl md:text-5xl font-black mt-2">عَدِّ تعرّف على كل زر بترتاح</h2>
-    <p class="text-slate-400 mt-3 max-w-2xl mx-auto">
-      انقر على أي قسم في القائمة جنب اللي تحت — البوت بيشرح لك إيش يفعل، وكيف يخدمك في شغلك.
-    </p>
-  </div>
-
-  <div class="grid lg:grid-cols-12 gap-6">
-    <!-- قائمة Tabs -->
-    <aside class="lg:col-span-4 space-y-2">
-      <div class="tab-card glass rounded-xl p-4 active" data-tab="dash" onclick="showAdminTab(this,'dash')">
-        <div class="flex items-center gap-3"><span class="text-2xl">📊</span><div><div class="font-bold">لوحة التحكم</div><div class="text-xs text-slate-400">نظرة سريعة بكل شي</div></div></div>
-      </div>
-      <div class="tab-card glass rounded-xl p-4" data-tab="menu" onclick="showAdminTab(this,'menu')">
-        <div class="flex items-center gap-3"><span class="text-2xl">📋</span><div><div class="font-bold">القائمة (المنيو)</div><div class="text-xs text-slate-400">منتجاتك بصور وأسعار</div></div></div>
-      </div>
-      <div class="tab-card glass rounded-xl p-4" data-tab="orders" onclick="showAdminTab(this,'orders')">
-        <div class="flex items-center gap-3"><span class="text-2xl">📦</span><div><div class="font-bold">الطلبات</div><div class="text-xs text-slate-400">قبول/رفض/تتبع</div></div></div>
-      </div>
-      <div class="tab-card glass rounded-xl p-4" data-tab="customers" onclick="showAdminTab(this,'customers')">
-        <div class="flex items-center gap-3"><span class="text-2xl">👥</span><div><div class="font-bold">العملاء</div><div class="text-xs text-slate-400">قائمة + سجل + VIP</div></div></div>
-      </div>
-      <div class="tab-card glass rounded-xl p-4" data-tab="loyalty" onclick="showAdminTab(this,'loyalty')">
-        <div class="flex items-center gap-3"><span class="text-2xl">🏆</span><div><div class="font-bold">نقاط الولاء</div><div class="text-xs text-slate-400">يرجعون لك بدل ما يروحون</div></div></div>
-      </div>
-      <div class="tab-card glass rounded-xl p-4" data-tab="broadcast" onclick="showAdminTab(this,'broadcast')">
-        <div class="flex items-center gap-3"><span class="text-2xl">📢</span><div><div class="font-bold">بث للعملاء</div><div class="text-xs text-slate-400">عرض جديد؟ ابعت لكل أحد</div></div></div>
-      </div>
-      <div class="tab-card glass rounded-xl p-4" data-tab="accounting" onclick="showAdminTab(this,'accounting')">
-        <div class="flex items-center gap-3"><span class="text-2xl">💼</span><div><div class="font-bold">الحسابات</div><div class="text-xs text-slate-400">ربح صافي + تقارير</div></div></div>
-      </div>
-      <div class="tab-card glass rounded-xl p-4" data-tab="ratings" onclick="showAdminTab(this,'ratings')">
-        <div class="flex items-center gap-3"><span class="text-2xl">⭐</span><div><div class="font-bold">التقييمات</div><div class="text-xs text-slate-400">رأي عميلك = ذهب</div></div></div>
-      </div>
-      <div class="tab-card glass rounded-xl p-4" data-tab="whatsapp" onclick="showAdminTab(this,'whatsapp')">
-        <div class="flex items-center gap-3"><span class="text-2xl">📱</span><div><div class="font-bold">ربط واتساب</div><div class="text-xs text-slate-400">QR + رقم البوت</div></div></div>
-      </div>
-    </aside>
-
-    <!-- محتوى Tab -->
-    <div class="lg:col-span-8">
-      <div class="glass rounded-2xl p-6 md:p-8 glow-gold min-h-[400px]">
-        <div id="adminContent">
-          <!-- يُحقن من JS -->
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ ADAPTIVE UI ═══════════════════ -->
-<section id="adaptive" class="max-w-7xl mx-auto px-5 py-20">
-  <div class="text-center mb-10">
-    <span class="text-xs text-[#c9a24b] font-bold uppercase tracking-wider">ميزة فريدة · AI Adaptive</span>
-    <h2 class="text-3xl md:text-5xl font-black mt-2">صفحة الادمن <span class="gradient-text">تتغيّر</span> حسب نشاطك</h2>
-    <p class="text-slate-400 mt-3 max-w-2xl mx-auto leading-relaxed">
-      نفس اللوحة، نفس الكود — لكن المصطلحات والأزرار والحقول تتبدّل تلقائياً حسب نوع متجرك.
-      مقهى يشوف <b class="text-[#c9a24b]">"الطلبات"</b>، صالون يشوف <b class="text-[#c9a24b]">"الحجوزات"</b>،
-      مبرمج يشوف <b class="text-[#c9a24b]">"المشاريع"</b> — كأن كل نشاط له لوحته الخاصة.
-    </p>
-  </div>
-
-  <!-- Business type selector -->
-  <div class="flex flex-wrap justify-center gap-3 mb-8">
-    <button onclick="setBiz('food')" data-biz-btn="food" class="biz-btn active glass rounded-xl px-5 py-3 flex items-center gap-3 transition-all">
-      <span class="text-2xl">🍽️</span>
-      <div class="text-right">
-        <div class="font-bold text-sm">مقهى / مطعم</div>
-        <div class="text-[10px] text-slate-400">أطعمة ومشروبات</div>
-      </div>
-    </button>
-    <button onclick="setBiz('salon')" data-biz-btn="salon" class="biz-btn glass rounded-xl px-5 py-3 flex items-center gap-3 transition-all">
-      <span class="text-2xl">💇</span>
-      <div class="text-right">
-        <div class="font-bold text-sm">صالون / عيادة</div>
-        <div class="text-[10px] text-slate-400">حجوزات وعناية</div>
-      </div>
-    </button>
-    <button onclick="setBiz('service')" data-biz-btn="service" class="biz-btn glass rounded-xl px-5 py-3 flex items-center gap-3 transition-all">
-      <span class="text-2xl">💻</span>
-      <div class="text-right">
-        <div class="font-bold text-sm">برمجة / تصميم</div>
-        <div class="text-[10px] text-slate-400">خدمات تقنية</div>
-      </div>
-    </button>
-    <button onclick="setBiz('home')" data-biz-btn="home" class="biz-btn glass rounded-xl px-5 py-3 flex items-center gap-3 transition-all">
-      <span class="text-2xl">🚗</span>
-      <div class="text-right">
-        <div class="font-bold text-sm">سيارات / منزلية</div>
-        <div class="text-[10px] text-slate-400">غسيل + تنظيف + سباكة</div>
-      </div>
-    </button>
-  </div>
-
-  <!-- Adaptive admin mockup -->
-  <div class="glass rounded-3xl p-5 md:p-8 glow-gold border-[#c9a24b]/30">
-    <!-- Mock navbar -->
-    <div class="bg-[#1b5e20] rounded-xl px-4 py-3 flex items-center justify-between mb-4 transition-colors duration-500" id="bizNavbar">
-      <div class="flex items-center gap-2">
-        <span class="text-xl" id="bizNavEmoji">🍽️</span>
-        <span class="text-white font-bold text-sm">متجر تجريبي</span>
-        <span class="hidden sm:inline-block bg-white/15 text-white text-[10px] px-2 py-0.5 rounded-full border border-white/20" id="bizNavBadge">🍽️ أطعمة ومشروبات</span>
-      </div>
-      <div class="flex items-center gap-2 text-white/60 text-xs">
-        <span>🔔</span><span class="hidden sm:inline">خروج</span>
-      </div>
-    </div>
-
-    <!-- Tagline that changes -->
-    <div class="bg-gradient-to-br from-white to-slate-50 rounded-xl px-5 py-4 flex items-center gap-4 mb-4 transition-all duration-500" id="bizTagline">
-      <div class="text-4xl" id="bizTagEmoji">🍽️</div>
-      <div class="flex-1">
-        <div class="text-[10px] font-bold uppercase tracking-wider" id="bizTagBrand" style="color:#1b5e20">منصة ثواني | Thawani</div>
-        <div class="text-base md:text-lg font-black text-slate-800 leading-tight mt-1" id="bizTagText">شغّل مقهاك بذكاء — البوت يستقبل الطلبات حتى لو الكاشير مشغول ☕</div>
-      </div>
-    </div>
-
-    <!-- Tabs that change -->
-    <div class="flex flex-wrap gap-2 mb-4 pb-2 border-b border-[#1a3a25]" id="bizTabs"></div>
-
-    <!-- Dashboard KPI cards -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5" id="bizKPIs"></div>
-
-    <!-- Mock order/booking inbox -->
-    <div class="bg-white rounded-xl p-4 text-slate-800">
-      <div class="flex items-center justify-between mb-3">
-        <h4 class="font-black text-sm flex items-center gap-2" id="bizInboxTitle">📦 الطلبات الواردة</h4>
-        <span class="text-[10px] text-slate-500" id="bizInboxCount">3 عنصر جديد</span>
-      </div>
-      <div class="space-y-2" id="bizInboxList"></div>
-    </div>
-
-    <!-- Order status flow -->
-    <div class="mt-5 bg-[#0a1612] rounded-xl p-4 border border-[#1a3a25]">
-      <div class="text-xs text-[#c9a24b] font-bold mb-3">🔄 رحلة <span id="bizFlowName">الطلب</span> عندك:</div>
-      <div class="flex items-center gap-1 overflow-x-auto pb-2" id="bizFlow"></div>
-    </div>
-
-    <!-- Field hints -->
-    <div class="mt-4 grid sm:grid-cols-2 gap-3" id="bizFieldsHints"></div>
-  </div>
-
-  <!-- Final tip -->
-  <div class="mt-8 text-center max-w-2xl mx-auto">
-    <p class="text-sm text-slate-400 leading-relaxed">
-      <i class="fas fa-magic text-[#c9a24b]"></i>
-      الـ AI يتعرف على نشاطك من اسم المتجر تلقائياً، وتقدر تغيّره يدوياً من إعدادات المتجر.
-      كل نوع بيزنس له <b class="text-[#c9a24b]">tabs مخصصة</b>،
-      <b class="text-[#c9a24b]">مصطلحات صحيحة</b>،
-      وحقول مناسبة (مدة الخدمة للصالون، أحجام للمشروبات، سعر بالساعة للبرمجة...).
-    </p>
-  </div>
-</section>
-
-<style>
-  .biz-btn{border:1px solid rgba(201,162,75,0.18);opacity:.6}
-  .biz-btn.active{opacity:1;border-color:#c9a24b;background:rgba(201,162,75,0.12);transform:scale(1.05)}
-  .biz-btn:hover{opacity:.9;transform:scale(1.03)}
-  .biz-tab{background:#1a3a25;color:#e5e7eb;font-size:12px;padding:8px 14px;border-radius:8px;white-space:nowrap;transition:all .25s}
-  .biz-tab.active{background:#c9a24b;color:#0a1612;font-weight:800}
-</style>
-
-<!-- ═══════════════════ BEFORE / AFTER ═══════════════════ -->
-<section id="before-after" class="max-w-6xl mx-auto px-5 py-20">
-  <div class="text-center mb-12">
-    <span class="text-xs text-[#c9a24b] font-bold uppercase tracking-wider">قبل · وبعد</span>
-    <h2 class="text-3xl md:text-5xl font-black mt-2">يومك من <span class="text-rose-400">فوضى</span> إلى <span class="gradient-text">انسجام</span></h2>
-    <p class="text-slate-400 mt-3 max-w-2xl mx-auto">نفس العميل، نفس الرسالة، نفس الساعة الفجر — نتيجتان مختلفتان كلياً.</p>
-  </div>
-
-  <div class="grid md:grid-cols-2 gap-5 md:gap-8 relative">
-    <!-- VS divider -->
-    <div class="hidden md:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-14 h-14 rounded-full bg-[#c9a24b] text-[#0a1612] font-black text-lg items-center justify-center shadow-2xl">VS</div>
-
-    <!-- BEFORE -->
-    <div class="bg-gradient-to-br from-rose-950/40 to-[#1a1416] border border-rose-900/40 rounded-3xl p-5 md:p-7">
-      <div class="flex items-center gap-2 mb-5">
-        <span class="bg-rose-600 text-white text-[10px] font-black px-3 py-1 rounded-full">قبل ثواني 😩</span>
-      </div>
-      <div class="space-y-3 text-sm">
-        <div class="flex items-start gap-2"><span class="text-base">🌙</span><div><b>2:14 ص</b> · عميل يكتب: "بكم اللاتيه؟"</div></div>
-        <div class="bg-rose-950/30 border border-rose-900/40 rounded-lg p-3 text-rose-200 text-xs">
-          🔕 جوالك على صامت · ما تشوف الرسالة
-        </div>
-        <div class="flex items-start gap-2"><span class="text-base">😤</span><div><b>2:18 ص</b> · العميل: "محد رد..." 🚶‍♂️</div></div>
-        <div class="bg-rose-950/30 border border-rose-900/40 rounded-lg p-3 text-rose-200 text-xs">
-          ❌ راح للكافيه الثاني · طلب 4 مشروبات
-        </div>
-        <div class="flex items-start gap-2"><span class="text-base">😩</span><div><b>8:00 ص</b> · تفتح الجوال، تشوف الرسالة، تكتب اعتذار</div></div>
-        <div class="flex items-start gap-2"><span class="text-base">📉</span><div>متوسط 3 عملاء/يوم تخسرهم بسبب التأخر في الرد</div></div>
-      </div>
-      <div class="mt-5 bg-rose-950/40 border border-rose-700/40 rounded-xl p-4 text-center">
-        <div class="text-2xl font-black text-rose-300">~3,600 ر.س</div>
-        <div class="text-[11px] text-rose-200/70 mt-1">خسارة شهرية تقريبية</div>
-      </div>
-    </div>
-
-    <!-- AFTER -->
-    <div class="bg-gradient-to-br from-emerald-950/40 to-[#0a1f17] border border-[#c9a24b]/30 rounded-3xl p-5 md:p-7 glow-green">
-      <div class="flex items-center gap-2 mb-5">
-        <span class="bg-emerald-600 text-white text-[10px] font-black px-3 py-1 rounded-full">بعد ثواني 🎉</span>
-      </div>
-      <div class="space-y-3 text-sm">
-        <div class="flex items-start gap-2"><span class="text-base">🌙</span><div><b>2:14 ص</b> · نفس العميل، نفس الرسالة</div></div>
-        <div class="bg-emerald-950/30 border border-emerald-900/40 rounded-lg p-3 text-emerald-200 text-xs">
-          🤖 البوت رد في 2.8 ثانية: "أهلاً! اللاتيه بـ 22 ر.س ☕"
-        </div>
-        <div class="flex items-start gap-2"><span class="text-base">😊</span><div><b>2:15 ص</b> · العميل طلب 4 مشروبات، أكد الموقع</div></div>
-        <div class="bg-emerald-950/30 border border-emerald-900/40 rounded-lg p-3 text-emerald-200 text-xs">
-          🧾 فاتورة وُلِّدت + تنبيه وصلك على الجوال
-        </div>
-        <div class="flex items-start gap-2"><span class="text-base">🌅</span><div><b>8:00 ص</b> · تفتح الادمن، الطلب جاهز للتحضير</div></div>
-        <div class="flex items-start gap-2"><span class="text-base">⭐</span><div>العميل قيّمك 5 نجوم وانضم لقائمة الولاء</div></div>
-      </div>
-      <div class="mt-5 bg-emerald-950/40 border border-[#c9a24b]/40 rounded-xl p-4 text-center">
-        <div class="text-2xl font-black text-[#c9a24b]">+3,600 ر.س</div>
-        <div class="text-[11px] text-emerald-200/70 mt-1">إيراد إضافي شهري تقريبياً</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ LIVE DEMO ═══════════════════ -->
-<section id="demo" class="max-w-7xl mx-auto px-5 py-20">
-  <div class="text-center mb-12">
-    <span class="text-xs text-[#c9a24b] font-bold uppercase tracking-wider">تجربة حية بدون تسجيل</span>
-    <h2 class="text-3xl md:text-5xl font-black mt-2">شوف العميل والبوت يتكلمون</h2>
-    <p class="text-slate-400 mt-3">اضغط زر "بدء العرض" — اعد المشهد كأنك العميل والبوت يخدمك. بدون تنزيل، بدون تسجيل.</p>
-  </div>
-
-  <div class="grid lg:grid-cols-2 gap-10 items-start">
-    <!-- المنيو التجريبي -->
-    <div class="space-y-4">
-      <div class="flex items-center justify-between">
-        <h3 class="text-xl font-bold flex items-center gap-2">☕ كافيه ثواني <span class="status-dot status-on"></span><span class="text-xs text-emerald-400">مفتوح</span></h3>
-        <span class="text-xs text-slate-400">منيو تجريبي</span>
-      </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="demoMenu"></div>
-      <div class="glass rounded-2xl p-5 border-[#c9a24b]/30">
-        <div class="flex items-center justify-between mb-3">
-          <h4 class="font-bold text-[#c9a24b]">🛒 سلتك</h4>
-          <button onclick="clearCart()" class="text-xs text-slate-500 hover:text-rose-400">مسح</button>
-        </div>
-        <div id="cartItems" class="space-y-2 text-sm text-slate-300 mb-3 min-h-[40px]">
-          <div class="text-slate-500 text-xs text-center py-3">أضف منتج من فوق</div>
-        </div>
-        <div class="flex items-center justify-between text-sm border-t border-[#1a3a25] pt-3">
-          <span class="text-slate-400">الإجمالي:</span>
-          <span class="text-xl font-black text-[#c9a24b]"><span id="cartTotal">0</span> ر.س</span>
-        </div>
-        <button onclick="sendOrderToBot()" id="sendBtn" disabled class="btn-gold w-full mt-4 py-3 rounded-xl disabled:opacity-40 disabled:cursor-not-allowed text-sm">
-          <i class="fab fa-whatsapp"></i> أرسل الطلب للبوت ←
-        </button>
-      </div>
-    </div>
-
-    <!-- الـ phone simulator -->
-    <div class="flex justify-center">
-      <div class="phone-frame w-[340px] h-[640px]">
-        <div class="phone-notch"></div>
-        <!-- WA header -->
-        <div class="bg-[#202c33] text-white px-4 pt-8 pb-3 flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] flex items-center justify-center text-lg">☕</div>
-          <div class="flex-1">
-            <div class="font-bold text-sm">كافيه ثواني</div>
-            <div class="text-[11px] text-emerald-300 flex items-center gap-1">
-              <span id="waStatus">بوت • يكتب الآن...</span>
-            </div>
-          </div>
-          <i class="fas fa-video text-slate-400 text-sm"></i>
-          <i class="fas fa-phone text-slate-400 text-sm"></i>
-        </div>
-        <!-- WA chat -->
-        <div id="waChat" class="wa-bg h-[calc(100%-80px)] overflow-y-auto p-3 space-y-2">
-          <div class="text-center my-2"><span class="bg-[#182229] text-[#8696a0] text-[10px] px-3 py-1 rounded-full">اليوم</span></div>
-          <div class="wa-bubble-in msg-in">
-            أهلاً وسهلاً ☕<br>أنا بوت كافيه ثواني، جاهز أخدمك. وش حابب اليوم؟
-            <div class="wa-meta">10:24 ص</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ ADMIN REACTS ═══════════════════ -->
-<section class="max-w-5xl mx-auto px-5 py-16">
-  <div class="glass rounded-3xl p-6 md:p-10 glow-green">
-    <div class="text-center mb-8">
-      <span class="text-xs text-[#c9a24b] font-bold uppercase tracking-wider">في نفس اللحظة</span>
-      <h3 class="text-2xl md:text-4xl font-black mt-2">صاحب المتجر شاف الطلب فوراً</h3>
-      <p class="text-slate-400 mt-2">انقر "قبول" وشوف العميل ياخذ الفاتورة في ثواني</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-6 items-center">
-      <!-- لوحة الادمن mock -->
-      <div class="bg-[#0a1612] border border-[#1a3a25] rounded-2xl p-5">
-        <div class="flex items-center justify-between mb-4">
-          <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-rose-500 pulse-soft"></span>
-            <span class="text-xs font-bold text-rose-300">طلب جديد!</span>
-          </div>
-          <span class="text-[10px] text-slate-500 font-mono" id="orderTime">--:--</span>
-        </div>
-        <div id="adminOrderCard" class="text-sm text-slate-300 space-y-2 min-h-[120px]">
-          <div class="text-slate-500 text-xs text-center py-6">في انتظار الطلب من جنب 👈</div>
-        </div>
-        <div class="grid grid-cols-2 gap-2 mt-4">
-          <button onclick="acceptOrder()" id="acceptBtn" disabled class="bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 rounded-lg text-sm font-bold disabled:opacity-30 disabled:cursor-not-allowed">
-            ✓ قبول
-          </button>
-          <button onclick="rejectOrder()" id="rejectBtn" disabled class="bg-rose-700 hover:bg-rose-600 text-white py-2.5 rounded-lg text-sm font-bold disabled:opacity-30 disabled:cursor-not-allowed">
-            ✕ رفض
-          </button>
-        </div>
-      </div>
-
-      <!-- الفاتورة الناتجة -->
-      <div id="invoicePreview" class="hidden">
-        <div class="bg-gradient-to-br from-[#faf7f2] to-[#fff] text-[#1a3a25] rounded-2xl p-5 shadow-2xl">
-          <div class="text-center border-b border-dashed border-[#c9a24b] pb-3 mb-3">
-            <div class="text-3xl">☕</div>
-            <div class="font-black text-lg">كافيه ثواني</div>
-            <div class="text-xs text-[#5b7367]">فاتورة طلبك</div>
-          </div>
-          <div id="invoiceItems" class="text-sm space-y-1.5 mb-3"></div>
-          <div class="border-t border-dashed border-[#c9a24b] pt-3 flex justify-between font-black">
-            <span>الإجمالي</span>
-            <span class="text-[#1b5e20]"><span id="invoiceTotal">0</span> ر.س</span>
-          </div>
-          <div class="text-center text-[10px] text-[#5b7367] mt-3">شكراً لاختياركم — يتم التحضير الآن ⏱️</div>
-        </div>
-        <p class="text-xs text-center text-emerald-300 mt-3">✓ أُرسلت الفاتورة للعميل + المالك في نفس اللحظة</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ ONBOARDING TIMELINE ═══════════════════ -->
-<section id="start" class="max-w-5xl mx-auto px-5 py-20">
-  <div class="text-center mb-12">
-    <span class="text-xs text-[#c9a24b] font-bold uppercase tracking-wider">سهلة جداً</span>
-    <h2 class="text-3xl md:text-5xl font-black mt-2">ابدأ في <span class="gradient-text">30 دقيقة</span></h2>
-    <p class="text-slate-400 mt-3">بدون مبرمج، بدون تنصيب، بدون تعلم. أنت بس اتبع الخطوات.</p>
-  </div>
-
-  <div class="relative">
-    <!-- خط الزمن العمودي -->
-    <div class="hidden md:block absolute right-[50%] top-8 bottom-8 w-0.5 bg-gradient-to-b from-[#c9a24b] via-[#1b5e20] to-[#c9a24b]"></div>
-
-    <div class="space-y-6 md:space-y-10">
-      <!-- خطوة 1 -->
-      <div class="grid md:grid-cols-2 gap-5 md:gap-12 items-center">
-        <div class="glass rounded-2xl p-5 md:p-6 md:order-1 order-2">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-3xl">📝</span>
-            <div>
-              <div class="text-[10px] text-[#c9a24b] font-bold">الخطوة 1 · 5 دقائق</div>
-              <h3 class="font-black text-lg">اشترك بسرعة</h3>
-            </div>
-          </div>
-          <p class="text-sm text-slate-300 leading-relaxed">رسالة واتساب بسيطة لنا، نعطيك رابط متجرك + كلمة مرور، تدخل ادمن متجرك مباشرة.</p>
-        </div>
-        <div class="md:order-2 order-1 text-center">
-          <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-[#c9a24b] to-[#e0b85f] text-[#0a1612] font-black text-2xl flex items-center justify-center shadow-2xl shadow-[#c9a24b]/40 ring-4 ring-[#0a1612]">1</div>
-        </div>
-      </div>
-
-      <!-- خطوة 2 -->
-      <div class="grid md:grid-cols-2 gap-5 md:gap-12 items-center">
-        <div class="md:order-1 order-1 text-center">
-          <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] text-white font-black text-2xl flex items-center justify-center shadow-2xl shadow-[#1b5e20]/40 ring-4 ring-[#0a1612]">2</div>
-        </div>
-        <div class="glass rounded-2xl p-5 md:p-6 md:order-2 order-2">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-3xl">📋</span>
-            <div>
-              <div class="text-[10px] text-[#c9a24b] font-bold">الخطوة 2 · 10 دقائق</div>
-              <h3 class="font-black text-lg">ضع منيوك</h3>
-            </div>
-          </div>
-          <p class="text-sm text-slate-300 leading-relaxed">صور المنتج + اسم + سعر. أو اكتب لنا في واتساب نعمله لك مجاناً في 10 دقائق.</p>
-        </div>
-      </div>
-
-      <!-- خطوة 3 -->
-      <div class="grid md:grid-cols-2 gap-5 md:gap-12 items-center">
-        <div class="glass rounded-2xl p-5 md:p-6 md:order-1 order-2">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-3xl">📱</span>
-            <div>
-              <div class="text-[10px] text-[#c9a24b] font-bold">الخطوة 3 · 5 دقائق</div>
-              <h3 class="font-black text-lg">اربط واتسابك</h3>
-            </div>
-          </div>
-          <p class="text-sm text-slate-300 leading-relaxed">من اللوحة → "ربط واتساب" → امسح QR من جوالك أو ادخل رقمك واحصل على كود سداسي. تم.</p>
-        </div>
-        <div class="md:order-2 order-1 text-center">
-          <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-[#c9a24b] to-[#e0b85f] text-[#0a1612] font-black text-2xl flex items-center justify-center shadow-2xl shadow-[#c9a24b]/40 ring-4 ring-[#0a1612]">3</div>
-        </div>
-      </div>
-
-      <!-- خطوة 4 -->
-      <div class="grid md:grid-cols-2 gap-5 md:gap-12 items-center">
-        <div class="md:order-1 order-1 text-center">
-          <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-emerald-500 to-emerald-700 text-white font-black text-2xl flex items-center justify-center shadow-2xl shadow-emerald-500/40 ring-4 ring-[#0a1612]">4</div>
-        </div>
-        <div class="glass rounded-2xl p-5 md:p-6 md:order-2 order-2 border-[#c9a24b]/40 glow-gold">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-3xl">🚀</span>
-            <div>
-              <div class="text-[10px] text-emerald-400 font-bold">الخطوة 4 · 10 دقائق</div>
-              <h3 class="font-black text-lg">شارك واربح</h3>
-            </div>
-          </div>
-          <p class="text-sm text-slate-300 leading-relaxed">شارك رقمك أو رابط متجرك في حالة واتساب أو سناب. الطلبات تبدأ بالدخول. مبروك! 🎉</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="text-center mt-12">
-    <a href="https://wa.me/966508572902?text=أبغى%20أبدأ%20في%20ثواني" target="_blank" class="btn-gold inline-block px-8 py-4 rounded-xl text-base">
-      <i class="fab fa-whatsapp"></i> ابدأ الآن — كلمنا في واتساب
-    </a>
-  </div>
-</section>
-
-<!-- ═══════════════════ FUN SUPPORT ═══════════════════ -->
-<section id="support" class="max-w-7xl mx-auto px-5 py-20">
-  <div class="text-center mb-10">
-    <span class="text-xs text-[#c9a24b] font-bold uppercase tracking-wider">الدعم الفني</span>
-    <h2 class="text-3xl md:text-5xl font-black mt-2">دعمنا أسرع من الباريستا في وقت الذروة</h2>
-  </div>
-
-  <div class="grid md:grid-cols-3 gap-5">
-    <!-- بطاقة 1 -->
-    <div class="glass rounded-2xl p-6 relative overflow-hidden">
-      <div class="ribbon">جربها!</div>
-      <div class="text-5xl mb-3">⚡</div>
-      <h3 class="font-bold text-lg mb-1">3 ثوان</h3>
-      <p class="text-sm text-slate-400">رد فني على واتساب — أسرع من ما تكتب "هلا، عندي مشكلة"</p>
-      <div class="mt-4 bg-[#0a1612] rounded-lg p-3 text-xs space-y-1.5 border border-[#1a3a25]">
-        <div class="text-slate-300"><b class="text-rose-400">انت:</b> الفاتورة ما طلعت!</div>
-        <div class="text-emerald-300"><b>الدعم بعد 3 ثوان:</b> أعطني رقم الطلب 🙏</div>
-        <div class="text-slate-300"><b class="text-rose-400">انت:</b> ORD-9384</div>
-        <div class="text-emerald-300"><b>الدعم:</b> ✅ تم! شُف جوالك</div>
-      </div>
-    </div>
-
-    <!-- بطاقة 2 -->
-    <div class="glass rounded-2xl p-6">
-      <div class="text-5xl mb-3">🤖</div>
-      <h3 class="font-bold text-lg mb-1">بوت دعم ذكي</h3>
-      <p class="text-sm text-slate-400">عشان ما نشغل البشر بأسئلة "كيف أحط منتج؟" — البوت نفسه يجاوبك بفيديو + خطوات</p>
-      <div class="mt-4 flex gap-2 flex-wrap">
-        <span class="bg-[#1a3a25] text-emerald-300 text-[10px] px-2 py-1 rounded">كيف أنشر منتج؟</span>
-        <span class="bg-[#1a3a25] text-emerald-300 text-[10px] px-2 py-1 rounded">كيف أربط واتساب؟</span>
-        <span class="bg-[#1a3a25] text-emerald-300 text-[10px] px-2 py-1 rounded">+10 أسئلة</span>
-      </div>
-    </div>
-
-    <!-- بطاقة 3 -->
-    <div class="glass rounded-2xl p-6">
-      <div class="text-5xl mb-3">😅</div>
-      <h3 class="font-bold text-lg mb-1">صدقاً، نعرف اسم متجرك</h3>
-      <p class="text-sm text-slate-400">ما عندنا "العميل #5847". عندنا "أبو علي صاحب كافيه الحارة" 🫶</p>
-      <div class="mt-4 bg-gradient-to-br from-[#1b5e20]/30 to-[#c9a24b]/10 rounded-xl p-4 border border-[#c9a24b]/30">
-        <div class="text-xs text-[#c9a24b] font-bold mb-1">مثال قصة حقيقية</div>
-        <p class="text-xs text-slate-300 leading-relaxed">مالك مطعم اتصل الساعة 11 الليل: "البوت رد على عميل سعودي بلهجة مصرية!" — أصلحناها وضحكنا. لسا يطلب البوت يكلم زبائنه بكلمات لهجته 🤣</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ FAQ ═══════════════════ -->
-<section id="faq" class="max-w-4xl mx-auto px-5 py-20">
-  <div class="text-center mb-10">
-    <span class="text-xs text-[#c9a24b] font-bold uppercase tracking-wider">الأسئلة الشائعة</span>
-    <h2 class="text-3xl md:text-5xl font-black mt-2">سؤال في بالك؟ <span class="gradient-text">ها هو الجواب</span></h2>
-  </div>
-
-  <div class="space-y-3" id="faqList"></div>
-
-  <div class="text-center mt-10">
-    <p class="text-sm text-slate-400">ما لقيت سؤالك؟</p>
-    <a href="https://wa.me/966508572902" target="_blank" class="text-[#c9a24b] hover:text-[#e0b85f] font-bold mt-2 inline-block">
-      <i class="fab fa-whatsapp"></i> اسألنا مباشرة على واتساب
-    </a>
-  </div>
-</section>
-
-<!-- ═══════════════════ FINAL BOT CTA ═══════════════════ -->
-<section class="max-w-5xl mx-auto px-5 py-24">
-  <div class="glass rounded-3xl p-8 md:p-14 text-center glow-gold relative overflow-hidden">
-    <div class="absolute -top-20 -right-20 w-60 h-60 bg-[#c9a24b]/10 rounded-full blur-3xl"></div>
-    <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-[#1b5e20]/30 rounded-full blur-3xl"></div>
-    <div class="relative">
-      <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] flex items-center justify-center text-4xl mx-auto float-bot shadow-2xl">🤖</div>
-      <h2 class="text-2xl md:text-4xl font-black mt-6">قبل ما تروح، خلني أقولك شي</h2>
-      <div class="bg-[#0a1612]/70 border border-[#c9a24b]/30 rounded-2xl p-6 md:p-8 max-w-3xl mx-auto mt-6 text-right leading-loose">
-        <p class="text-slate-200 text-sm md:text-base">
-          هلا. أنا البوت اللي بيشتغل عندك.<br>
-          من اليوم اللي تشترك فيه، <b class="text-[#c9a24b]">انت ما تشتغل لحالك</b>.
-          أنا أرد على عملاءك الساعة <b class="text-emerald-400">2 الفجر</b> لو سألوا، أحفظ سلتهم لو رجعوا بكرة،
-          أنبهك إذا طلب جديد جاء، أكتب لك تقرير كل ليلة عن مبيعاتك،
-          وأذكّر العملاء القُدامى اللي ما طلبوا من شهر — <b class="text-[#c9a24b]">يرجعون لك</b>.
-        </p>
-        <p class="text-slate-200 text-sm md:text-base mt-4">
-          أنت بس <b class="text-emerald-400">سَوِّ المنتجات وحط الأسعار</b>. الباقي عليّ.
-          صدقني، بعد أسبوع راح تقول: "كيف كنت أشتغل قبل ثواني؟" 😄
-        </p>
-        <p class="text-[#c9a24b] font-bold text-base md:text-lg mt-6">
-          جاهز نبدأ؟
-        </p>
-      </div>
-      <div class="flex flex-col sm:flex-row gap-3 justify-center mt-8">
-        <a href="https://wa.me/966508572902?text=أبغى%20أشترك%20في%20ثواني" target="_blank" class="btn-gold px-8 py-4 rounded-xl text-base">
-          <i class="fab fa-whatsapp"></i> ابدأ على واتساب
-        </a>
-        <a href="#demo" class="btn-primary px-8 py-4 rounded-xl text-base">
-          ↻ شاهد التجربة مرة ثانية
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ FOOTER ═══════════════════ -->
-<footer class="border-t border-[#1a3a25] mt-10">
-  <div class="max-w-7xl mx-auto px-5 py-10 grid md:grid-cols-3 gap-8 text-sm">
-    <div>
-      <div class="flex items-center gap-2 mb-3">
-        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] flex items-center justify-center overflow-hidden p-1">
-          <img src="logo.png" alt="ثواني" class="w-full h-full object-contain">
-        </div>
-        <span class="font-black text-lg">منصة ثواني</span>
-      </div>
-      <p class="text-slate-400 text-xs leading-relaxed">بوت واتساب + لوحة إدارة عربية كاملة. صُنع بحب في السعودية.</p>
-    </div>
-    <div>
-      <h4 class="font-bold mb-3 text-[#c9a24b]">روابط</h4>
-      <ul class="space-y-2 text-slate-400 text-xs">
-        <li><a href="#admin" class="hover:text-[#c9a24b]">جولة في الادمن</a></li>
-        <li><a href="#adaptive" class="hover:text-[#c9a24b]">تكيّف حسب نشاطك</a></li>
-        <li><a href="#before-after" class="hover:text-[#c9a24b]">قبل وبعد</a></li>
-        <li><a href="#demo" class="hover:text-[#c9a24b]">تجربة حية</a></li>
-        <li><a href="#start" class="hover:text-[#c9a24b]">ابدأ في 30 دقيقة</a></li>
-        <li><a href="#faq" class="hover:text-[#c9a24b]">أسئلة شائعة</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4 class="font-bold mb-3 text-[#c9a24b]">تواصل</h4>
-      <ul class="space-y-2 text-slate-400 text-xs">
-        <li><a href="https://wa.me/966508572902" target="_blank" class="hover:text-[#c9a24b]"><i class="fab fa-whatsapp"></i> 0508572902</a></li>
-        <li>الدعم 24/7</li>
-      </ul>
-    </div>
-  </div>
-  <div class="border-t border-[#1a3a25] py-4 text-center text-xs text-slate-500">
-    © 2026 منصة ثواني — جميع الحقوق محفوظة
+  <div class="copy">
+    © 2026 منصة ثواني — كل الحقوق محفوظة •
+    <a href="#" style="color:var(--gold2)">الخصوصية</a> •
+    <a href="#" style="color:var(--gold2)">الشروط</a>
   </div>
 </footer>
 
-<!-- ═══════════════════ JS ═══════════════════ -->
 <script>
-/* ── Admin Tour Data ─────────────────────────────── */
-const adminTabs = {
-  dash: {
-    icon: "📊", title: "لوحة التحكم",
-    desc: "أول صفحة تشوفها لما تدخل. تخبرك بـ <b>كم طلب اليوم</b>، إيرادك، أكثر منتج مطلوب، وآخر العملاء.",
-    why: "في 5 ثوان تعرف يومك حلو ولا لازم تتحرّك. بدون فتح إكسل، بدون حسابات.",
-    features: ["إيراد اليوم/الأسبوع/الشهر","أكثر 5 منتجات مطلوبة","العملاء الجدد","تنبيهات ذكية"]
-  },
-  menu: {
-    icon: "📋", title: "القائمة (المنيو)",
-    desc: "هنا تحط منتجاتك: <b>اسم، صورة، سعر، وصف، أصناف</b>. تقدر تخفي منتج مؤقت أو تعدّل سعره فوراً.",
-    why: "العميل يشوف نفس المنيو في بوت واتساب — أي تعديل تسوّيه يصير له فوراً، بدون اعادة نشر.",
-    features: ["فئات (مشروبات/حلويات/...)","صور احترافية","سعر + خصومات","إخفاء سريع (نفد)"]
-  },
-  orders: {
-    icon: "📦", title: "الطلبات",
-    desc: "كل طلب جديد <b>ينبهك بصوت + يظهر هنا</b>. تشوفه، تقبله أو ترفضه، وتتابع التحضير.",
-    why: "ما عاد تحتاج تفتح واتساب لكل طلب. كل شي في صفحة واحدة + تنبيه بصوت لتعرف على طول.",
-    features: ["تنبيه صوتي فوري","قبول/رفض بزر","فلتر حسب الحالة","تصدير CSV"]
-  },
-  customers: {
-    icon: "👥", title: "العملاء",
-    desc: "قائمة كل من طلب منك. تشوف <b>كم مرة طلب، آخر طلب، إجمالي صرفه</b>، وتقدر تحوّله VIP.",
-    why: "عميل صرف عندك 1000 ر.س = ذهب. اجعله VIP، اعطه خصم خاص، يصبح زبون دائم.",
-    features: ["كم طلب طلب","إجمالي صرفه","تحويل VIP","ملاحظات خاصة"]
-  },
-  loyalty: {
-    icon: "🏆", title: "نقاط الولاء",
-    desc: "كل عميل يطلب يجمع نقاط. وعند <b>عدد معين، يحصل على هدية أو خصم</b>.",
-    why: "هذا اللي يخلي العميل يرجع لك بدل ما يجرّب الكافيه اللي جنبك. عميل قديم = أرخص بكثير من جذب جديد.",
-    features: ["نقطة لكل ريال","استبدال بخصم","تذكير تلقائي","تقارير الفعالية"]
-  },
-  broadcast: {
-    icon: "📢", title: "بث للعملاء",
-    desc: "عندك عرض جديد؟ <b>ابعت رسالة واتساب لكل عميل دفعة واحدة</b> — مع حماية ضد الحظر.",
-    why: "بدل ما تكتب لكل عميل، اكتب مرة واحدة. النظام يبعت تلقائي بفواصل آمنة تحمي رقمك.",
-    features: ["50 رسالة/بث","فاصل 8-15 ث","استخدام اسم العميل","إيقاف تلقائي للمعترضين"]
-  },
-  accounting: {
-    icon: "💼", title: "الحسابات",
-    desc: "<b>ربح صافي = إيراد - تكلفة منتجات - مصاريف</b>. كل شي محسوب تلقائي.",
-    why: "بدل ما تجيب محاسب أو تدخل في إكسل، النظام يطلع لك ربحك الحقيقي + يخبرك أي منتج يخسر مالاً!",
-    features: ["تكلفة كل منتج","مصاريف ثابتة","ربح شهري/سنوي","تحذير من خسارة"]
-  },
-  ratings: {
-    icon: "⭐", title: "التقييمات",
-    desc: "بعد كل طلب، البوت يسأل العميل <b>قيّمنا 1-5</b>. وانت تشوف كل التقييمات + ترد على السلبية.",
-    why: "تقييم سلبي بدون رد = عميل خاسر للأبد. مع ردك السريع = عميل مخلص جداً (إحصائياً).",
-    features: ["NPS تلقائي","رد على تقييم","رسالة اعتذار","قياس التحسن"]
-  },
-  whatsapp: {
-    icon: "📱", title: "ربط واتساب",
-    desc: "هنا تربط <b>رقم واتساب متجرك بالبوت</b>. مسح QR من جوالك أو رقم سداسي — وخلصت.",
-    why: "بدون رقم جديد، بدون SIM، بدون أرقام مدفوعة. رقمك الحالي يصير بوت ذكي في ثوان.",
-    features: ["QR code + Pairing code","تنبيه عند الانقطاع","إعادة اتصال تلقائي","لا حظر من واتساب"]
+// ═══ Tabs ═══
+function showTab(btn,id){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+// ═══ Calculator ═══
+function fmt(n){return Math.round(n).toLocaleString('en-US')}
+function calc(){
+  var orders = +document.getElementById('c-orders').value;
+  var avg = +document.getElementById('c-avg').value;
+  var hours = +document.getElementById('c-hours').value;
+  var salary = +document.getElementById('c-salary').value;
+
+  document.getElementById('c-orders-val').textContent = orders;
+  document.getElementById('c-avg-val').textContent = avg;
+  document.getElementById('c-hours-val').textContent = hours;
+  document.getElementById('c-salary-val').textContent = fmt(salary);
+
+  // Monthly calculations
+  var monthlyOrders = orders * 30;
+  var monthlyRevenue = monthlyOrders * avg;
+  var lostRevenue = monthlyRevenue * 0.20;  // 20% lost without bot
+  var hoursSaved = hours * 30;              // hours per month
+  var subscription = 150;
+
+  var totalSaved = salary + lostRevenue - subscription;
+  var yearly = totalSaved * 12;
+
+  document.getElementById('c-total').textContent = fmt(totalSaved);
+  document.getElementById('c-yearly').textContent = 'سنوياً: ' + fmt(yearly) + ' ﷼ 🎉';
+  document.getElementById('c-salary-b').textContent = fmt(salary) + ' ﷼';
+  document.getElementById('c-lost-b').textContent = fmt(lostRevenue) + ' ﷼';
+  document.getElementById('c-time-b').textContent = hoursSaved + ' ساعة';
+  document.getElementById('c-final').textContent = fmt(totalSaved) + ' ﷼';
+}
+calc();
+
+// ═══ Animate hero stats ═══
+function animateNumber(el, target, duration){
+  var start = 0, startTime = null;
+  function step(ts){
+    if(!startTime) startTime = ts;
+    var progress = Math.min((ts - startTime) / duration, 1);
+    var current = Math.floor(progress * target);
+    el.textContent = current.toLocaleString('en-US') + (progress===1 && target>1000 ? '+' : '');
+    if(progress < 1) requestAnimationFrame(step);
   }
-};
-
-function showAdminTab(el, tab) {
-  document.querySelectorAll('.tab-card').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-  const d = adminTabs[tab];
-  document.getElementById('adminContent').innerHTML = `
-    <div class="msg-in">
-      <div class="flex items-center gap-3 mb-4">
-        <div class="text-5xl">${d.icon}</div>
-        <h3 class="text-2xl font-black">${d.title}</h3>
-      </div>
-      <p class="text-slate-300 leading-relaxed mb-5">${d.desc}</p>
-      <div class="bg-[#1b5e20]/15 border border-[#c9a24b]/30 rounded-xl p-4 mb-5">
-        <div class="text-xs text-[#c9a24b] font-bold mb-1">💡 كيف تنفعك:</div>
-        <p class="text-sm text-slate-200">${d.why}</p>
-      </div>
-      <div class="grid grid-cols-2 gap-2">
-        ${d.features.map(f => `<div class="bg-[#0a1612] border border-[#1a3a25] rounded-lg p-3 text-sm text-slate-300">✓ ${f}</div>`).join('')}
-      </div>
-    </div>
-  `;
-  botSpeechSet(`${d.icon} <b>${d.title}</b> — ${d.why.substring(0,90)}...`);
+  requestAnimationFrame(step);
 }
-
-/* ── Demo menu ───────────────────────────────────── */
-const menu = [
-  {id:'p1', name:'كابتشينو', price:18, emoji:'☕', tag:''},
-  {id:'p2', name:'لاتيه كراميل', price:22, emoji:'🥤', tag:'🔥'},
-  {id:'p3', name:'كرواسان', price:15, emoji:'🥐', tag:''},
-  {id:'p4', name:'تشيز كيك', price:25, emoji:'🍰', tag:'⭐'},
-  {id:'p5', name:'موكا مثلج', price:24, emoji:'🧊', tag:''},
-  {id:'p6', name:'تمر مع جبن', price:12, emoji:'🌴', tag:'🆕'},
-];
-const cart = [];
-function renderMenu(){
-  document.getElementById('demoMenu').innerHTML = menu.map(p => `
-    <div class="product-card p-3 text-center cursor-pointer" onclick="addToCart('${p.id}')">
-      <div class="text-4xl mb-1">${p.emoji}</div>
-      <div class="font-bold text-sm">${p.name} ${p.tag}</div>
-      <div class="text-[#c9a24b] font-black text-sm mt-1">${p.price} ر.س</div>
-      <button class="text-[10px] bg-[#1b5e20] text-white px-3 py-1 rounded-md mt-2 w-full">+ أضف</button>
-    </div>
-  `).join('');
-}
-function addToCart(id){
-  const p = menu.find(x => x.id === id);
-  const existing = cart.find(x => x.id === id);
-  if (existing) existing.qty++;
-  else cart.push({...p, qty:1});
-  renderCart();
-}
-function renderCart(){
-  const el = document.getElementById('cartItems');
-  if (cart.length === 0){
-    el.innerHTML = '<div class="text-slate-500 text-xs text-center py-3">أضف منتج من فوق</div>';
-    document.getElementById('sendBtn').disabled = true;
-    document.getElementById('cartTotal').textContent = 0;
-    return;
-  }
-  el.innerHTML = cart.map(i =>
-    `<div class="flex justify-between items-center">
-      <span>${i.emoji} ${i.name} <span class="text-slate-500 text-xs">×${i.qty}</span></span>
-      <span class="text-[#c9a24b] font-bold">${i.price*i.qty} ر.س</span>
-    </div>`
-  ).join('');
-  const total = cart.reduce((s,i) => s + i.price*i.qty, 0);
-  document.getElementById('cartTotal').textContent = total;
-  document.getElementById('sendBtn').disabled = false;
-}
-function clearCart(){ cart.length = 0; renderCart(); resetDemo(); }
-
-/* ── WA Chat Simulator ───────────────────────────── */
-function waAdd(html, isOut=false){
-  const c = document.getElementById('waChat');
-  const t = new Date();
-  const hh = t.getHours() % 12 || 12, mm = String(t.getMinutes()).padStart(2,'0');
-  const meta = `${hh}:${mm} ${t.getHours()<12?'ص':'م'}`;
-  c.insertAdjacentHTML('beforeend',
-    `<div class="${isOut?'flex justify-end':''} msg-in">
-      <div class="${isOut?'wa-bubble-out':'wa-bubble-in'}">
-        ${html}
-        <div class="wa-meta">${meta} ${isOut?'<i class=\"fas fa-check-double text-[#53bdeb]\"></i>':''}</div>
-      </div>
-    </div>`);
-  c.scrollTop = c.scrollHeight;
-}
-function waTyping(on=true){
-  document.getElementById('waStatus').textContent = on ? 'بوت • يكتب الآن...' : 'بوت • متصل';
-}
-async function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
-
-async function sendOrderToBot(){
-  if (cart.length === 0) return;
-  document.getElementById('sendBtn').disabled = true;
-  const items = cart.map(i => `• ${i.emoji} ${i.name} × ${i.qty}`).join('<br>');
-  const total = cart.reduce((s,i) => s + i.price*i.qty, 0);
-
-  waAdd(`أبغى أطلب:<br>${items}`, true);
-  await sleep(800);
-  waTyping(true);
-  await sleep(1200);
-  waAdd(`تمام ✅ المجموع <b>${total} ر.س</b><br>وش اسمك ووين توصلك؟`);
-  await sleep(900);
-  waAdd(`أحمد — حي الصفا، شارع 12`, true);
-  await sleep(1000);
-  waAdd(`جاري تأكيد طلبك مع المطعم... ⏳`);
-
-  // ابعث للادمن
-  setTimeout(() => {
-    showAdminOrder(cart, total, 'أحمد', 'حي الصفا، شارع 12');
-  }, 1500);
-}
-
-/* ── Admin order panel ───────────────────────────── */
-let currentOrder = null;
-function showAdminOrder(items, total, name, loc){
-  currentOrder = {items, total, name, loc};
-  const t = new Date();
-  document.getElementById('orderTime').textContent =
-    `${String(t.getHours()).padStart(2,'0')}:${String(t.getMinutes()).padStart(2,'0')}`;
-  document.getElementById('adminOrderCard').innerHTML = `
-    <div class="text-[#c9a24b] font-bold msg-in">ORD-${Math.floor(Math.random()*9000+1000)}</div>
-    <div class="msg-in"><b>${name}</b> · ${loc}</div>
-    <div class="text-xs text-slate-400 msg-in space-y-0.5 mt-2">
-      ${items.map(i => `<div>• ${i.emoji} ${i.name} ×${i.qty} = ${i.price*i.qty} ر.س</div>`).join('')}
-    </div>
-    <div class="border-t border-[#1a3a25] mt-2 pt-2 flex justify-between text-sm">
-      <span>الإجمالي</span><span class="text-[#c9a24b] font-black">${total} ر.س</span>
-    </div>
-  `;
-  document.getElementById('acceptBtn').disabled = false;
-  document.getElementById('rejectBtn').disabled = false;
-  // scroll للوحة الادمن
-  setTimeout(() => document.getElementById('acceptBtn').scrollIntoView({behavior:'smooth', block:'center'}), 200);
-  botSpeechSet('شفت؟ الطلب وصل للوحتك في ثانية واحدة. اضغط <b>قبول</b> ↓');
-}
-
-async function acceptOrder(){
-  if (!currentOrder) return;
-  document.getElementById('acceptBtn').disabled = true;
-  document.getElementById('rejectBtn').disabled = true;
-  // فاتورة
-  const items = currentOrder.items.map(i => `<div class="flex justify-between"><span>${i.emoji} ${i.name} ×${i.qty}</span><span>${i.price*i.qty}</span></div>`).join('');
-  document.getElementById('invoiceItems').innerHTML = items;
-  document.getElementById('invoiceTotal').textContent = currentOrder.total;
-  document.getElementById('invoicePreview').classList.remove('hidden');
-  document.getElementById('invoicePreview').scrollIntoView({behavior:'smooth', block:'center'});
-  // واتساب
-  setTimeout(() => {
-    waAdd(`✅ تم قبول طلبك!<br>المالك يحضّر الآن. مدة التحضير ~ 10 د`);
-    setTimeout(() => waAdd(`🧾 <b>فاتورتك جاهزة</b><br>(الصورة فوق ↑)`), 1200);
-    botSpeechSet('والفاتورة وصلت للعميل في نفس اللحظة 🎉');
-  }, 800);
-}
-function rejectOrder(){
-  document.getElementById('acceptBtn').disabled = true;
-  document.getElementById('rejectBtn').disabled = true;
-  setTimeout(() => waAdd(`نأسف، الطلب لا يمكن تأكيده الآن. شكراً لتفهمك 🙏`), 600);
-}
-function resetDemo(){
-  document.getElementById('adminOrderCard').innerHTML = '<div class="text-slate-500 text-xs text-center py-6">في انتظار الطلب من جنب 👈</div>';
-  document.getElementById('acceptBtn').disabled = true;
-  document.getElementById('rejectBtn').disabled = true;
-  document.getElementById('invoicePreview').classList.add('hidden');
-  currentOrder = null;
-}
-
-/* ── Floating bot speech ─────────────────────────── */
-const responses = {
-  admin: 'صفحة الادمن فيها 9 أقسام رئيسية. كل قسم يحل لك مشكلة. مرّر فوق ↑ واضغط على أي بطاقة',
-  orders: 'العميل يكلم البوت → البوت يبعت لك إشعار + يظهر في "الطلبات" → تضغط قبول → الفاتورة تطلع للعميل تلقائي 🎯',
-  support: '3 ثوان رد على واتساب 0508572902. ما عندنا "اضغط 1 ثم 2 ثم انتظر 20 د". مباشر، عربي، إنساني.',
-  price: '3 باقات: أساسية 80 / احترافية 150 / متقدمة 250 ر.س شهرياً. جربها أسبوع مجاناً بدون بطاقة.',
-  default: 'سؤال حلو! تواصل معنا واتساب 0508572902 وراح نرد في ثوان 🚀'
-};
-function botSpeechSet(html){
-  document.getElementById('botSpeech').innerHTML = html;
-}
-function botSay(topic){
-  botSpeechSet(responses[topic] || responses.default);
-}
-function botAsk(){
-  const v = document.getElementById('botInput').value.trim();
-  if (!v) return;
-  document.getElementById('botInput').value = '';
-  document.getElementById('botStatus').textContent = 'يفكر...';
-  setTimeout(() => {
-    document.getElementById('botStatus').textContent = 'جاهز';
-    let r = responses.default;
-    const l = v.toLowerCase();
-    if (l.includes('سعر') || l.includes('كم') || l.includes('باقة')) r = responses.price;
-    else if (l.includes('ادمن') || l.includes('لوحة')) r = responses.admin;
-    else if (l.includes('طلب') || l.includes('فاتورة')) r = responses.orders;
-    else if (l.includes('دعم') || l.includes('مشكلة')) r = responses.support;
-    botSpeechSet(r);
-  }, 700);
-}
-
-/* ── Adaptive UI Demo ────────────────────────────── */
-const bizConfigs = {
-  food: {
-    emoji:'🍽️', label:'أطعمة ومشروبات', accent:'#d4af37', navBg:'#1b5e20',
-    tagline:'شغّل مقهاك بذكاء — البوت يستقبل الطلبات حتى لو الكاشير مشغول ☕',
-    tabs:['📊 لوحة التحكم','📋 القائمة','📦 الطلبات','👥 العملاء','🏆 الولاء','💼 الحسابات'],
-    kpis:[
-      {emoji:'📦', title:'طلبات اليوم', value:'23', color:'#d4af37'},
-      {emoji:'💰', title:'إيراد اليوم', value:'1,840', color:'#22c55e'},
-      {emoji:'☕', title:'الأكثر طلباً', value:'كابتشينو', color:'#1b5e20'},
-      {emoji:'⭐', title:'متوسط التقييم', value:'4.8', color:'#f59e0b'},
-    ],
-    inboxTitle:'📦 الطلبات الواردة',
-    inbox:[
-      {id:'ORD-9421', who:'أحمد · حي النخيل', items:'كابتشينو ×2 + كرواسان', amount:'56 ر.س'},
-      {id:'ORD-9420', who:'سارة · حي الياسمين', items:'لاتيه + تشيز كيك', amount:'48 ر.س'},
-      {id:'ORD-9419', who:'محمد · حي الصفا', items:'موكا مثلج ×3', amount:'72 ر.س'},
-    ],
-    flowName:'الطلب',
-    flow:['جديد','قيد التحضير','جاهز للاستلام','تم التسليم'],
-    fields:[
-      {icon:'📦', text:'حقل <b>المخزون</b> ظاهر (تتبع نفاد المنتج)'},
-      {icon:'📏', text:'حقل <b>الأحجام</b> (صغير / وسط / كبير)'},
-    ],
-  },
-  salon: {
-    emoji:'💇', label:'صالون / عناية', accent:'#ec4899', navBg:'#831843',
-    tagline:'صالونك مفتوح بالحجوزات حتى عندما تكون في إجازة 💆‍♀️',
-    tabs:['📊 لوحة التحكم','💆 قائمة الخدمات','📅 الحجوزات','👥 العملاء','🏆 الولاء','⭐ التقييمات'],
-    kpis:[
-      {emoji:'📅', title:'حجوزات اليوم', value:'12', color:'#ec4899'},
-      {emoji:'💰', title:'إيراد اليوم', value:'2,150', color:'#22c55e'},
-      {emoji:'💇', title:'الخدمة الأكثر', value:'صبغة شعر', color:'#831843'},
-      {emoji:'⏱️', title:'متوسط الجلسة', value:'45 د', color:'#f59e0b'},
-    ],
-    inboxTitle:'📅 الحجوزات الواردة',
-    inbox:[
-      {id:'BK-2841', who:'نوف · 4:30 م', items:'قص + صبغة', amount:'180 ر.س · 90 د'},
-      {id:'BK-2840', who:'ريم · 5:15 م', items:'مكياج عروس', amount:'400 ر.س · 120 د'},
-      {id:'BK-2839', who:'لين · 6:00 م', items:'مساج استرخاء', amount:'150 ر.س · 60 د'},
-    ],
-    flowName:'الحجز',
-    flow:['محجوز','قيد التنفيذ','مكتمل'],
-    fields:[
-      {icon:'⏱️', text:'حقل <b>مدة الخدمة</b> ظاهر (بالدقائق)'},
-      {icon:'❌', text:'حقل <b>المخزون</b> مخفي (لا منتجات تنفد)'},
-    ],
-  },
-  service: {
-    emoji:'💻', label:'خدمات / تقنية', accent:'#3b82f6', navBg:'#1e3a8a',
-    tagline:'مشاريعك مرتبة، عملاؤك راضون، وأنت تركز على الكود 💻',
-    tabs:['📊 لوحة التحكم','🛠️ قائمة الخدمات','📂 المشاريع','👥 العملاء','💼 الحسابات','⭐ التقييمات'],
-    kpis:[
-      {emoji:'📂', title:'مشاريع نشطة', value:'7', color:'#3b82f6'},
-      {emoji:'💰', title:'إيراد الشهر', value:'24,800', color:'#22c55e'},
-      {emoji:'💻', title:'الأكثر طلباً', value:'موقع ووردبريس', color:'#1e3a8a'},
-      {emoji:'⏱️', title:'متوسط الساعة', value:'150 ر.س', color:'#f59e0b'},
-    ],
-    inboxTitle:'📂 المشاريع الواردة',
-    inbox:[
-      {id:'PRJ-184', who:'شركة الفهد · جدة', items:'موقع شركة + لوحة ادمن', amount:'8,500 ر.س'},
-      {id:'PRJ-183', who:'كافيه الندى · الرياض', items:'تطبيق توصيل', amount:'12,000 ر.س'},
-      {id:'PRJ-182', who:'د. منى · عيادة', items:'نظام حجوزات', amount:'5,200 ر.س'},
-    ],
-    flowName:'المشروع',
-    flow:['جديد','قيد التنفيذ','قيد المراجعة','تم التسليم'],
-    fields:[
-      {icon:'⏰', text:'حقل <b>السعر بالساعة</b> ظاهر'},
-      {icon:'❌', text:'حقل <b>المخزون</b> + <b>الأحجام</b> مخفية'},
-    ],
-  },
-  home: {
-    emoji:'🚗', label:'خدمات منزلية وسيارات', accent:'#10b981', navBg:'#065f46',
-    tagline:'فريقك في الطريق، والعميل يتابع كل خطوة 🚗',
-    tabs:['📊 لوحة التحكم','🛠️ قائمة الخدمات','🛎️ الطلبات','👥 العملاء','🏆 الولاء','📍 المواقع'],
-    kpis:[
-      {emoji:'🛎️', title:'طلبات اليوم', value:'18', color:'#10b981'},
-      {emoji:'💰', title:'إيراد اليوم', value:'3,420', color:'#22c55e'},
-      {emoji:'🚗', title:'الأكثر طلباً', value:'غسيل سيارة', color:'#065f46'},
-      {emoji:'⏱️', title:'متوسط المهمة', value:'35 د', color:'#f59e0b'},
-    ],
-    inboxTitle:'🛎️ الطلبات الواردة',
-    inbox:[
-      {id:'JOB-741', who:'فهد · حي الملز', items:'غسيل سيارة شامل', amount:'120 ر.س · 45 د'},
-      {id:'JOB-740', who:'منى · حي العليا', items:'تنظيف منزل 200م²', amount:'350 ر.س · 3 س'},
-      {id:'JOB-739', who:'سعد · حي الحمراء', items:'سباكة + إصلاح صنبور', amount:'180 ر.س · 60 د'},
-    ],
-    flowName:'الطلب',
-    flow:['جديد','في الطريق','قيد التنفيذ','مكتمل'],
-    fields:[
-      {icon:'⏱️', text:'حقل <b>مدة المهمة</b> ظاهر'},
-      {icon:'⏰', text:'حقل <b>السعر بالساعة</b> ظاهر (للمهام الطويلة)'},
-    ],
-  },
-};
-
-function setBiz(key){
-  const c = bizConfigs[key];
-  if (!c) return;
-  // إبراز الزر النشط
-  document.querySelectorAll('[data-biz-btn]').forEach(b => {
-    b.classList.toggle('active', b.dataset.bizBtn === key);
-  });
-  // navbar
-  document.getElementById('bizNavbar').style.background = c.navBg;
-  document.getElementById('bizNavEmoji').textContent = c.emoji;
-  const bd = document.getElementById('bizNavBadge');
-  bd.textContent = `${c.emoji} ${c.label}`;
-  bd.style.color = c.accent;
-  bd.style.borderColor = c.accent + '55';
-  // tagline
-  document.getElementById('bizTagEmoji').textContent = c.emoji;
-  document.getElementById('bizTagBrand').style.color = c.accent;
-  document.getElementById('bizTagText').textContent = c.tagline;
-  // tabs
-  document.getElementById('bizTabs').innerHTML = c.tabs.map((t,i) =>
-    `<div class="biz-tab ${i===0?'active':''}">${t}</div>`
-  ).join('');
-  // KPIs
-  document.getElementById('bizKPIs').innerHTML = c.kpis.map(k => `
-    <div class="bg-white rounded-xl p-3 text-slate-800 border-r-4 shadow-sm" style="border-right-color:${k.color}">
-      <div class="text-2xl">${k.emoji}</div>
-      <div class="text-[11px] text-slate-500 font-semibold mt-1">${k.title}</div>
-      <div class="text-base font-black mt-0.5" style="color:${k.color}">${k.value}</div>
-    </div>
-  `).join('');
-  // inbox
-  document.getElementById('bizInboxTitle').textContent = c.inboxTitle;
-  document.getElementById('bizInboxCount').textContent = `${c.inbox.length} عنصر جديد`;
-  document.getElementById('bizInboxList').innerHTML = c.inbox.map(o => `
-    <div class="border border-slate-200 rounded-lg p-3 flex items-center justify-between gap-3 hover:bg-slate-50 transition">
-      <div class="min-w-0">
-        <div class="font-bold text-xs" style="color:${c.accent}">${o.id}</div>
-        <div class="text-xs text-slate-700 mt-0.5 truncate">${o.who} · ${o.items}</div>
-      </div>
-      <div class="text-sm font-black shrink-0" style="color:${c.navBg}">${o.amount}</div>
-    </div>
-  `).join('');
-  // flow
-  document.getElementById('bizFlowName').textContent = c.flowName;
-  document.getElementById('bizFlow').innerHTML = c.flow.map((s,i) => `
-    <div class="flex items-center shrink-0">
-      <div class="px-3 py-1.5 rounded-md text-xs font-bold whitespace-nowrap" style="background:${i===0?c.accent:'#1a3a25'};color:${i===0?'#0a1612':'#e5e7eb'}">${s}</div>
-      ${i < c.flow.length-1 ? '<i class="fas fa-arrow-left mx-2 text-[#c9a24b] text-xs"></i>' : ''}
-    </div>
-  `).join('');
-  // fields
-  document.getElementById('bizFieldsHints').innerHTML = c.fields.map(f => `
-    <div class="bg-[#0a1612] border border-[#1a3a25] rounded-lg p-3 text-xs text-slate-300 flex items-center gap-2">
-      <span class="text-lg">${f.icon}</span><span>${f.text}</span>
-    </div>
-  `).join('');
-  // bot speech
-  botSpeechSet(`${c.emoji} <b>${c.label}</b> — اللوحة الآن بمصطلحات هذا النشاط. شاهد كيف تغيّر "${c.flowName}" + الـ tabs + الحقول`);
-}
-
-/* ── Counter animation ───────────────────────────── */
-function animateCounter(el){
-  const target = parseFloat(el.dataset.target);
-  const suffix = el.dataset.suffix || '';
-  const decimals = parseInt(el.dataset.decimals || '0');
-  const duration = 1800;
-  const start = performance.now();
-  function tick(now){
-    const p = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - p, 3);
-    const v = target * eased;
-    el.textContent = (decimals > 0 ? v.toFixed(decimals) : Math.floor(v).toLocaleString('ar-SA')) + suffix;
-    if (p < 1) requestAnimationFrame(tick);
-    else el.textContent = (decimals > 0 ? target.toFixed(decimals) : target.toLocaleString('ar-SA')) + suffix;
-  }
-  requestAnimationFrame(tick);
-}
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !entry.target.dataset.done){
-      entry.target.dataset.done = '1';
-      animateCounter(entry.target);
-    }
-  });
-}, {threshold:0.5});
-document.querySelectorAll('.count-up').forEach(el => counterObserver.observe(el));
-
-/* ── FAQ Accordion ───────────────────────────────── */
-const faqs = [
-  {q:'هل أحتاج رقم واتساب جديد؟', a:'لا أبداً. نفس رقمك الحالي يصير بوت ذكي. تربطه عبر QR (نفس طريقة WhatsApp Web) أو كود سداسي ترسله واتساب لرقمك.'},
-  {q:'هل البوت يفهم اللهجة السعودية والعربية؟', a:'نعم تماماً. الـ AI مدرّب على اللهجات الخليجية والعربية الفصحى. والمصطلحات في اللوحة كلها بالعربية الواضحة.'},
-  {q:'كم طلب يقدر يستقبل في اليوم؟', a:'بدون حد أعلى. النظام يستقبل آلاف الطلبات في اليوم بدون مشاكل. حد الأمان فقط في "بث الرسائل" — 50 رسالة/جلسة لحماية رقمك من حظر واتساب.'},
-  {q:'هل بياناتي وبيانات عملائي آمنة؟', a:'نعم. كل المتاجر معزولة كلياً (composite keys)، النظام يستخدم تشفير bcrypt للكلمات، 2FA TOTP اختياري للماستر، ونسخ احتياطي مشفّر (GPG AES-256) يومياً على VPS منفصل.'},
-  {q:'إذا انقطع الانترنت أو واتساب، إيش يصير؟', a:'النظام عنده "Session Watchdog" يفحص كل 5 دقائق ويعيد الاتصال تلقائياً. لو استمر الانقطاع أكثر من 10 د، نتصل بك. الطلبات اللي وصلت قبل الانقطاع محفوظة كلها.'},
-  {q:'هل أقدر أعدل المنيو والأسعار في أي وقت؟', a:'نعم، تعديلاتك تظهر فوراً في بوت واتساب. بدون إعادة نشر، بدون انتظار. حتى إخفاء منتج مؤقت "نفد" بضغطة زر.'},
-  {q:'يدعم أي أنواع متاجر؟', a:'مقاهي، مطاعم، مخابز، صالونات تجميل، عيادات، خدمات منزلية (سباكة/كهرباء/تنظيف)، خدمات تقنية (برمجة/تصميم)، بقالات، وأي نشاط يستقبل طلبات أو حجوزات.'},
-  {q:'كيف أتواصل مع الدعم؟', a:'واتساب 0508572902 — متوسط رد 3 ثوان في ساعات العمل. وعندنا بوت دعم ذكي يجاوبك على الأسئلة الشائعة 24/7.'},
-];
-function renderFAQ(){
-  document.getElementById('faqList').innerHTML = faqs.map((f,i) => `
-    <div class="glass rounded-xl border border-[#1a3a25] overflow-hidden faq-item">
-      <button onclick="toggleFAQ(${i})" class="w-full px-5 py-4 flex items-center justify-between text-right gap-3 hover:bg-white/5 transition">
-        <span class="font-bold text-sm flex-1">${f.q}</span>
-        <i class="fas fa-chevron-down text-[#c9a24b] text-xs faq-icon transition-transform"></i>
-      </button>
-      <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
-        <div class="px-5 pb-4 text-sm text-slate-300 leading-relaxed border-t border-[#1a3a25] pt-3">${f.a}</div>
-      </div>
-    </div>
-  `).join('');
-}
-function toggleFAQ(i){
-  const item = document.querySelectorAll('.faq-item')[i];
-  const ans = item.querySelector('.faq-answer');
-  const icon = item.querySelector('.faq-icon');
-  const isOpen = ans.style.maxHeight && ans.style.maxHeight !== '0px';
-  // أغلق الباقي
-  document.querySelectorAll('.faq-item').forEach(it => {
-    it.querySelector('.faq-answer').style.maxHeight = '0px';
-    it.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
-  });
-  if (!isOpen){
-    ans.style.maxHeight = ans.scrollHeight + 'px';
-    icon.style.transform = 'rotate(180deg)';
-  }
-}
-
-/* ── Floating bot minimize ───────────────────────── */
-function botMinimize(){
-  document.getElementById('floatBot').style.display = 'none';
-  document.getElementById('botBubble').style.display = 'flex';
-}
-function botExpand(){
-  document.getElementById('floatBot').style.display = 'block';
-  document.getElementById('botBubble').style.display = 'none';
-}
-
-/* ── Init ────────────────────────────────────────── */
-renderMenu();
-showAdminTab(document.querySelector('.tab-card.active'), 'dash');
-setBiz('food');
-renderFAQ();
-
-// تقليل البوت تلقائياً على الموبايل بعد 4 ث
-if (window.innerWidth < 768){
-  setTimeout(botMinimize, 4000);
-}
-
-// تحديث الـ floating bot speech عند scroll
-let lastSection = '';
-window.addEventListener('scroll', () => {
-  const sections = [
-    {id:'admin', msg:'هنا أعرّفك على صفحة الادمن. انقر على بطاقة وأنا أشرح لك'},
-    {id:'adaptive', msg:'هذي ميزتنا الفريدة! اللوحة تتغيّر حسب نشاطك — جرّب الأزرار فوق ⬆️'},
-    {id:'before-after', msg:'شف الفرق: نفس العميل، نفس الساعة، نتيجتان مختلفتان كلياً 🌅'},
-    {id:'demo', msg:'جرّب الآن! اضغط منتج من المنيو وأرسل الطلب — راح تشوف كل شي يتحرك 🎬'},
-    {id:'start', msg:'30 دقيقة فقط وتكون شغّال — اتبع الخطوات الأربع ⚡'},
-    {id:'support', msg:'الدعم؟ 3 ثوان رد + بوت يشرح لك حتى لو ما حد رد ⚡'},
-    {id:'faq', msg:'سؤال في بالك؟ على الأغلب جوابه هنا 📖'},
-  ];
-  const y = window.scrollY + 200;
-  for (const s of sections){
-    const el = document.getElementById(s.id);
-    if (el && y >= el.offsetTop && y < el.offsetTop + el.offsetHeight){
-      if (lastSection !== s.id){ botSpeechSet(s.msg); lastSection = s.id; }
-      return;
-    }
-  }
+window.addEventListener('load',()=>{
+  animateNumber(document.getElementById('stat-orders'), 128000, 1800);
+  animateNumber(document.getElementById('stat-hours'), 4320, 1800);
 });
+
+// ═══ Fade-in on scroll ═══
+var observer = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){ e.target.classList.add('visible'); }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
 </script>
+
 </body>
 </html>
