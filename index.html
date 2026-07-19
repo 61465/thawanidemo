@@ -1230,7 +1230,7 @@ footer .copy{margin-top:24px;font-size:12px;color:var(--muted);padding-top:20px;
 .qr-testimonial p{color:var(--text2);font-size:13px;line-height:1.7;font-style:italic;margin:0}
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 (function(){
   var BOT_PHONE = "201278632120";
@@ -1238,13 +1238,29 @@ footer .copy{margin-top:24px;font-size:12px;color:var(--muted);padding-top:20px;
   var waLink = "https://wa.me/" + BOT_PHONE + "?text=" + encodeURIComponent(MESSAGE);
   var directLink = document.getElementById("qrDirectLink");
   if (directLink) directLink.href = waLink;
-  var qrEl = document.getElementById("qrcode");
-  if (qrEl && typeof QRCode !== "undefined") {
-    QRCode.toCanvas(waLink, { width: 220, margin: 1, color: { dark: "#0d1f17", light: "#ffffff" }, errorCorrectionLevel: "H" }, function(err, canvas){
-      if (err) { qrEl.innerHTML = '<div style="color:#ef4444;padding:20px">فشل توليد QR</div>'; return; }
-      qrEl.innerHTML = ""; qrEl.appendChild(canvas);
-    });
+
+  function makeQR() {
+    var qrEl = document.getElementById("qrcode");
+    if (!qrEl) return;
+    if (typeof QRCode === "undefined") {
+      // fallback: خدمة QR image خارجية
+      qrEl.innerHTML = '<img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(waLink) + '&bgcolor=ffffff&color=0d1f17" alt="QR" style="width:220px;height:220px;border-radius:8px">';
+      return;
+    }
+    qrEl.innerHTML = "";
+    try {
+      new QRCode(qrEl, {
+        text: waLink,
+        width: 220, height: 220,
+        colorDark: "#0d1f17", colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    } catch(e) {
+      qrEl.innerHTML = '<img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(waLink) + '&bgcolor=ffffff&color=0d1f17" alt="QR" style="width:220px;height:220px;border-radius:8px">';
+    }
   }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", makeQR);
+  else makeQR();
 })();
 </script>
 
