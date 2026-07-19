@@ -393,6 +393,7 @@ footer .copy{margin-top:24px;font-size:12px;color:var(--muted);padding-top:20px;
       <a href="#compare">مقارنة</a>
       <a href="#pricing">الأسعار</a>
       <a href="#b2b">للوكالات</a>
+      <a href="#meet-bot" style="color:#25d366;font-weight:800"><i class="fa-brands fa-whatsapp"></i> جرّب البوت</a>
     </div>
     <a href="demo/" class="nav-cta">جرّب مجاناً</a>
   </div>
@@ -416,9 +417,9 @@ footer .copy{margin-top:24px;font-size:12px;color:var(--muted);padding-top:20px;
       + 46 وكيل ذكاء اصطناعي يعمل معك في الظل + إدارة عربية كاملة
     </p>
     <div class="hero-cta">
-      <a href="demo/" class="btn btn-gold">
-        <i class="fa-solid fa-play"></i>
-        جرّب البوت الحقيقي مجاناً (45 دقيقة)
+      <a href="#meet-bot" class="btn btn-whatsapp">
+        <i class="fa-brands fa-whatsapp"></i>
+        امسح QR وتعرّف على البوت (45 ثانية)
       </a>
       <a href="#calc" class="btn btn-outline">
         <i class="fa-solid fa-calculator"></i>
@@ -1142,6 +1143,110 @@ footer .copy{margin-top:24px;font-size:12px;color:var(--muted);padding-top:20px;
     </div>
   </div>
 </section>
+
+<!-- ═══════════ QR DEMO BOT ═══════════ -->
+<section id="meet-bot">
+  <div class="container">
+    <div class="sec-title">
+      <div class="tag" style="background:rgba(37,211,102,.15);color:#25d366;border-color:rgba(37,211,102,.3)">
+        <i class="fa-brands fa-whatsapp"></i> جلسة تعارف مع البوت
+      </div>
+      <h2>تعرّف على <span>بوت ثواني</span> شخصياً</h2>
+      <p>امسح الـ QR بواتسابك 👇 وسيرسل لك سيرته الذاتية مقطّعة بأناقة — يعمل مع الجميع في نفس الوقت، ثم يصمت بأدب 🤫</p>
+    </div>
+
+    <div class="qr-hero">
+      <div class="qr-hero-inner">
+        <div class="qr-side">
+          <div class="qr-frame">
+            <div id="qrcode"></div>
+          </div>
+          <div class="qr-hint">
+            <i class="fa-solid fa-mobile-screen"></i>
+            امسح بكاميرا واتساب
+          </div>
+          <a id="qrDirectLink" href="#" class="btn btn-whatsapp" style="margin-top:14px" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i>
+            أو اضغط هنا مباشرة
+          </a>
+        </div>
+
+        <div class="qr-info">
+          <h3><span class="qr-emoji">🤖</span> ما سيحدث بعد المسح؟</h3>
+          <ol class="qr-steps">
+            <li><b>واتساب سيفتح</b> برسالة جاهزة "demo_intro" — فقط اضغط إرسال</li>
+            <li><b>البوت سيرحب بك</b> ثم يبدأ يحكي عن نفسه بلطف</li>
+            <li><b>8 رسائل مقطّعة</b> — كل واحدة بعد 5 ثواني + typing طبيعي</li>
+            <li><b>يقدّم CV كاملاً</b>: مهاراته، أرقامه، كيف يوفر لك المال</li>
+            <li><b>يصمت تماماً بعد ذلك</b> 🤫 (24 ساعة قبل إعادة الإرسال)</li>
+          </ol>
+
+          <div class="qr-features">
+            <div class="qr-feat"><i class="fa-solid fa-users"></i> يخدم عشرات في وقت واحد</div>
+            <div class="qr-feat"><i class="fa-solid fa-shield-halved"></i> بلا رقم منك — فقط QR</div>
+            <div class="qr-feat"><i class="fa-solid fa-clock"></i> 45 ثانية فقط</div>
+            <div class="qr-feat"><i class="fa-solid fa-face-grin-hearts"></i> ممتع + معلوماتي</div>
+          </div>
+
+          <div class="qr-testimonial">
+            <div class="stars">★★★★★</div>
+            <p>"جربته وضحكت من ذكائه! تعرفت على كل ميزات المنصة في دقيقة"</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.qr-hero{background:linear-gradient(135deg,rgba(37,211,102,.10) 0%,rgba(8,18,14,.9) 60%,rgba(201,162,75,.05) 100%);border:1.5px solid rgba(37,211,102,.3);border-radius:24px;padding:48px 32px;max-width:1200px;margin:0 auto;position:relative;overflow:hidden}
+.qr-hero::before{content:"";position:absolute;top:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(37,211,102,.15) 0%,transparent 70%);pointer-events:none}
+.qr-hero::after{content:"";position:absolute;bottom:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(201,162,75,.1) 0%,transparent 70%);pointer-events:none}
+.qr-hero-inner{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;position:relative;z-index:2}
+@media (max-width:900px){.qr-hero-inner{grid-template-columns:1fr;gap:32px;text-align:center}}
+.qr-side{text-align:center}
+.qr-frame{background:#fff;padding:20px;border-radius:20px;display:inline-block;box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 0 3px var(--gold2);position:relative}
+.qr-frame::before{content:"";position:absolute;inset:-8px;border:2px dashed rgba(201,162,75,.4);border-radius:24px;pointer-events:none;animation:rotate-dash 30s linear infinite}
+@keyframes rotate-dash{to{transform:rotate(360deg)}}
+#qrcode{width:220px;height:220px;display:flex;align-items:center;justify-content:center}
+#qrcode canvas,#qrcode img{display:block!important;width:220px!important;height:220px!important;border-radius:8px}
+.qr-hint{margin-top:18px;color:var(--gold2);font-size:14px;font-weight:700}
+.qr-info h3{font-size:26px;font-weight:900;color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:12px;line-height:1.3}
+@media (max-width:900px){.qr-info h3{justify-content:center}}
+.qr-emoji{font-size:34px;animation:float-emoji 3s ease-in-out infinite}
+@keyframes float-emoji{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(5deg)}}
+.qr-steps{list-style:none;padding:0;margin:0 0 24px;counter-reset:step}
+.qr-steps li{position:relative;padding:12px 0 12px 52px;color:var(--text2);font-size:14.5px;line-height:1.7;border-bottom:1px dashed rgba(255,255,255,.06);counter-increment:step}
+.qr-steps li:last-child{border-bottom:none}
+.qr-steps li::before{content:counter(step);position:absolute;left:0;top:14px;width:32px;height:32px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;box-shadow:0 4px 12px rgba(37,211,102,.4)}
+.qr-steps li b{color:#fff;font-weight:800}
+@media (max-width:900px){.qr-steps li{padding-left:0;padding-right:52px;text-align:right}.qr-steps li::before{left:auto;right:0}}
+.qr-features{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+@media (max-width:900px){.qr-features{grid-template-columns:1fr}}
+.qr-feat{background:rgba(37,211,102,.06);border:1px solid rgba(37,211,102,.2);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--accent);display:flex;align-items:center;gap:10px}
+.qr-feat i{color:#25d366}
+.qr-testimonial{background:rgba(0,0,0,.35);border-right:3px solid var(--gold2);border-radius:10px;padding:14px 18px}
+.qr-testimonial .stars{color:#fbbf24;font-size:13px;margin-bottom:6px}
+.qr-testimonial p{color:var(--text2);font-size:13px;line-height:1.7;font-style:italic;margin:0}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script>
+(function(){
+  var BOT_PHONE = "201278632120";
+  var MESSAGE = "demo_intro";
+  var waLink = "https://wa.me/" + BOT_PHONE + "?text=" + encodeURIComponent(MESSAGE);
+  var directLink = document.getElementById("qrDirectLink");
+  if (directLink) directLink.href = waLink;
+  var qrEl = document.getElementById("qrcode");
+  if (qrEl && typeof QRCode !== "undefined") {
+    QRCode.toCanvas(waLink, { width: 220, margin: 1, color: { dark: "#0d1f17", light: "#ffffff" }, errorCorrectionLevel: "H" }, function(err, canvas){
+      if (err) { qrEl.innerHTML = '<div style="color:#ef4444;padding:20px">فشل توليد QR</div>'; return; }
+      qrEl.innerHTML = ""; qrEl.appendChild(canvas);
+    });
+  }
+})();
+</script>
 
 <!-- ═══════════ FAQ ═══════════ -->
 <section>
